@@ -297,7 +297,7 @@ img {
 
 .skills__icon {
   font-size: 2rem;
-  color: var(--first-color);
+  /* color: var(--first-color); */
 }
 
 .skills__bar {
@@ -333,20 +333,128 @@ img {
   object-fit: cover;
 }
 
-/* ===== WORK =====*/
+ /* ===== Portfolio =====*/
 .work__container {
   row-gap: 2rem;
 }
+
+/* کل کارت‌ها */
 .work__img {
-  box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
-  border-radius: 0.5rem;
+  position: relative;
   overflow: hidden;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
+
+.work__img:hover {
+  transform: perspective(800px) rotateX(8deg) rotateY(-8deg) scale(1.05);
+  box-shadow:
+    0 10px 25px rgba(94,240,255,0.3),
+    0 0 35px rgba(200,107,255,0.25);
+}
+
+/* لوگوی پروژه داخل کارت */
 .work__img img {
-  transition: 1s;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
 }
-.work__img img:hover {
-  transform: scale(1.1);
+
+.work__img:hover img {
+  transform: scale(1.1) translateZ(30px);
+}
+
+/* متن عنوان */
+.work__img:hover .work__title {
+  text-shadow:
+    1px 1px 2px rgba(0,0,0,0.5),
+    0 0 12px rgba(255,255,255,0.8),
+    0 0 25px rgba(94,240,255,0.75),
+    0 0 45px rgba(200,107,255,0.55);
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  animation: flicker 3s linear infinite;
+}
+
+.work__img:hover .work__overlay {
+  opacity: 1;
+}
+
+.work__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+/* استایل‌های پاپ‌آپ */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: var(--z-fixed);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup__content {
+    background: #fff;
+    width: 90%;
+    max-width: 800px;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.popup__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--second-color);
+}
+
+.popup__title {
+    font-size: var(--h2-font-size);
+    color: var(--first-color);
+    margin-bottom: var(--mb-2);
+}
+
+.popup__gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: var(--mb-4);
+}
+
+.popup__media {
+    width: 100%;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    max-height: 150px; /* محدود کردن ارتفاع برای هماهنگی */
+}
+
+.popup__media:hover {
+    transform: scale(1.05);
+}
+
+.popup__description {
+    font-size: var(--normal-font-size);
+    color: var(--second-color);
 }
 
 /* ===== CONTACT =====*/
@@ -514,4 +622,219 @@ img {
   .home__img {
     width: 450px;
   }
+}
+
+/* ==== Coming Soon Spinner (for work cards) ==== */
+.work__comingsoon {
+  width: 330px;
+  height: 330px;
+  background: rgba(255, 255, 255);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.5),
+    inset 0 0 15px rgba(94,240,255,0.25);
+  transform: perspective(600px) rotateX(0deg) rotateY(0deg);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.work__comingsoon:hover {
+  transform: perspective(800px) rotateX(8deg) rotateY(-8deg) scale(1.05);
+  box-shadow:
+    0 10px 25px rgba(94,240,255,0.3),
+    0 0 35px rgba(200,107,255,0.25);
+}
+
+/* Spinner Base */
+.spinner {
+  width: 70px;
+  height: 70px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top: 3px solid rgba(94,240,255,0.7);
+  border-right: 3px solid rgba(200,107,255,0.5);
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+  transition: all 0.4s ease;
+  box-shadow:
+    0 0 10px rgba(94,240,255,0.3),
+    0 0 20px rgba(200,107,255,0.2);
+}
+
+.work__comingsoon:hover .spiner {
+  box-shadow:
+    0 0 15px rgba(94,240,255,0.6),
+    0 0 35px rgba(200,107,255,0.4);
+  transform: scale(1.1);
+}
+
+@keyframes spin {
+  from { transform: rotateZ(0deg) rotateX(18deg) rotateY(-8deg); }
+  to   { transform: rotateZ(360deg) rotateX(18deg) rotateY(-8deg); }
+}
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  -webkit-mask: radial-gradient(farthest-side, transparent 70%, black 71%);
+  mask: radial-gradient(farthest-side, transparent 70%, black 71%);
+}
+.r1 {
+  background: conic-gradient(from 120deg, #5ef0ff, #fff 25%, transparent 55%);
+  transform: translateZ(10px) scale(1.06);
+}
+.r2 {
+  background: conic-gradient(from -40deg, #c86bff, #fff 18%, transparent 45%);
+  transform: scale(0.9);
+  mix-blend-mode: screen;
+}
+.r3 {
+  background: conic-gradient(from 200deg, #fff 15%, #5ef0ff 40%, #c86bff 65%);
+  transform: translateZ(-6px) scale(0.74);
+  opacity: 0.9;
+}
+.core {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%) translateZ(12px);
+  width: 52%; height: 52%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.4) 25%, rgba(255,255,255,0.02) 60%);
+}
+
+.work__comingsoon:hover .label {
+  text-shadow:
+    1px 1px 2px rgba(0,0,0,0.5),
+    0 0 12px rgba(255,255,255,0.8),
+    0 0 25px rgba(94,240,255,0.75),
+    0 0 45px rgba(200,107,255,0.55);
+  transform: scale(1.05);
+}
+
+/* Coming Soon text */
+.label {
+  margin-top: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.9) 0%,
+    rgba(94,240,255,0.65) 50%,
+    rgba(200,107,255,0.55) 100%
+  );
+  /* -webkit-background-clip: text; */
+  -webkit-text-fill-color: rgba(255,255,255,0.9);
+  text-shadow:
+    1px 1px 2px rgba(0,0,0,0.4),
+    0 0 10px rgba(94,240,255,0.4),
+    0 0 20px rgba(200,107,255,0.25);
+  transition: all 0.3s ease;
+}
+
+/* حالت سه‌بعدی و درخشان هنگام هاور */
+.label:hover {
+  text-shadow:
+    1px 1px 2px rgba(0,0,0,0.5),
+    0 0 12px rgba(255,255,255,0.8),
+    0 0 25px rgba(94,240,255,0.75),
+    0 0 45px rgba(200,107,255,0.55);
+  transform: scale(1.05);
+}
+.neon {
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.9),
+    0 0 18px rgba(94,240,255,0.45),
+    0 0 30px rgba(200,107,255,0.25);
+  animation: flicker 3s linear infinite;
+}
+
+/* استایل اسپینر کوچک داخل دکمه */
+/* حالت عادی دکمه */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* فاصله بین اسپینر و متن */
+  position: relative;
+}
+
+/* حالت در حال بارگذاری */
+.button.loading {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* اسپینر هماهنگ با تم (اینجا سفید فرض شده، می‌تونی تغییر بدی) */
+.button.loading::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff; /* رنگ اسپینر */
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ساختار کلی فیلدها */
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.contact__input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.input-group label {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  color: #777;
+  font-size: 1rem;
+  background: white;
+  padding: 0 4px;
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+/* وقتی کاربر درون باکس کلیک می‌کند یا مقدار دارد */
+.contact__input:focus + label,
+.contact__input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  font-size: 0.8rem;
+  color: #2196f3; /* رنگ آبی تم */
+}
+
+/* پیام خطا زیر هر فیلد */
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 8px;
+  left: 5px;
+}
+
+/* انیمیشن چرخش */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes flicker {
+  0%,19%,21%,23%,100% { opacity:1; }
+  20%,22% { opacity:0.8; }
 }

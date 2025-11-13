@@ -101,7 +101,7 @@
                 <div class="skills__container bd-grid">
                     <div class="skills__content">
                         <h2 class="skills__subtitle">Professional Skills</h2>
-                        <p class="skills__text">HTML, CSS, JS, React, VueJS</p>
+                        <p class="skills__text">HTML, CSS, TailwindCSS, JS, React, NextJs, VueJS</p>
 
                         <!-- تکرار مهارت‌ها -->
                         <div class="skills__data" data-skill="85">
@@ -126,6 +126,17 @@
                             <span class="skills__percentage">85%</span>
                         </div>
 
+                        <div class="skills__data" data-skill="75">
+                            <div class="skills__names">
+                                <img class="skills__icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tailwindcss.svg" alt="TailwindCSS" style="width:24px;height:24px;">
+                                <span class="skills__name">Tailwind CSS</span>
+                            </div>
+                            <div class="skills__bar">
+                                <div class="skill__progress"></div>
+                            </div>
+                            <span class="skills__percentage">75%</span>
+                        </div>
+
                         <div class="skills__data" data-skill="65">
                             <div class="skills__names">
                                 <i class='bx bxl-javascript skills__icon'></i>
@@ -137,7 +148,7 @@
                             <span class="skills__percentage">65%</span>
                         </div>
 
-                        <div class="skills__data" data-skill="40">
+                        <div class="skills__data" data-skill="60">
                             <div class="skills__names">
                                 <i class="fab fa-react skills__icon"></i>
                                 <span class="skills__name">React</span>
@@ -145,7 +156,18 @@
                             <div class="skills__bar">
                                 <div class="skill__progress"></div>
                             </div>
-                            <span class="skills__percentage">40%</span>
+                            <span class="skills__percentage">60%</span>
+                        </div>
+
+                        <div class="skills__data" data-skill="50">
+                            <div class="skills__names">
+                                <img class="skills__icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nextdotjs.svg" alt="Next.js" width="24" height="24">
+                                <span class="skills__name">NextJs</span>
+                            </div>
+                            <div class="skills__bar">
+                                <div class="skill__progress"></div>
+                            </div>
+                            <span class="skills__percentage">50%</span>
                         </div>
 
                         <div class="skills__data" data-skill="60">
@@ -168,43 +190,101 @@
             </section>
 
 
-            <!--===== WORK =====-->
+            <!--===== portfolio =====-->
             <section class="work section" id="work">
-                <h2 class="section-title">Work</h2>
+                <h2 class="section-title">Portfolio</h2>
 
                 <div class="work__container bd-grid">
-                    <a href="" class="work__img">
-                        <img src="assets/img/work1.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work2.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work3.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work4.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work5.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work6.jpg" alt="">
-                    </a>
+                    <!-- نمونه‌کار 1 -->
+                    <div class="work__img" data-project="project1">
+                            <img src="assets/img/logo-lugx.jpg" alt="Project 1">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Lugx Gaming</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 2 -->
+                    <div class="work__img" data-project="project2">
+                        <img src="assets/img/logo-ogs.png" alt="Project 2">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Online Game Shop</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 3 -->
+                    <div class="work__img" data-project="project3">
+                        <img src="assets/img/coffee-beans.png" alt="Project 3">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Barista Cafe</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 4 -->
+                    <div class="work__img" data-project="project4">
+                        <img src="assets/img/logo-vue.png" alt="Project 4">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Vue SPA</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 5 -->
+                    <div class="work__img work__comingsoon" data-project="project5">
+                        <img src="assets/img/logo-sewing.png" alt="Project 5">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Orkideh Store</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 6 -->
+                    <div class="work__img work__comingsoon">
+                        <div class="spinner">
+                            <div class="ring r1"></div>
+                            <div class="ring r2"></div>
+                            <div class="ring r3"></div>
+                            <div class="core"></div>
+                        </div>
+                        <div class="work__overlay">
+                            <h3 class="work__title">New Project</h3>
+                        </div>
+                    <div class="label"><span class="neon">Coming Soon</span></div>
                 </div>
-            </section>
+
+
+                </div>
+
+                <!-- پاپ‌آپ برای نمایش جزئیات پروژه -->
+                <div class="popup" id="projectPopup">
+                    <div class="popup__content">
+                        <span class="popup__close">&times;</span>
+                        <h2 class="popup__title"></h2>
+                    <div class="popup__gallery">
+                    <!-- تصاویر گالری اینجا به صورت دینامیک اضافه می‌شوند -->
+                </div>
+                <p class="popup__description"></p>
+            </div>
+        </div>
+    </section>
 
             <!--===== CONTACT =====-->
             <section class="contact section" id="contact">
                 <h2 class="section-title">Contact</h2>
-
                 <div class="contact__container bd-grid">
-                    <form action="" class="contact__form">
-                        <input type="text" placeholder="Name" class="contact__input">
-                        <input type="mail" placeholder="Email" class="contact__input">
-                        <textarea name="" id="" cols="0" rows="10" class="contact__input"></textarea>
-                        <input type="button" value="Enviar" class="contact__button button">
+                    <form class="contact__form" id="contactForm">
+                        <div class="input-group">
+                            <input type="text" class="contact__input" name="user_name" id="user_name" required>
+                            <label for="user_name">Name</label>
+                            <small class="error-message"></small>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" class="contact__input" name="user_email" id="user_email" required>
+                            <label for="user_email">Email</label>
+                            <small class="error-message"></small>
+                        </div>
+                        <div class="input-group">
+                            <textarea class="contact__input" name="message" id="message" required></textarea>
+                            <label for="message">Message</label>
+                            <small class="error-message"></small>
+                        </div>
+                        <button type="button" class="contact__button button" id="contactSubmit">
+                            Submit
+                        </button>
                     </form>
+                    <p id="formMessage" style="margin-top:10px; color:green;"></p>
                 </div>
             </section>
         </main>
@@ -232,6 +312,12 @@
 
         <!--===== SCROLL REVEAL =====-->
         <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!-- EmailJS SDK -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!--===== MAIN JS =====-->
         <script src="assets/js/main.js"></script>

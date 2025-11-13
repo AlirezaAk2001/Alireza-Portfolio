@@ -72,3 +72,163 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// داده‌های پروژه‌ها
+const projects = {
+    project1: {
+        title: "Lugx Gaming",
+        media: [
+            "assets/img/g1.png",
+            "assets/img/gm1.mp4"
+        ]
+    },
+    project2: {
+        title: "Online Game Shop",
+        media: [
+            "assets/img/og1.png",
+            "assets/img/ogm1.mp4"
+        ]
+    },
+    project3: {
+        title: "Barista Cafe",
+        
+        media: [
+            "assets/img/cafe.png",
+            "assets/img/mcafe.mp4",
+        ]
+    },
+    project4: {
+        title: "Vue SPA",
+        media: [
+            "assets/img/vue.png",
+            "assets/img/mvue.mp4"
+        ]
+    },
+    project5: {
+        title: "Orkideh Sewing Machine Store",
+        media: [
+            "assets/img/sewing.png",
+            "assets/img/sewing1.mp4"
+        ]
+    }
+};
+
+// مدیریت پاپ‌آپ
+const popup = document.getElementById('projectPopup');
+const popupTitle = document.querySelector('.popup__title');
+const popupGallery = document.querySelector('.popup__gallery');
+const popupDescription = document.querySelector('.popup__description');
+const closePopup = document.querySelector('.popup__close');
+const workItems = document.querySelectorAll('.work__img');
+
+workItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const projectId = item.getAttribute('data-project');
+        const project = projects[projectId];
+
+        if (project) {
+            // تنظیم عنوان و توضیحات
+            popupTitle.textContent = project.title;
+            popupDescription.textContent = project.description;
+
+            // پاک کردن گالری قبلی
+            popupGallery.innerHTML = '';
+
+            // افزودن رسانه‌ها (تصاویر یا ویدیوها) به گالری
+            project.media.forEach(media => {
+                const isVideo = media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.ogg');
+                if (isVideo) {
+                    const video = document.createElement('video');
+                    video.src = media;
+                    video.alt = project.title;
+                    video.controls = true;
+                    video.className = 'popup__media';
+                    popupGallery.appendChild(video);
+                } else {
+                    const img = document.createElement('img');
+                    img.src = media;
+                    img.alt = project.title;
+                    img.className = 'popup__media';
+                    popupGallery.appendChild(img);
+                }
+            });
+
+            // نمایش پاپ‌آپ
+            popup.style.display = 'flex';
+        }
+    });
+});
+
+// بستن پاپ‌آپ
+closePopup.addEventListener('click', () => {
+    popup.style.display = 'none';
+});
+
+// بستن پاپ‌آپ با کلیک روی پس‌زمینه
+popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+        popup.style.display = 'none';
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  emailjs.init("01DP55z4IT14nN_aQ");
+
+  const contactForm = document.getElementById('contactForm');
+  const contactSubmit = document.getElementById('contactSubmit');
+  const inputs = contactForm.querySelectorAll('.contact__input');
+
+  contactSubmit.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    let isValid = true;
+
+    // پاک کردن خطاهای قبلی
+    contactForm.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+    // بررسی فیلدها
+    inputs.forEach(input => {
+      if (!input.value.trim()) {
+        const errorMsg = input.parentElement.querySelector('.error-message');
+        errorMsg.textContent = `${input.name === "user_name" ? "Name" : input.name === "user_email" ? "Email" : "Message"} is required.`;
+        isValid = false;
+      }
+    });
+
+    if (!isValid) return; // اگر فیلد ناقص بود، ارسال انجام نشود
+
+    // شروع ارسال
+    contactSubmit.classList.add('loading');
+    contactSubmit.disabled = true;
+    contactSubmit.textContent = "Submitting...";
+
+    emailjs.sendForm('service_19d6kpg', 'template_fruq6c6', contactForm)
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Your message has been sent successfully!',
+          text: 'Thank you for your feedback🙏. Your message will be responded to via email soon.',
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        contactSubmit.classList.remove('loading');
+        contactSubmit.disabled = false;
+        contactSubmit.textContent = "Submit";
+        contactForm.reset();
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error sending message!',
+          text: 'Please try again.',
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        contactSubmit.classList.remove('loading');
+        contactSubmit.disabled = false;
+        contactSubmit.textContent = "Submit";
+        console.error('EmailJS error:', error);
+      });
+  });
+});

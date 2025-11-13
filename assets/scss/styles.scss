@@ -337,6 +337,9 @@ img{
   &__css .skills__bar::after {
     width: 80%;
   }
+  &__tailwindcss .skills__bar::after {
+    width: 60%;
+  }
   &__js .skills__bar::after {
     width: 60%;
   }
@@ -344,6 +347,9 @@ img{
     width: 40%;
   }
   &__vue .skills__bar::after {
+    width: 60%;
+  }
+  &__nextjs .skills__bar::after {
     width: 60%;
   }
 
