@@ -33,43 +33,35 @@
     --smaller-font-size: .875rem;
   }
 }
-
 /*===== BASE =====*/
 *, ::before, ::after {
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
 body {
   margin: var(--header-height) 0 0 0;
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   color: var(--second-color);
 }
-
 h1, h2, p {
   margin: 0;
 }
-
 ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-
 a {
   text-decoration: none;
 }
-
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
-
 /*===== CLASS CSS ===== */
 .section-title {
   position: relative;
@@ -90,12 +82,10 @@ img {
   top: 2rem;
   background-color: var(--first-color);
 }
-
 .section {
   padding-top: 3rem;
   padding-bottom: 2rem;
 }
-
 /*===== LAYOUT =====*/
 .bd-grid {
   max-width: 1024px;
@@ -103,7 +93,6 @@ img {
   margin-left: var(--mb-2);
   margin-right: var(--mb-2);
 }
-
 .l-header {
   width: 100%;
   position: fixed;
@@ -113,7 +102,6 @@ img {
   background-color: #fff;
   box-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
 }
-
 /*===== NAV =====*/
 .nav {
   height: var(--header-height);
@@ -160,8 +148,11 @@ img {
   color: var(--second-color);
   font-size: 1.5rem;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
-
+.nav__toggle.open {
+  transform: rotate(90deg);
+}
 /*Active menu*/
 .active-link::after {
   position: absolute;
@@ -172,12 +163,10 @@ img {
   top: 2rem;
   background-color: var(--first-color);
 }
-
 /*=== Show menu ===*/
 .show {
   right: 0;
 }
-
 /*===== HOME =====*/
 .home {
   position: relative;
@@ -217,9 +206,8 @@ img {
   fill: var(--first-color);
 }
 .home__blob-img {
-  width: 360px;
+  width: 376px;
 }
-
 /*BUTTONS*/
 .button {
   display: inline-block;
@@ -228,7 +216,7 @@ img {
   padding: 0.75rem 2.5rem;
   font-weight: var(--font-semi);
   border-radius: 0.5rem;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
@@ -237,12 +225,11 @@ img {
 .button:hover {
   box-shadow: 0px 10px 36px rgba(0, 0, 0, 0.15);
   background-color: #218838;
+  transform: translateY(-3px);
 }
-
 .button i {
   font-size: 18px;
 }
-
 /* ===== ABOUT =====*/
 .about__container {
   row-gap: 2rem;
@@ -258,7 +245,6 @@ img {
   width: 200px;
   border-radius: 0.5rem;
 }
-
 /* ===== SKILLS =====*/
 .skills__container {
   display: flex;
@@ -267,16 +253,16 @@ img {
   gap: 2rem;
   text-align: left;
 }
-
 .skills__content {
   flex: 1;
   min-width: 300px;
 }
-
-.skills__text {
-  margin-bottom: 8px;
+.skills__subtitle {
+  margin-bottom: 15px;
 }
-
+.skills__text {
+  margin-bottom: 9px;
+}
 .skills__data {
   display: flex;
   flex-direction: column;
@@ -286,20 +272,18 @@ img {
   background-color: #fff;
   border-radius: 0.5rem;
   box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
+  margin-top: 9px;
 }
-
 .skills__names {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
-
 .skills__icon {
   font-size: 2rem;
   /* color: var(--first-color); */
 }
-
 .skills__bar {
   width: 100%;
   height: 0.5rem;
@@ -308,7 +292,6 @@ img {
   overflow: hidden;
   margin-bottom: 0.5rem;
 }
-
 .skill__progress {
   height: 100%;
   background-color: #00bcd4;
@@ -316,54 +299,56 @@ img {
   border-radius: 0.5rem;
   transition: width 0.6s ease;
 }
-
 .skills__percentage {
   font-weight: bold;
   color: #333;
 }
-
 .skills__img-container {
   flex: 1;
   min-width: 250px;
 }
-
 .skills__img {
   width: 100%;
   border-radius: 0.5rem;
   object-fit: cover;
 }
-
  /* ===== Portfolio =====*/
 .work__container {
   row-gap: 2rem;
+  justify-items: center;
 }
-
 /* کل کارت‌ها */
 .work__img {
-  position: relative;
-  overflow: hidden;
+  width: 330px;
+  height: 330px;
+  background: rgba(255, 255, 255);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.5),
+    inset 0 0 15px rgba(94,240,255,0.25);
+  transform: perspective(600px) rotateX(0deg) rotateY(0deg);
+  transition: all 0.4s ease;
   cursor: pointer;
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  backdrop-filter: blur(8px);
 }
-
 .work__img:hover {
   transform: perspective(800px) rotateX(8deg) rotateY(-8deg) scale(1.05);
   box-shadow:
     0 10px 25px rgba(94,240,255,0.3),
     0 0 35px rgba(200,107,255,0.25);
 }
-
 /* لوگوی پروژه داخل کارت */
 .work__img img {
   transition: transform 0.5s ease;
   transform-style: preserve-3d;
 }
-
 .work__img:hover img {
   transform: scale(1.1) translateZ(30px);
 }
-
 /* متن عنوان */
 .work__img:hover .work__title {
   text-shadow:
@@ -375,11 +360,9 @@ img {
   transition: all 0.3s ease;
   animation: flicker 3s linear infinite;
 }
-
 .work__img:hover .work__overlay {
   opacity: 1;
 }
-
 .work__overlay {
     position: absolute;
     bottom: 0;
@@ -405,7 +388,6 @@ img {
     justify-content: center;
     align-items: center;
 }
-
 .popup__content {
     background: #fff;
     width: 90%;
@@ -416,7 +398,6 @@ img {
     max-height: 80vh;
     overflow-y: auto;
 }
-
 .popup__close {
     position: absolute;
     top: 1rem;
@@ -425,20 +406,17 @@ img {
     cursor: pointer;
     color: var(--second-color);
 }
-
 .popup__title {
     font-size: var(--h2-font-size);
     color: var(--first-color);
     margin-bottom: var(--mb-2);
 }
-
 .popup__gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
     margin-bottom: var(--mb-4);
 }
-
 .popup__media {
     width: 100%;
     border-radius: 0.5rem;
@@ -447,16 +425,13 @@ img {
     transition: transform 0.3s ease;
     max-height: 150px; /* محدود کردن ارتفاع برای هماهنگی */
 }
-
 .popup__media:hover {
     transform: scale(1.05);
 }
-
 .popup__description {
     font-size: var(--normal-font-size);
     color: var(--second-color);
 }
-
 /* ===== CONTACT =====*/
 .contact__input {
   width: 100%;
@@ -476,7 +451,6 @@ img {
   cursor: pointer;
   margin-left: auto;
 }
-
 /* ===== FOOTER =====*/
 .footer {
   background-color: var(--second-color);
@@ -504,8 +478,53 @@ img {
 .footer__copy {
   font-size: var(--smaller-font-size);
 }
-
 /* ===== MEDIA QUERIES=====*/
+@media screen and (max-width: 767px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 0;
+    padding: 4rem 0 2rem;
+  }
+  .home__img {
+    position: static;
+    width: 260px;
+    order: -1;
+    margin-bottom: var(--mb-4);
+  }
+  .home__data {
+    text-align: center;
+    margin-bottom: var(--mb-2);
+  }
+  .home__social {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--mb-4);
+  }
+  .home__social-icon {
+    margin-bottom: 0;
+    margin-right: var(--mb-2);
+  }
+  .skills__container {
+    flex-direction: column;
+  }
+  .skills__content {
+    display: contents;
+  }
+  .skills__subtitle {
+    order: 1;
+  }
+  .skills__text {
+    order: 2;
+  }
+  .skills__img-container {
+    order: 3;
+  }
+  .skills__data {
+    order: 4;
+  }
+}
 @media screen and (max-width: 320px) {
   .home {
     row-gap: 2rem;
@@ -623,7 +642,6 @@ img {
     width: 450px;
   }
 }
-
 /* ==== Coming Soon Spinner (for work cards) ==== */
 .work__comingsoon {
   width: 330px;
@@ -642,16 +660,16 @@ img {
   cursor: pointer;
   backdrop-filter: blur(8px);
 }
-
 .work__comingsoon:hover {
   transform: perspective(800px) rotateX(8deg) rotateY(-8deg) scale(1.05);
   box-shadow:
     0 10px 25px rgba(94,240,255,0.3),
     0 0 35px rgba(200,107,255,0.25);
 }
-
 /* Spinner Base */
 .spinner {
+  --scale: 1;
+  --rot: 0deg;
   width: 70px;
   height: 70px;
   border: 3px solid rgba(255,255,255,0.1);
@@ -659,22 +677,22 @@ img {
   border-right: 3px solid rgba(200,107,255,0.5);
   border-radius: 50%;
   animation: spin 1.5s linear infinite;
-  transition: all 0.4s ease;
   box-shadow:
     0 0 10px rgba(94,240,255,0.3),
     0 0 20px rgba(200,107,255,0.2);
+  backdrop-filter: blur(8px);
+  transform: rotateZ(var(--rot)) rotateX(18deg) rotateY(-8deg) scale(var(--scale));
+  transition: --scale 0.3s ease;
 }
-
-.work__comingsoon:hover .spiner {
+.work__comingsoon:hover .spinner {
+  --scale: 1.05;
   box-shadow:
     0 0 15px rgba(94,240,255,0.6),
     0 0 35px rgba(200,107,255,0.4);
-  transform: scale(1.1);
 }
-
 @keyframes spin {
-  from { transform: rotateZ(0deg) rotateX(18deg) rotateY(-8deg); }
-  to   { transform: rotateZ(360deg) rotateX(18deg) rotateY(-8deg); }
+  from { --rot: 0deg; }
+  to { --rot: 360deg; }
 }
 .ring {
   position: absolute;
@@ -705,7 +723,6 @@ img {
   border-radius: 50%;
   background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.4) 25%, rgba(255,255,255,0.02) 60%);
 }
-
 .work__comingsoon:hover .label {
   text-shadow:
     1px 1px 2px rgba(0,0,0,0.5),
@@ -714,7 +731,6 @@ img {
     0 0 45px rgba(200,107,255,0.55);
   transform: scale(1.05);
 }
-
 /* Coming Soon text */
 .label {
   margin-top: 16px;
@@ -736,7 +752,6 @@ img {
     0 0 20px rgba(200,107,255,0.25);
   transition: all 0.3s ease;
 }
-
 /* حالت سه‌بعدی و درخشان هنگام هاور */
 .label:hover {
   text-shadow:
@@ -753,7 +768,6 @@ img {
     0 0 30px rgba(200,107,255,0.25);
   animation: flicker 3s linear infinite;
 }
-
 /* استایل اسپینر کوچک داخل دکمه */
 /* حالت عادی دکمه */
 .button {
@@ -763,13 +777,11 @@ img {
   gap: 8px; /* فاصله بین اسپینر و متن */
   position: relative;
 }
-
 /* حالت در حال بارگذاری */
 .button.loading {
   pointer-events: none;
   opacity: 0.85;
 }
-
 /* اسپینر هماهنگ با تم (اینجا سفید فرض شده، می‌تونی تغییر بدی) */
 .button.loading::before {
   content: "";
@@ -780,13 +792,11 @@ img {
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
-
 /* ساختار کلی فیلدها */
 .input-group {
   position: relative;
   margin-bottom: 1.5rem;
 }
-
 .contact__input {
   width: 100%;
   padding: 12px;
@@ -796,7 +806,6 @@ img {
   font-size: 1rem;
   background: transparent;
 }
-
 .input-group label {
   position: absolute;
   left: 12px;
@@ -808,7 +817,6 @@ img {
   transition: all 0.2s ease;
   pointer-events: none;
 }
-
 /* وقتی کاربر درون باکس کلیک می‌کند یا مقدار دارد */
 .contact__input:focus + label,
 .contact__input:not(:placeholder-shown) + label {
@@ -817,7 +825,6 @@ img {
   font-size: 0.8rem;
   color: #2196f3; /* رنگ آبی تم */
 }
-
 /* پیام خطا زیر هر فیلد */
 .error-message {
   color: red;
@@ -826,14 +833,12 @@ img {
   bottom: 8px;
   left: 5px;
 }
-
 /* انیمیشن چرخش */
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
-
 @keyframes flicker {
   0%,19%,21%,23%,100% { opacity:1; }
   20%,22% { opacity:0.8; }
