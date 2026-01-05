@@ -237,34 +237,23 @@
         </div>
     </section>
             <!--===== CONTACT =====-->
-            <section class="contact section" id="contact">
-                <h2 class="section-title">Contact</h2>
-                <div class="contact__container bd-grid">
-                    <form class="contact__form" id="contactForm">
-                        <div class="input-group">
-                            <input type="text" class="contact__input" name="user_name" id="user_name" required>
-                            <label for="user_name">Name</label>
-                            <small class="error-message"></small>
-                        </div>
-                        <div class="input-group">
-                            <input type="email" class="contact__input" name="user_email" id="user_email" required>
-                            <label for="user_email">Email</label>
-                            <small class="error-message"></small>
-                        </div>
-                        <div class="input-group">
-                            <textarea class="contact__input" name="message" id="message" required></textarea>
-                            <label for="message">Message</label>
-                            <small class="error-message"></small>
-                        </div>
-                        <button type="button" class="btn btn-send" id="contactSubmit" style="margin-top: 10px;">
-                            <i class="bx bxs-paper-plane icon-default" style="margin-right: 2px; margin-top: 1px;"></i>
-                            <i class="bx bx-paper-plane icon-hover" style="margin-right: 2px; margin-top: 1px;"></i>
-                            Send Message
-                        </button>
-                    </form>
-                    <p id="formMessage" style="margin-top:10px; color:green;"></p>
-                </div>
-            </section>
+           <div class="contact-box">
+                        <form id="contactForm">
+                            <input type="text" class="field" name="user_name" id="user_name" placeholder="Full Name"
+                                required>
+                            <input type="email" class="field" name="user_email" id="user_email"
+                                placeholder="Email Address" required>
+                            <textarea name="message" id="message" cols="30" rows="10" class="field"
+                                placeholder="Your Message" required></textarea>
+
+                            <button type="button" class="btn btn-send" id="contactSubmit" style="margin-top: 10px;">
+                                <i class="bx bxs-paper-plane icon-default" style="margin-right: 2px; margin-top: 1px;"></i>
+                                <i class="bx bx-paper-plane icon-hover" style="margin-right: 2px; margin-top: 1px;"></i>
+                                Send Message
+                            </button>
+                            <small class="error-message" style="display:block; color:red; margin-top:5px;"></small>
+                        </form>
+            </div>
         </main>
         <!--===== FOOTER =====-->
         <footer class="footer">
