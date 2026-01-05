@@ -451,143 +451,24 @@ img {
     font-size: var(--normal-font-size);
     color: var(--second-color);
 }
-/* ===== CONTACT ===== */
-.contact__container {
-  justify-items: center;
-  row-gap: 2rem;
-}
-
-.contact__form {
-  width: 100%;
-  max-width: 450px;
-}
-
-/* ساختار کلی فیلدها با افکت Label شناور */
-.input-group {
-  position: relative;
-  margin-bottom: 1.5rem;
-}
-
+/* ===== CONTACT =====*/
 .contact__input {
   width: 100%;
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-semi);
   padding: 1rem;
-  font-size: var(--normal-font-size);
-  font-family: var(--body-font);
-  background-color: transparent;
+  border-radius: 0.5rem;
   border: 1.5px solid var(--second-color);
-  border-radius: 0.5rem;
   outline: none;
-  transition: border-color 0.3s ease;
-  color: var(--second-color);
+  margin-bottom: var(--mb-4);
 }
-
-.contact__input:focus {
-  border-color: var(--first-color);
-}
-
-.input-group label {
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-  color: #777;
-  font-size: var(--normal-font-size);
-  background-color: #fff; /* باید هماهنگ با پس‌زمینه بخش باشد */
-  padding: 0 0.5rem;
-  transition: all 0.2s ease;
-  pointer-events: none;
-}
-
-/* افکت بالا رفتن لیبل هنگام تایپ یا فوکوس */
-.contact__input:focus + label,
-.contact__input:not(:placeholder-shown) + label {
-  top: -0.6rem;
-  left: 0.8rem;
-  font-size: var(--smaller-font-size);
-  color: var(--first-color);
-  font-weight: var(--font-semi);
-}
-
-.contact__input.textarea {
-  resize: none;
-  height: 10rem;
-}
-
-/* دکمه ارسال با انیمیشن موشک کاغذی */
-.btn-send {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background-color: var(--first-color);
-  color: #fff;
-  padding: 0.75rem 2.5rem;
-  font-weight: var(--font-semi);
-  border-radius: 0.5rem;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-  float: right; /* یا margin-left: auto برای تراز راست */
-}
-
-.btn-send:hover {
-  background-color: var(--second-color);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-}
-
-/* مدیریت آیکون‌ها در دکمه */
-.btn-send i {
-  font-size: 1.2rem;
-  transition: 0.3s;
-}
-
-.btn-send .icon-hover {
-  display: none;
-}
-
-/* انیمیشن موشک در حالت هاور */
-.btn-send:hover .icon-default {
-  display: none;
-}
-
-.btn-send:hover .icon-hover {
-  display: inline-block;
-  animation: flyPlane 0.6s ease-in-out forwards;
-}
-
-/* پیغام خطا */
-.error-message {
-  color: #e74c3c;
-  font-size: var(--smaller-font-size);
-  margin-top: -1.2rem;
-  margin-bottom: 1rem;
+.contact__button {
   display: block;
-  padding-left: 0.5rem;
-}
-
-/* انیمیشن پرواز موشک کاغذی */
-@keyframes flyPlane {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-  40% {
-    transform: translate(-5px, 5px) scale(0.9);
-  }
-  100% {
-    transform: translate(20px, -20px) scale(1.1);
-    opacity: 0;
-  }
-}
-
-/* هماهنگی با موبایل */
-@media screen and (max-width: 576px) {
-  .contact__form {
-    width: 100%;
-  }
-  .btn-send {
-    width: 100%;
-  }
+  border: none;
+  outline: none;
+  font-size: var(--normal-font-size);
+  cursor: pointer;
+  margin-left: auto;
 }
 /* ===== FOOTER =====*/
 .footer {
