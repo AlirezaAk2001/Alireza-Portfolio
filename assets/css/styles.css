@@ -227,101 +227,66 @@ img {
 .home__blob-img {
   width: 376px;
 }
-/* ==================== GENERAL BUTTON STYLES ==================== */
+/* ==================== BUTTONS CONFIGURATION ==================== */
+/* تعریف استایل پایه دکمه‌ها هماهنگ با متغیرهای قالب شما */
 .btn {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 9.5rem;
-  height: 3rem;
-  background: var(--main-color);
-  border: var(--border);
-  border-radius: .3rem;
-  font-size: 1rem;
-  color: var(--white-color);
-  font-weight: 500;
-  margin: 0 0.5rem;
-  transition: .5s;
-  cursor: pointer;
+  padding: 0.75rem 2.5rem;
+  background-color: var(--first-color); /* رنگ اصلی سایت شما */
+  border: 2px solid var(--first-color);
+  border-radius: 0.5rem;
+  font-weight: var(--font-semi);
+  color: #fff;
+  transition: all 0.4s ease;
   position: relative;
-  overflow: hidden; /* برای جلوگیری از بیرون زدن انیمیشن‌ها */
+  overflow: hidden;
   z-index: 1;
+  cursor: pointer;
+  text-decoration: none;
+  gap: 8px; /* فاصله بین آیکون و متن */
 }
 
-/* تنظیمات عمومی آیکون‌ها داخل دکمه */
+/* تنظیم اندازه آیکون‌ها */
 .btn i {
-  font-size: 1.2rem;
-  transition: .3s;
-  /* تنظیم فاصله آیکون از متن */
-  margin-right: 5px; 
+  font-size: 1.3rem;
+  transition: 0.3s;
 }
 
-/* مخفی کردن آیکون دوم (hover) در حالت عادی */
+/* مخفی کردن آیکون هاور در حالت عادی */
 .btn .icon-hover {
   display: none;
 }
 
-/* ==================== BUTTON BOX (PROFILE PAGE) ==================== */
+/* ==================== CALL ME BUTTON (Phone Effect) ==================== */
 
-/* دکمه اول (Call Me) - حالت عادی */
-.btn-box .btn:nth-child(1) {
-    background: var(--main-color);
-    color: var(--white-color);
+/* هاور دکمه تماس: پس‌زمینه خالی می‌شود و متن رنگی می‌شود */
+.btn-call:hover {
+  background-color: transparent;
+  color: var(--first-color);
 }
 
-/* دکمه اول (Call Me) - هاور: تغییر رنگ پس‌زمینه */
-.btn-box .btn:nth-child(1):hover {
-  background: transparent;
-  color: var(--main-color);
-}
-
-/* دکمه دوم (Contact Me) - حالت عادی */
-.btn-box .btn:nth-child(2) {
-  background: transparent;
-  color: var(--main-color);
-}
-
-/* دکمه دوم (Contact Me) - هاور */
-.btn-box .btn:nth-child(2):hover {
-  background: var(--main-color);
-  color: var(--white-color);
-}
-
-/* ==================== CALL ME & CONTACT ME HOVER EFFECTS ==================== */
-
-/* --- Call Me Button Logic --- */
-/* وقتی موس روی دکمه می‌رود، آیکون عادی مخفی شود */
+/* وقتی موس روی دکمه رفت، آیکون ثابت مخفی شود */
 .btn-call:hover .icon-default {
   display: none;
 }
 
-/* وقتی موس روی دکمه می‌رود، آیکون دوم ظاهر و انیمیشن اجرا شود */
+/* وقتی موس روی دکمه رفت، آیکون دوم ظاهر شده و می‌لرزد */
 .btn-call:hover .icon-hover {
   display: inline-block;
+  color: var(--first-color);
   animation: phoneWobble 0.5s infinite;
 }
 
-/* --- Contact Me Button Logic --- */
-.btn-contact:hover .icon-default {
-  display: none;
-}
-
-.btn-contact:hover .icon-hover {
-  display: inline-block;
-  /* دکمه کانتکت انیمیشن خاصی ندارد، فقط آیکون عوض می‌شود */
-}
-
-/* ==================== SEND MESSAGE BUTTON (Form) ==================== */
+/* ==================== SEND MESSAGE BUTTON (Plane Effect) ==================== */
 
 .btn-send {
-  /* تنظیمات خاص برای دکمه ارسال */
-  background: var(--main-color);
-  transition: color 0.5s;
-  width: auto; /* عرض خودکار یا ثابت بسته به نیاز */
-  padding: 0 1.5rem;
+  width: 100%; /* تمام عرض در فرم */
+  border: 2px solid var(--first-color);
 }
 
-/* لایه سفید که هنگام هاور اسلاید می‌شود */
+/* افکت پر شدن سفید هنگام هاور */
 .btn-send::before {
   content: "";
   position: absolute;
@@ -329,34 +294,32 @@ img {
   left: 0;
   width: 0;
   height: 100%;
-  background: var(--white-color);
+  background: #fff;
   z-index: -1;
   transition: width 0.5s ease;
 }
 
 /* هاور دکمه ارسال */
 .btn-send:hover {
-  color: var(--main-color) !important;
-  border: var(--border);
+  color: var(--first-color);
 }
 
-/* پر شدن پس‌زمینه سفید */
 .btn-send:hover::before {
   width: 100%;
 }
 
-/* منطق تعویض آیکون دکمه ارسال */
+/* تعویض آیکون‌ها در دکمه ارسال */
 .btn-send:hover .icon-default {
   display: none;
 }
 
 .btn-send:hover .icon-hover {
   display: inline-block;
+  color: var(--first-color);
   animation: flyPlane 0.6s ease-in-out forwards;
-  color: var(--main-color);
 }
 
-/* ==================== KEYFRAMES ANIMATIONS ==================== */
+/* ==================== ANIMATIONS ==================== */
 
 /* انیمیشن لرزش تلفن */
 @keyframes phoneWobble {
@@ -367,16 +330,16 @@ img {
   100% { transform: rotate(0deg); }
 }
 
-/* انیمیشن پرواز موشک کاغذی */
+/* انیمیشن پرواز موشک */
 @keyframes flyPlane {
   0% {
     transform: translate(0, 0);
   }
   20% {
-    transform: translate(-2px, 2px); /* کمی عقب‌خیز */
+    transform: translate(-2px, 2px);
   }
   100% {
-    transform: translate(4px, -4px); /* پرواز به بالا سمت راست */
+    transform: translate(6px, -6px); /* پرواز به سمت بالا راست */
   }
 }
 /* ===== ABOUT =====*/
