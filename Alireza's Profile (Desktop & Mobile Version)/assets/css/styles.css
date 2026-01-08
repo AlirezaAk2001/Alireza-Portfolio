@@ -227,27 +227,120 @@ img {
 .home__blob-img {
   width: 376px;
 }
-/*BUTTONS*/
-.button {
-  display: inline-block;
-  background-color: var(--first-color);
-  color: #fff;
-  padding: 0.75rem 2.5rem;
-  font-weight: var(--font-semi);
-  border-radius: 0.5rem;
-  transition: all 0.3s ease;
+/* ==================== BUTTONS CONFIGURATION ==================== */
+/* تعریف استایل پایه دکمه‌ها هماهنگ با متغیرهای قالب شما */
+.btn {
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
+  padding: 0.75rem 2.5rem;
+  background-color: var(--first-color); /* رنگ اصلی سایت شما */
+  border: 2px solid var(--first-color);
+  border-radius: 0.5rem;
+  font-weight: var(--font-semi);
+  color: #fff;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
   text-decoration: none;
+  gap: 8px; /* فاصله بین آیکون و متن */
 }
-.button:hover {
-  box-shadow: 0px 10px 36px rgba(0, 0, 0, 0.15);
-  background-color: #218838;
-  transform: translateY(-3px);
+
+/* تنظیم اندازه آیکون‌ها */
+.btn i {
+  font-size: 1.3rem;
+  transition: 0.3s;
 }
-.button i {
-  font-size: 18px;
+
+/* مخفی کردن آیکون هاور در حالت عادی */
+.btn .icon-hover {
+  display: none;
+}
+
+/* ==================== CALL ME BUTTON (Phone Effect) ==================== */
+
+/* هاور دکمه تماس: پس‌زمینه خالی می‌شود و متن رنگی می‌شود */
+.btn-call:hover {
+  background-color: transparent;
+  color: var(--first-color);
+}
+
+/* وقتی موس روی دکمه رفت، آیکون ثابت مخفی شود */
+.btn-call:hover .icon-default {
+  display: none;
+}
+
+/* وقتی موس روی دکمه رفت، آیکون دوم ظاهر شده و می‌لرزد */
+.btn-call:hover .icon-hover {
+  display: inline-block;
+  color: var(--first-color);
+  animation: phoneWobble 0.5s infinite;
+}
+
+/* ==================== SEND MESSAGE BUTTON (Plane Effect) ==================== */
+
+.btn-send {
+  width: 100%; /* تمام عرض در فرم */
+  border: 2px solid var(--first-color);
+}
+
+/* افکت پر شدن سفید هنگام هاور */
+.btn-send::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #fff;
+  z-index: -1;
+  transition: width 0.5s ease;
+}
+
+/* هاور دکمه ارسال */
+.btn-send:hover {
+  color: var(--first-color);
+}
+
+.btn-send:hover::before {
+  width: 100%;
+}
+
+/* تعویض آیکون‌ها در دکمه ارسال */
+.btn-send:hover .icon-default {
+  display: none;
+}
+
+.btn-send:hover .icon-hover {
+  display: inline-block;
+  color: var(--first-color);
+  animation: flyPlane 0.6s ease-in-out forwards;
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+/* انیمیشن لرزش تلفن */
+@keyframes phoneWobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* انیمیشن پرواز موشک */
+@keyframes flyPlane {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  100% {
+    transform: translate(6px, -6px); /* پرواز به سمت بالا راست */
+  }
 }
 /* ===== ABOUT =====*/
 .about__container {
