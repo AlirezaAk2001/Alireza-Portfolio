@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const projects = {
     project1: {
         title: "Lugx Gaming",
+        description: "A professional gaming store template built with modern web technologies.",
         media: [
             "assets/img/g1.png",
             "assets/img/gm1.mp4"
@@ -83,6 +84,7 @@ const projects = {
     },
     project2: {
         title: "Online Game Shop",
+        description: "Complete e-commerce solution for digital game assets.",
         media: [
             "assets/img/og1.png",
             "assets/img/ogm1.mp4"
@@ -90,7 +92,7 @@ const projects = {
     },
     project3: {
         title: "Barista Cafe",
-        
+        description: "A beautiful cafe website design.",
         media: [
             "assets/img/cafe.png",
             "assets/img/mcafe.mp4",
@@ -98,6 +100,7 @@ const projects = {
     },
     project4: {
         title: "Vue SPA",
+        description: "Single Page Application using Vue.js.",
         media: [
             "assets/img/vue.png",
             "assets/img/mvue.mp4"
@@ -105,6 +108,7 @@ const projects = {
     },
     project5: {
         title: "Orkideh Sewing Machine Store",
+        description: "Online store for buying, selling and repairing sewing machines and their accessories",
         media: [
             "assets/img/sewing.png",
             "assets/img/sewing1.mp4"
