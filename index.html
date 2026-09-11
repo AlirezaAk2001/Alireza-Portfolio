@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Alireza Akhoondi | Front-End Developer — React, Vue.js, Next.js</title>
+        <meta name="description" content="Portfolio of Alireza Akhoondi, a front-end web developer working with HTML, CSS, JavaScript, React, Vue.js and Next.js. Browse projects and get in touch.">
+        <meta name="author" content="Alireza Akhoondi">
+        <link rel="canonical" href="https://alirezaakhoondi.ir/">
+
+        <!-- Open Graph (Facebook, LinkedIn, Telegram, WhatsApp) -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://alirezaakhoondi.ir/">
+        <meta property="og:site_name" content="Alireza Akhoondi">
+        <meta property="og:title" content="Alireza Akhoondi | Front-End Developer">
+        <meta property="og:description" content="Portfolio of Alireza Akhoondi, a front-end web developer working with HTML, CSS, JavaScript, React, Vue.js and Next.js.">
+        <meta property="og:image" content="https://alirezaakhoondi.ir/assets/img/perfil.jpg">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Alireza Akhoondi | Front-End Developer">
+        <meta name="twitter:description" content="Portfolio of Alireza Akhoondi, a front-end web developer working with HTML, CSS, JavaScript, React, Vue.js and Next.js.">
+        <meta name="twitter:image" content="https://alirezaakhoondi.ir/assets/img/perfil.jpg">
+
+        <meta name="theme-color" content="#3e6ff4">
+
+        <!-- Favicons -->
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+        <link rel="manifest" href="assets/site.webmanifest">
+
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <!-- Structured data for search engines -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Alireza Akhoondi",
+          "url": "https://alirezaakhoondi.ir/",
+          "image": "https://alirezaakhoondi.ir/assets/img/perfil.jpg",
+          "jobTitle": "Front-End Developer",
+          "sameAs": [
+            "https://www.linkedin.com/in/alireza-akhoondi2001",
+            "https://github.com/AlirezaAk2001",
+            "https://instagram.com/alireza_egn",
+            "https://t.me/alireza_egn"
+          ],
+          "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "Vue.js", "Next.js", "Tailwind CSS"]
+        }
+        </script>
+    </head>
+    <body>
+        <!--===== HEADER =====-->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div>
+                    <h1 class="nav__logo">
+                        <img src="assets/img/android-chrome-512x512.png" alt="Logo" style="width:40px; height:40px; border-radius:8px;">
+                    </h1>
+                </div>
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
+                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
+                        <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
+                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+        <main class="l-main">
+            <!--===== HOME =====-->
+            <section class="home bd-grid" id="home">
+                <div class="home__data">
+                    <h1 class="home__title">Hi,<br>I'am <span class="home__title-color">Alireza</span><br> Web Designer</h1>
+                    <a href="#contact" class="btn btn-call">
+                        <i class="bx bxs-phone icon-default"></i>
+                        <i class="bx bx-phone-call icon-hover"></i>
+                        Call Me
+                    </a>
+                </div>
+                <div class="home__social">
+                    <a href="https://www.linkedin.com/in/alireza-akhoondi2001" class="home__social-icon">
+                        <i class='bx bxl-linkedin'></i>
+                    </a>
+                    <a href="https://t.me/alireza_egn" class="home__social-icon">
+                        <i class='bx bxl-telegram'></i>
+                    </a>
+                    <a href="https://instagram.com/alireza_egn" class="home__social-icon">
+                        <i class='bx bxl-instagram'></i>
+                    </a>
+                    <a href="https://github.com/AlirezaAk2001" class="home__social-icon">
+                        <i class='bx bxl-github'></i>
+                    </a>
+                </div>
+                <div class="home__img">
+                    <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <mask id="mask0" mask-type="alpha">
+                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
+                        </mask>
+                        <g mask="url(#mask0)">
+                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
+                            <image class="home__blob-img" x="50" y="60" href="assets/img/perfil.jpg"/>
+                        </g>
+                    </svg>
+                </div>
+            </section>
+            <!--===== ABOUT =====-->
+            <section class="about section " id="about">
+                <h2 class="section-title">About</h2>
+                <div class="about__container bd-grid">
+                    <div class="about__img">
+                        <img src="assets/img/profile(1).jpg" alt="Alireza Akhoondi" loading="lazy">
+                    </div>
+                   
+                    <div>
+                        <h2 class="about__subtitle">I'm Alireza</h2>
+                        <p class="about__text">
+                            I am a Front-end developer and have been working with HTML, CSS, and JS for about 3 years and have been working with React and VueJS frameworks for about 2 years. I love Front-end challenges and along with project development, I like to improve my knowledge in related fields. I also have some familiarity with Python and have completed the C# Windows Form course.
+                        </p>           
+                    </div>                                   
+                </div>
+            </section>  
+            <!--===== SKILLS =====-->
+            <section class="skills section" id="skills">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills__container bd-grid">
+                    <div class="skills__content">
+                        <h2 class="skills__subtitle">Professional Skills</h2>
+                        <p class="skills__text">HTML, CSS, TailwindCSS, JS, React, NextJs, VueJS</p>
+                        <!-- تکرار مهارت‌ها -->
+                        <div class="skills__data" data-skill="85">
+                            <div class="skills__names">
+                                <i class='bx bxl-html5 skills__icon'></i>
+                                <span class="skills__name">HTML5</span>
+                            </div>
+                            <div class="skills__bar">
+                                <div class="skill__progress"></div>
+                            </div>
+                            <span class="skills__percentage">85%</span>
+                        </div>
+                        <div class="skills__data" data-skill="85">
+                            <div class="skills__names">
+                                <i class='bx bxl-css3 skills__icon'></i>
+                                <span class="skills__name">CSS3</span>
+                            </div>
+                            <div class="skills__bar">
+                                <div class="skill__progress"></div>
+                            </div>
+                            <span class="skills__percentage">85%</span>
+                        </div>
+                        <div class="skills__data" data-skill="65">
+                            <div class="skills__names">
+                                <i class='bx bxl-javascript skills__icon'></i>
+                                <span class="skills__name">JavaScript</span>
+                            </div>
+                            <div class="skills__bar">
+                                <div class="skill__progress"></div>
+                            </div>
+                            <span class="skills__percentage">65%</span>
+                        </div>
+                        <div class="skills__data" data-skill="60">
+                            <div class="skills__names">
+                                <i class="fab fa-react skills__icon"></i>
+                                <span class="skills__name">React</span>
+                            </div>
+                            <div class="skills__bar">
+                                <div class="skill__progress"></div>
+                            </div>
+                            <span class="skills__percentage">60%</span>
+                        </div>
+                        <div class="skills__data" data-skill="50">
+                            <div class="skills__names">
+                                <img class="skills__icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nextdotjs.svg" alt="Next.js" width="24" height="24">
+                                <span class="skills__name">NextJs</span>
+                            </div>
+                            <div class="skills__bar">
+                                <div class="skill__progress"></div>
+                            </div>
+                            <span class="skills__percentage">50%</span>
+                        </div>
+                        <div class="skills__data" data-skill="75">
+                            <div class="skills__names">
+                                <img class="skills__icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tailwindcss.svg" alt="TailwindCSS" style="width:24px;height:24px;">
+                                <span class="skills__name">Tailwind CSS</span>
+                            </div>
+                            <div class="skills__bar">
+                                <div class="skill__progress"></div>
+                            </div>
+                            <span class="skills__percentage">75%</span>
+                        </div>
+                        <div class="skills__data" data-skill="60">
+                            <div class="skills__names">
+                                <i class="fab fa-vuejs skills__icon"></i>
+                                <span class="skills__name">Vue</span>
+                            </div>
+                        <div class="skills__bar">
+                            <div class="skill__progress"></div>
+                        </div>
+                        <span class="skills__percentage">60%</span>
+                    </div>
+                        <div class="skills__data" data-skill="50">
+                            <div class="skills__names">
+                                <img class="skills__icon" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vuetify.svg" alt="Vuetify" style="width:24px;height:24px;">
+                                <span class="skills__name">Vuetify</span>
+                            </div>
+                            <div class="skills__bar">
+                                <div class="skill__progress"></div>
+                            </div>
+                            <span class="skills__percentage">50%</span>
+                        </div>
+                    </div>
+                    <!-- تصویر کنار مهارت‌ها -->
+                    <div class="skills__img-container">
+                        <img src="assets/img/work3.jpg" alt="Front-end development workspace" class="skills__img" loading="lazy">
+                    </div>
+                </div>
+            </section>
+            <!--===== portfolio =====-->
+            <section class="work section" id="work">
+                <h2 class="section-title">Portfolio</h2>
+                <div class="work__container bd-grid">
+                    <!-- نمونه‌کار 1 -->
+                    <div class="work__img" data-project="project1">
+                            <img src="assets/img/logo-lugx(1).jpg" alt="Lugx Gaming project thumbnail" loading="lazy">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Lugx Gaming</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 2 -->
+                    <div class="work__img" data-project="project2">
+                        <img src="assets/img/logo-ogs-1.png" alt="Online Game Shop project thumbnail" loading="lazy">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Online Game Shop</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 3 -->
+                    <div class="work__img" data-project="project3">
+                        <img src="assets/img/coffee-beans.png" alt="Barista Cafe project thumbnail" loading="lazy">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Barista Cafe</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 4 -->
+                    <div class="work__img" data-project="project4">
+                        <img src="assets/img/logo-vue-1.png" alt="Vue SPA project thumbnail" loading="lazy">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Vue SPA</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 5 -->
+                    <div class="work__img" data-project="project5">
+                        <img src="assets/img/logo-sewing-1.png" alt="Orkideh Sewing Machine Store project thumbnail" loading="lazy">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Orkideh Store</h3>
+                        </div>
+                    </div>
+                    <!-- نمونه‌کار 6 -->
+                    <div class="work__img work__comingsoon">
+                        <div class="spinner">
+                            <div class="ring r1"></div>
+                            <div class="ring r2"></div>
+                            <div class="ring r3"></div>
+                            <div class="core"></div>
+                        </div>
+                        <div class="work__overlay">
+                            <h3 class="work__title">New Project</h3>
+                        </div>
+                    <div class="label"><span class="neon">Coming Soon</span></div>
+                </div>
+                </div>
+                <!-- پاپ‌آپ برای نمایش جزئیات پروژه -->
+                <div class="popup" id="projectPopup">
+                    <div class="popup__content">
+                        <span class="popup__close">&times;</span>
+                        <h2 class="popup__title"></h2>
+                    <div class="popup__gallery">
+                    <!-- تصاویر گالری اینجا به صورت دینامیک اضافه می‌شوند -->
+                </div>
+                <p class="popup__description"></p>
+            </div>
+        </div>
+    </section>
+            <!--===== CONTACT =====-->
+            <section class="contact section" id="contact">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact__container bd-grid">
+                    <form class="contact__form" id="contactForm">
+                        <div class="input-group">
+                            <input type="text" class="contact__input" name="user_name" id="user_name" required>
+                            <label for="user_name">Name</label>
+                            <small class="error-message"></small>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" class="contact__input" name="user_email" id="user_email" required>
+                            <label for="user_email">Email</label>
+                            <small class="error-message"></small>
+                        </div>
+                        <div class="input-group">
+                            <textarea class="contact__input" name="message" id="message" required></textarea>
+                            <label for="message">Message</label>
+                            <small class="error-message"></small>
+                        </div>
+                        <button type="button" class="btn btn-send" id="contactSubmit">
+                            <i class="bx bxs-paper-plane icon-default"></i>
+                            <i class="bx bx-paper-plane icon-hover"></i>
+                            Send Message
+                        </button>
+                    </form>
+                    <p id="formMessage" style="margin-top:10px; color:green;"></p>
+                </div>
+            </section>
+        </main>
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <p class="footer__title">Alireza</p>
+            <div class="footer__social">
+                <a href="https://www.linkedin.com/in/alireza-akhoondi2001" class="footer__icon">
+                    <i class='bx bxl-linkedin'></i>
+                </a>
+                <a href="https://t.me/alireza_egn" class="footer__icon">
+                    <i class='bx bxl-telegram'></i>
+                </a>
+                <a href="https://instagram.com/alireza_egn" class="footer__icon">
+                    <i class='bx bxl-instagram'></i>
+                </a>
+                <a href="https://github.com/AlirezaAk2001" class="footer__icon">
+                    <i class='bx bxl-github'></i>
+                </a>
+            </div>
+            <p class="footer__copy">&#169; Alireza Akhoondi All rigths reserved</p>
+        </footer>
+
+        <!-- EmailJS SDK -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!--===== SCROLL REVEAL =====-->
+        <script src="assets/js/vendor/scrollreveal.min.js"></script>
+        <!--===== MAIN JS =====-->
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>
