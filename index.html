@@ -4,8 +4,29 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Alireza Akhoondi | Front-End Developer — React, Vue.js, Next.js</title>
-        <meta name="description" content="Portfolio of Alireza Akhoondi, a front-end web developer working with HTML, CSS, JavaScript, React, Vue.js and Next.js. Browse projects and get in touch.">
+        <!-- تشخیص زودهنگام زبان و تم تا صفحه از همون اول با جهت/فونت/رنگ درست رندر بشه (جلوگیری از پرش) -->
+        <script>
+        (function () {
+          try {
+            var saved = localStorage.getItem('site-lang');
+            var lang = (saved === 'en' || saved === 'fa')
+              ? saved
+              : (((navigator.language || '').toLowerCase().indexOf('fa') === 0) ? 'fa' : 'en');
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+          } catch (e) {}
+          try {
+            var savedTheme = localStorage.getItem('site-theme');
+            var theme = (savedTheme === 'light' || savedTheme === 'dark')
+              ? savedTheme
+              : ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+          } catch (e) {}
+        })();
+        </script>
+
+        <title>Alireza Akhoondi | Front-End Developer — Full-Stack Developer</title>
+        <meta name="description" content="Portfolio of Alireza Akhoondi, a front-end and full-stack web developer working with HTML, CSS, JavaScript, React, Vue.js, Tailwind CSS, Vuetify and Next.js. Browse projects and get in touch.">
         <meta name="author" content="Alireza Akhoondi">
         <link rel="canonical" href="https://alirezaakhoondi.ir/">
 
@@ -13,14 +34,14 @@
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://alirezaakhoondi.ir/">
         <meta property="og:site_name" content="Alireza Akhoondi">
-        <meta property="og:title" content="Alireza Akhoondi | Front-End Developer">
-        <meta property="og:description" content="Portfolio of Alireza Akhoondi, a front-end web developer working with HTML, CSS, JavaScript, React, Vue.js and Next.js.">
+        <meta property="og:title" content="Alireza Akhoondi | Front-End and Full-Stack Developer">
+        <meta property="og:description" content="Portfolio of Alireza Akhoondi, a front-end and full-stack web developer working with HTML, CSS, JavaScript, React, Vue.js, Tailwind CSS, Vuetify and Next.js. Browse projects and get in touch.">
         <meta property="og:image" content="https://alirezaakhoondi.ir/assets/img/perfil.jpg">
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Alireza Akhoondi | Front-End Developer">
-        <meta name="twitter:description" content="Portfolio of Alireza Akhoondi, a front-end web developer working with HTML, CSS, JavaScript, React, Vue.js and Next.js.">
+        <meta name="twitter:title" content="Alireza Akhoondi | Front-End and Full-Stack Developer">
+        <meta name="twitter:description" content="Portfolio of Alireza Akhoondi, a front-end and full-stack web developer working with HTML, CSS, JavaScript, React, Vue.js, Tailwind CSS, Vuetify and Next.js. Browse projects and get in touch.">
         <meta name="twitter:image" content="https://alirezaakhoondi.ir/assets/img/perfil.jpg">
 
         <meta name="theme-color" content="#3e6ff4">
@@ -51,7 +72,7 @@
             "https://instagram.com/alireza_egn",
             "https://t.me/alireza_egn"
           ],
-          "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "Vue.js", "Next.js", "Tailwind CSS"]
+          "knowsAbout": ["HTML", "CSS", "JavaScript", "React", "Vue.js", "Next.js", "Tailwind CSS", "Vuetify"]
         }
         </script>
     </head>
@@ -64,14 +85,23 @@
                         <img src="assets/img/android-chrome-512x512.png" alt="Logo" style="width:40px; height:40px; border-radius:8px;">
                     </h1>
                 </div>
-                <div class="nav__menu" id="nav-menu">
+                <div class="nav__menu" id="nav-menu" style="cursor: default;">
                     <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                        <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
-                        <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
-                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                        <li class="nav__item"><a href="#home" class="nav__link active-link" data-i18n="nav_home">Home</a></li>
+                        <li class="nav__item"><a href="#about" class="nav__link" data-i18n="nav_about">About</a></li>
+                        <li class="nav__item"><a href="#skills" class="nav__link" data-i18n="nav_skills">Skills</a></li>
+                        <li class="nav__item"><a href="#work" class="nav__link" data-i18n="nav_work">Portfolio</a></li>
+                        <li class="nav__item"><a href="#contact" class="nav__link" data-i18n="nav_contact">Contact</a></li>
                     </ul>
+                </div>
+                <div class="nav__actions">
+                    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" data-tooltip="Switch to dark mode">
+                        <i class='bx bx-moon'></i>
+                    </button>
+                    <button type="button" id="lang-toggle" class="lang-toggle" aria-label="Change language">
+                        <span class="lang-toggle__label">فارسی</span>
+                        <span class="lang-toggle__badge">FA</span>
+                    </button>
                 </div>
                 <div class="nav__toggle" id="nav-toggle">
                     <i class='bx bx-menu'></i>
@@ -81,26 +111,26 @@
         <main class="l-main">
             <!--===== HOME =====-->
             <section class="home bd-grid" id="home">
-                <div class="home__data">
-                    <h1 class="home__title">Hi,<br>I'am <span class="home__title-color">Alireza</span><br> Web Designer</h1>
-                    <a href="#contact" class="btn btn-call">
+                <div class="home__data" style="cursor: default;">
+                    <h1 class="home__title" data-i18n="home_title">Hi,<br>I'am <span class="home__title-color">Alireza</span><br> Web Designer</h1>
+                    <a href="#contact" class="btn btn-call flag-button">
                         <i class="bx bxs-phone icon-default"></i>
                         <i class="bx bx-phone-call icon-hover"></i>
-                        Call Me
+                        <span data-i18n="home_call">Call Me</span>
                     </a>
                 </div>
                 <div class="home__social">
                     <a href="https://www.linkedin.com/in/alireza-akhoondi2001" class="home__social-icon">
-                        <i class='bx bxl-linkedin'></i>
+                        <i class='bx bxl-linkedin flag-button'></i>
                     </a>
                     <a href="https://t.me/alireza_egn" class="home__social-icon">
-                        <i class='bx bxl-telegram'></i>
+                        <i class='bx bxl-telegram flag-button'></i>
                     </a>
                     <a href="https://instagram.com/alireza_egn" class="home__social-icon">
-                        <i class='bx bxl-instagram'></i>
+                        <i class='bx bxl-instagram flag-button'></i>
                     </a>
                     <a href="https://github.com/AlirezaAk2001" class="home__social-icon">
-                        <i class='bx bxl-github'></i>
+                        <i class='bx bxl-github flag-button'></i>
                     </a>
                 </div>
                 <div class="home__img">
@@ -116,28 +146,28 @@
                 </div>
             </section>
             <!--===== ABOUT =====-->
-            <section class="about section " id="about">
-                <h2 class="section-title">About</h2>
+            <section class="about section " id="about" style="cursor: default;">
+                <h2 class="section-title" data-i18n="about_title">About</h2>
                 <div class="about__container bd-grid">
                     <div class="about__img">
                         <img src="assets/img/profile(1).jpg" alt="Alireza Akhoondi" loading="lazy">
                     </div>
-                   
+
                     <div>
-                        <h2 class="about__subtitle">I'm Alireza</h2>
-                        <p class="about__text">
-                            I am a Front-end developer and have been working with HTML, CSS, and JS for about 3 years and have been working with React and VueJS frameworks for about 2 years. I love Front-end challenges and along with project development, I like to improve my knowledge in related fields. I also have some familiarity with Python and have completed the C# Windows Form course.
-                        </p>           
-                    </div>                                   
+                        <h2 class="about__subtitle" data-i18n="about_subtitle">I'm Alireza</h2>
+                        <p class="about__text" data-i18n="about_text">
+                            I am a Front-end and Full-stack developer and have been working with HTML, CSS, and JS for about 3 years and have been working with React and VueJS frameworks for about 2 years. I love Front-end challenges and along with project development, I like to improve my knowledge in related fields. I also have some familiarity with Python and have completed the C# Windows Form course.
+                        </p>
+                    </div>
                 </div>
-            </section>  
+            </section>
             <!--===== SKILLS =====-->
-            <section class="skills section" id="skills">
-                <h2 class="section-title">Skills</h2>
+            <section class="skills section" id="skills" style="cursor: default;">
+                <h2 class="section-title" data-i18n="skills_title">Skills</h2>
                 <div class="skills__container bd-grid">
                     <div class="skills__content">
-                        <h2 class="skills__subtitle">Professional Skills</h2>
-                        <p class="skills__text">HTML, CSS, TailwindCSS, JS, React, NextJs, VueJS</p>
+                        <h2 class="skills__subtitle" data-i18n="skills_subtitle">Professional Skills</h2>
+                        <p class="skills__text">HTML, CSS, JS, React, NextJs, TailwindCSS, VueJs, Vuetify</p>
                         <!-- تکرار مهارت‌ها -->
                         <div class="skills__data" data-skill="85">
                             <div class="skills__names">
@@ -202,7 +232,7 @@
                         <div class="skills__data" data-skill="60">
                             <div class="skills__names">
                                 <i class="fab fa-vuejs skills__icon"></i>
-                                <span class="skills__name">Vue</span>
+                                <span class="skills__name">VueJs</span>
                             </div>
                         <div class="skills__bar">
                             <div class="skill__progress"></div>
@@ -227,42 +257,42 @@
                 </div>
             </section>
             <!--===== portfolio =====-->
-            <section class="work section" id="work">
-                <h2 class="section-title">Portfolio</h2>
+            <section class="work section" id="work" style="cursor: default;">
+                <h2 class="section-title" data-i18n="work_title">Portfolio</h2>
                 <div class="work__container bd-grid">
                     <!-- نمونه‌کار 1 -->
                     <div class="work__img" data-project="project1">
-                            <img src="assets/img/logo-lugx(1).jpg" alt="Lugx Gaming project thumbnail" loading="lazy">
+                            <img src="assets/img/logo-lugx(2).jpg" alt="Lugx Gaming project thumbnail" loading="lazy">
                         <div class="work__overlay">
-                            <h3 class="work__title">Lugx Gaming</h3>
+                            <h3 class="work__title" data-i18n="proj1_title">Lugx Gaming</h3>
                         </div>
                     </div>
                     <!-- نمونه‌کار 2 -->
                     <div class="work__img" data-project="project2">
                         <img src="assets/img/logo-ogs-1.png" alt="Online Game Shop project thumbnail" loading="lazy">
                         <div class="work__overlay">
-                            <h3 class="work__title">Online Game Shop</h3>
+                            <h3 class="work__title" data-i18n="proj2_title">Online Game Shop</h3>
                         </div>
                     </div>
                     <!-- نمونه‌کار 3 -->
                     <div class="work__img" data-project="project3">
                         <img src="assets/img/coffee-beans.png" alt="Barista Cafe project thumbnail" loading="lazy">
                         <div class="work__overlay">
-                            <h3 class="work__title">Barista Cafe</h3>
+                            <h3 class="work__title" data-i18n="proj3_title">Barista Cafe</h3>
                         </div>
                     </div>
                     <!-- نمونه‌کار 4 -->
                     <div class="work__img" data-project="project4">
                         <img src="assets/img/logo-vue-1.png" alt="Vue SPA project thumbnail" loading="lazy">
                         <div class="work__overlay">
-                            <h3 class="work__title">Vue SPA</h3>
+                            <h3 class="work__title" data-i18n="proj4_title">Vue SPA</h3>
                         </div>
                     </div>
                     <!-- نمونه‌کار 5 -->
                     <div class="work__img" data-project="project5">
                         <img src="assets/img/logo-sewing-1.png" alt="Orkideh Sewing Machine Store project thumbnail" loading="lazy">
                         <div class="work__overlay">
-                            <h3 class="work__title">Orkideh Store</h3>
+                            <h3 class="work__title" data-i18n="proj5_title">Orkideh Store</h3>
                         </div>
                     </div>
                     <!-- نمونه‌کار 6 -->
@@ -274,9 +304,9 @@
                             <div class="core"></div>
                         </div>
                         <div class="work__overlay">
-                            <h3 class="work__title">New Project</h3>
+                            <h3 class="work__title" data-i18n="work_new_project">New Project</h3>
                         </div>
-                    <div class="label"><span class="neon">Coming Soon</span></div>
+                    <div class="label"><span class="neon" data-i18n="work_coming_soon">Coming Soon</span></div>
                 </div>
                 </div>
                 <!-- پاپ‌آپ برای نمایش جزئیات پروژه -->
@@ -292,29 +322,29 @@
         </div>
     </section>
             <!--===== CONTACT =====-->
-            <section class="contact section" id="contact">
-                <h2 class="section-title">Contact</h2>
+            <section class="contact section" id="contact" style="cursor: default;">
+                <h2 class="section-title" data-i18n="contact_title">Contact</h2>
                 <div class="contact__container bd-grid">
-                    <form class="contact__form" id="contactForm">
+                    <form class="contact__form" id="contactForm" novalidate>
                         <div class="input-group">
-                            <input type="text" class="contact__input" name="user_name" id="user_name" required>
-                            <label for="user_name">Name</label>
+                            <input type="text" class="contact__input" name="user_name" id="user_name" placeholder=" " required>
+                            <label for="user_name" data-i18n="contact_name">Name</label>
                             <small class="error-message"></small>
                         </div>
                         <div class="input-group">
-                            <input type="email" class="contact__input" name="user_email" id="user_email" required>
-                            <label for="user_email">Email</label>
+                            <input type="email" class="contact__input" name="user_email" id="user_email" placeholder=" " required>
+                            <label for="user_email" data-i18n="contact_email">Email</label>
                             <small class="error-message"></small>
                         </div>
                         <div class="input-group">
-                            <textarea class="contact__input" name="message" id="message" required></textarea>
-                            <label for="message">Message</label>
+                            <textarea class="contact__input" name="message" id="message" placeholder=" " required></textarea>
+                            <label for="message" data-i18n="contact_message">Message</label>
                             <small class="error-message"></small>
                         </div>
-                        <button type="button" class="btn btn-send" id="contactSubmit">
+                        <button type="button" class="btn btn-send flag-button" id="contactSubmit">
                             <i class="bx bxs-paper-plane icon-default"></i>
                             <i class="bx bx-paper-plane icon-hover"></i>
-                            Send Message
+                            <span class="btn-label" data-i18n="contact_submit">Send Message</span>
                         </button>
                     </form>
                     <p id="formMessage" style="margin-top:10px; color:green;"></p>
@@ -322,23 +352,23 @@
             </section>
         </main>
         <!--===== FOOTER =====-->
-        <footer class="footer">
+        <footer class="footer" style="cursor: default;">
             <p class="footer__title">Alireza</p>
             <div class="footer__social">
                 <a href="https://www.linkedin.com/in/alireza-akhoondi2001" class="footer__icon">
-                    <i class='bx bxl-linkedin'></i>
+                    <i class='bx bxl-linkedin flag-button'></i>
                 </a>
                 <a href="https://t.me/alireza_egn" class="footer__icon">
-                    <i class='bx bxl-telegram'></i>
+                    <i class='bx bxl-telegram flag-button'></i>
                 </a>
                 <a href="https://instagram.com/alireza_egn" class="footer__icon">
-                    <i class='bx bxl-instagram'></i>
+                    <i class='bx bxl-instagram flag-button'></i>
                 </a>
                 <a href="https://github.com/AlirezaAk2001" class="footer__icon">
-                    <i class='bx bxl-github'></i>
+                    <i class='bx bxl-github flag-button'></i>
                 </a>
             </div>
-            <p class="footer__copy">&#169; Alireza Akhoondi All rigths reserved</p>
+            <p class="footer__copy" data-i18n="footer_copy">&#169; Alireza Akhoondi — All rights reserved</p>
         </footer>
 
         <!-- EmailJS SDK -->

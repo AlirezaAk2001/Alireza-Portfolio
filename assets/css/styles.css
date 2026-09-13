@@ -6,6 +6,7 @@
   font-display: swap;
   src: url("../fonts/poppins-400.woff2") format("woff2");
 }
+
 @font-face {
   font-family: "Poppins";
   font-style: normal;
@@ -13,6 +14,7 @@
   font-display: swap;
   src: url("../fonts/poppins-600.woff2") format("woff2");
 }
+
 @font-face {
   font-family: "Poppins";
   font-style: normal;
@@ -20,6 +22,31 @@
   font-display: swap;
   src: url("../fonts/poppins-700.woff2") format("woff2");
 }
+
+/*===== FONTS (self-hosted Vazirmatn, subset: Arabic/Persian) =====*/
+/* فایل، فونت متغیره؛ هر سه وزن به همون یک فایل اشاره می‌کنن و مرورگر وزن درست رو ازش استخراج می‌کنه */
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/vazirmatn-var.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/vazirmatn-var.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/vazirmatn-var.woff2") format("woff2");
+}
+
 /*===== VARIABLES CSS =====*/
 :root {
   --header-height: 3rem;
@@ -30,6 +57,16 @@
   --hue-color: 224;
   --first-color: hsl(var(--hue-color), 89%, 60%);
   --second-color: hsl(var(--hue-color), 56%, 12%);
+  /*===== تم روشن (پیش‌فرض) =====*/
+  color-scheme: light;
+  --bg-color: #fff;
+  --surface-color: #fff;
+  --text-color: var(--second-color);
+  --text-muted: #777;
+  --border-color: #ccc;
+  --track-color: #e0e0e0;
+  --card-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
+  --header-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
   /*===== Fuente y tipografia =====*/
   --body-font: "Poppins", sans-serif;
   --big-font-size: 2rem;
@@ -45,6 +82,7 @@
   --z-back: -10;
   --z-fixed: 100;
 }
+
 @media screen and (min-width: 968px) {
   :root {
     --big-font-size: 3.5rem;
@@ -53,35 +91,49 @@
     --smaller-font-size: .875rem;
   }
 }
+
 /*===== BASE =====*/
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 body {
   margin: var(--header-height) 0 0 0;
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
-  color: var(--second-color);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-h1, h2, p {
+
+h1,
+h2,
+p {
   margin: 0;
 }
+
 ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 a {
   text-decoration: none;
 }
+
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
+
 /*===== CLASS CSS ===== */
 .section-title {
   position: relative;
@@ -91,6 +143,7 @@ img {
   margin-bottom: var(--mb-4);
   text-align: center;
 }
+
 .section-title::after {
   position: absolute;
   content: "";
@@ -102,10 +155,12 @@ img {
   top: 2rem;
   background-color: var(--first-color);
 }
+
 .section {
   padding-top: 3rem;
   padding-bottom: 2rem;
 }
+
 /*===== LAYOUT =====*/
 .bd-grid {
   max-width: 1024px;
@@ -113,15 +168,18 @@ img {
   margin-left: var(--mb-2);
   margin-right: var(--mb-2);
 }
+
 .l-header {
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: var(--z-fixed);
-  background-color: #fff;
-  box-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
+  background-color: var(--surface-color);
+  box-shadow: var(--header-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 /*===== NAV =====*/
 .nav {
   height: var(--header-height);
@@ -130,6 +188,7 @@ img {
   align-items: center;
   font-weight: var(--font-semi);
 }
+
 @media screen and (max-width: 767px) {
   .nav__menu {
     position: fixed;
@@ -142,16 +201,20 @@ img {
     transition: 0.5s;
   }
 }
+
 .nav__item {
   margin-bottom: var(--mb-4);
 }
+
 .nav__link {
   position: relative;
   color: #fff;
 }
+
 .nav__link:hover {
   position: relative;
 }
+
 .nav__link:hover::after {
   position: absolute;
   content: "";
@@ -161,14 +224,17 @@ img {
   top: 2rem;
   background-color: var(--first-color);
 }
+
 .nav__logo {
-  color: var(--second-color);
+  color: var(--text-color);
 }
+
 .nav__toggle {
-  color: var(--second-color);
+  color: var(--text-color);
   font-size: 1.5rem;
   cursor: pointer;
 }
+
 .nav__toggle .hamburger {
   width: 30px;
   height: 24px;
@@ -176,22 +242,27 @@ img {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .nav__toggle .bar {
   height: 4px;
   width: 100%;
-  background-color: var(--second-color);
+  background-color: var(--text-color);
   border-radius: 10px;
   transition: 0.4s;
 }
+
 .nav__toggle.open .bar:nth-child(1) {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
+
 .nav__toggle.open .bar:nth-child(2) {
   opacity: 0;
 }
+
 .nav__toggle.open .bar:nth-child(3) {
   transform: rotate(45deg) translate(-5px, -6px);
 }
+
 /*Active menu*/
 .active-link::after {
   position: absolute;
@@ -202,51 +273,63 @@ img {
   top: 2rem;
   background-color: var(--first-color);
 }
+
 /*=== Show menu ===*/
 .show {
   right: 0;
 }
+
 /*===== HOME =====*/
 .home {
   position: relative;
   row-gap: 5rem;
   padding: 4rem 0 5rem;
 }
+
 .home__data {
   align-self: center;
 }
+
 .home__title {
   font-size: var(--big-font-size);
   margin-bottom: var(--mb-5);
 }
+
 .home__title-color {
   color: var(--first-color);
 }
+
 .home__social {
   display: flex;
   flex-direction: column;
 }
+
 .home__social-icon {
   width: max-content;
   margin-bottom: var(--mb-2);
   font-size: 1.5rem;
-  color: var(--second-color);
+  color: var(--text-color);
 }
+
 .home__social-icon:hover {
   color: var(--first-color);
 }
+
 .home__img {
   position: absolute;
   right: 0;
   bottom: 0;
   width: 260px;
 }
+
 .home__blob {
   fill: var(--first-color);
 }
+
 .home__blob-img {
   width: 376px;
 }
+
 /* ==================== BUTTONS CONFIGURATION ==================== */
 /* تعریف استایل پایه دکمه‌ها هماهنگ با متغیرهای قالب شما */
 .btn {
@@ -254,7 +337,8 @@ img {
   justify-content: center;
   align-items: center;
   padding: 0.75rem 2.5rem;
-  background-color: var(--first-color); /* رنگ اصلی سایت شما */
+  background-color: var(--first-color);
+  /* رنگ اصلی سایت شما */
   border: 2px solid var(--first-color);
   border-radius: 0.5rem;
   font-weight: var(--font-semi);
@@ -265,7 +349,8 @@ img {
   z-index: 1;
   cursor: pointer;
   text-decoration: none;
-  gap: 8px; /* فاصله بین آیکون و متن */
+  gap: 8px;
+  /* فاصله بین آیکون و متن */
 }
 
 /* تنظیم اندازه آیکون‌ها */
@@ -302,7 +387,8 @@ img {
 /* ==================== SEND MESSAGE BUTTON (Plane Effect) ==================== */
 
 .btn-send {
-  width: 100%; /* تمام عرض در فرم */
+  width: 100%;
+  /* تمام عرض در فرم */
   border: 2px solid var(--first-color);
 }
 
@@ -343,11 +429,25 @@ img {
 
 /* انیمیشن لرزش تلفن */
 @keyframes phoneWobble {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(15deg); }
-  50% { transform: rotate(0deg); }
-  75% { transform: rotate(-15deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(15deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(-15deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 /* انیمیشن پرواز موشک */
@@ -355,28 +455,36 @@ img {
   0% {
     transform: translate(0, 0);
   }
+
   20% {
     transform: translate(-2px, 2px);
   }
+
   100% {
-    transform: translate(6px, -6px); /* پرواز به سمت بالا راست */
+    transform: translate(6px, -6px);
+    /* پرواز به سمت بالا راست */
   }
 }
+
 /* ===== ABOUT =====*/
 .about__container {
   row-gap: 2rem;
   text-align: center;
 }
+
 .about__subtitle {
   margin-bottom: var(--mb-2);
 }
+
 .about__img {
   justify-self: center;
 }
+
 .about__img img {
   width: 200px;
   border-radius: 0.5rem;
 }
+
 /* ===== SKILLS =====*/
 .skills__container {
   display: flex;
@@ -385,45 +493,75 @@ img {
   gap: 2rem;
   text-align: left;
 }
+
 .skills__content {
   flex: 1;
   min-width: 300px;
 }
+
 .skills__text {
   margin-bottom: 1px;
 }
+
 .skills__subtitle {
   margin-top: 20px;
 }
+
 .skills__data {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background-color: #fff;
+  background-color: var(--surface-color);
   border-radius: 0.5rem;
-  box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
+  box-shadow: var(--card-shadow);
   margin-top: 9px;
+  /* بدون important: تا انیمیشن ورود ScrollReveal (اسکرول/رفرش) دست‌نخورده بمونه */
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+/* بعد از تمام شدن انیمیشن ورود (main.js کلاس is-revealed رو اضافه می‌کنه)،
+   ترنزیشن سریع رو قطعی می‌کنیم تا رفتن و برگشتنِ هاور هر دو سریع و قرینه باشن */
+.skills__data.is-revealed {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* بلند شدن نرم کارت هنگام هاور */
+/* !important فقط اینجا (روی خود هاور) چون ScrollReveal یک transform/transition inline ست می‌کند؛
+   با اسکوپ کردنش به :hover، انیمیشن ورود اولیه دست‌نخورده می‌ماند و فقط لحظه‌ی هاور سریع/نرم اجرا می‌شود */
+.skills__data:hover {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transform: translateY(-10px) !important;
+  box-shadow:
+    0 22px 32px -16px hsla(var(--hue-color), 89%, 60%, 0.35),
+    0 8px 16px -8px rgba(14, 36, 49, 0.2) !important;
+}
+
 .skills__names {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
+
 .skills__icon {
   font-size: 2rem;
   /* color: var(--first-color); */
 }
+
 .skills__bar {
   width: 100%;
   height: 0.5rem;
-  background-color: #e0e0e0;
+  background-color: var(--track-color);
   border-radius: 0.5rem;
   overflow: hidden;
   margin-bottom: 0.5rem;
 }
+
 .skill__progress {
   height: 100%;
   background-color: #00bcd4;
@@ -431,29 +569,34 @@ img {
   border-radius: 0.5rem;
   transition: width 0.6s ease;
 }
+
 .skills__percentage {
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
 }
+
 .skills__img-container {
   flex: 1;
   min-width: 250px;
 }
+
 .skills__img {
   width: 100%;
   border-radius: 0.5rem;
   object-fit: cover;
 }
- /* ===== Portfolio =====*/
+
+/* ===== Portfolio =====*/
 .work__container {
   row-gap: 2rem;
   justify-items: center;
 }
+
 /* کل کارت‌ها */
 .work__img {
   width: 330px;
   height: 330px;
-  background: rgba(255, 255, 255);
+  background: var(--surface-color);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -461,109 +604,139 @@ img {
   justify-content: center;
   box-shadow:
     0 5px 15px rgba(0, 0, 0, 0.5),
-    inset 0 0 15px rgba(94,240,255,0.25);
+    inset 0 0 15px rgba(94, 240, 255, 0.25);
   transform: perspective(600px) rotateX(0deg) rotateY(0deg);
-  transition: all 0.4s ease;
+  /* بدون important: تا انیمیشن ورود ScrollReveal (اسکرول/رفرش) دست‌نخورده بمونه */
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
   backdrop-filter: blur(8px);
 }
-.work__img:hover {
-  transform: perspective(800px) rotateX(8deg) rotateY(-8deg) scale(1.05);
-  box-shadow:
-    0 10px 25px rgba(94,240,255,0.3),
-    0 0 35px rgba(200,107,255,0.25);
+
+/* بعد از تمام شدن انیمیشن ورود (main.js کلاس is-revealed رو اضافه می‌کنه)،
+   ترنزیشن سریع رو قطعی می‌کنیم تا رفتن و برگشتنِ هاور هر دو سریع و قرینه باشن */
+.work__img.is-revealed {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
+
+/* !important فقط اینجا (روی خود هاور) چون ScrollReveal یک transform/transition inline ست می‌کند؛
+   با اسکوپ کردنش به :hover، انیمیشن ورود اولیه دست‌نخورده می‌ماند و فقط لحظه‌ی هاور سریع/نرم اجرا می‌شود */
+.work__img:hover {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transform: translateY(-10px) !important;
+  box-shadow:
+    0 22px 32px -16px hsla(var(--hue-color), 89%, 60%, 0.35),
+    0 8px 16px -8px rgba(14, 36, 49, 0.2) !important;
+}
+
 /* لوگوی پروژه داخل کارت */
 .work__img img {
   transition: transform 0.5s ease;
   transform-style: preserve-3d;
 }
+
 .work__img:hover img {
   transform: scale(1.1) translateZ(30px);
 }
+
 /* متن عنوان */
 .work__img:hover .work__title {
   text-shadow:
-    1px 1px 2px rgba(0,0,0,0.5),
-    0 0 12px rgba(255,255,255,0.8),
-    0 0 25px rgba(94,240,255,0.75),
-    0 0 45px rgba(200,107,255,0.55);
+    1px 1px 2px rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(255, 255, 255, 0.8),
+    0 0 25px rgba(94, 240, 255, 0.75),
+    0 0 45px rgba(200, 107, 255, 0.55);
   transform: scale(1.05);
   transition: all 0.3s ease;
   animation: flicker 3s linear infinite;
 }
+
 .work__img:hover .work__overlay {
   opacity: 1;
 }
+
 .work__overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 1rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
 }
+
 /* استایل‌های پاپ‌آپ */
 .popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: var(--z-fixed);
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: var(--z-fixed);
+  justify-content: center;
+  align-items: center;
 }
+
 .popup__content {
-    background: #fff;
-    width: 90%;
-    max-width: 800px;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    position: relative;
-    max-height: 80vh;
-    overflow-y: auto;
+  background: var(--surface-color);
+  width: 90%;
+  max-width: 800px;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+  transition: background-color 0.3s ease;
 }
+
 .popup__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--second-color);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color);
 }
+
 .popup__title {
-    font-size: var(--h2-font-size);
-    color: var(--first-color);
-    margin-bottom: var(--mb-2);
+  font-size: var(--h2-font-size);
+  color: var(--first-color);
+  margin-bottom: var(--mb-2);
 }
+
 .popup__gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-    margin-bottom: var(--mb-4);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: var(--mb-4);
 }
+
 .popup__media {
-    width: 100%;
-    border-radius: 0.5rem;
-    object-fit: cover;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    max-height: 150px; /* محدود کردن ارتفاع برای هماهنگی */
+  width: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  max-height: 150px;
+  /* محدود کردن ارتفاع برای هماهنگی */
 }
+
 .popup__media:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
+
 .popup__description {
-    font-size: var(--normal-font-size);
-    color: var(--second-color);
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
 }
+
 /* ===== CONTACT =====*/
 .contact__input {
   width: 100%;
@@ -575,6 +748,7 @@ img {
   outline: none;
   margin-bottom: var(--mb-4);
 }
+
 .contact__button {
   display: block;
   border: none;
@@ -583,6 +757,7 @@ img {
   cursor: pointer;
   margin-left: auto;
 }
+
 /* ===== FOOTER =====*/
 .footer {
   background-color: var(--second-color);
@@ -591,25 +766,31 @@ img {
   font-weight: var(--font-semi);
   padding: 3.5rem 0;
 }
+
 .footer__title {
   font-size: 2rem;
   margin-bottom: var(--mb-4);
 }
+
 .footer__social {
   margin-bottom: var(--mb-4);
 }
+
 .footer__icon {
   width: max-content;
   margin-bottom: var(--mb-2);
   font-size: 1.5rem;
   color: #fff;
 }
+
 .footer__icon:hover {
   color: var(--first-color);
 }
+
 .footer__copy {
   font-size: var(--smaller-font-size);
 }
+
 /* ===== MEDIA QUERIES=====*/
 @media screen and (max-width: 767px) {
   .home {
@@ -619,166 +800,206 @@ img {
     row-gap: 0;
     padding: 4rem 0 2rem;
   }
+
   .home__img {
     position: static;
     width: 260px;
     order: -1;
     margin-bottom: var(--mb-4);
   }
+
   .home__data {
     text-align: center;
     margin-bottom: var(--mb-2);
   }
+
   .home__social {
     flex-direction: row;
     justify-content: center;
     gap: var(--mb-4);
   }
+
   .home__social-icon {
     margin-bottom: 0;
     margin-right: var(--mb-2);
   }
+
   .skills__container {
     flex-direction: column;
   }
+
   .skills__content {
     display: contents;
   }
+
   .skills__subtitle {
     order: 1;
   }
+
   .skills__text {
     order: 2;
   }
+
   .skills__img-container {
     order: 3;
   }
+
   .skills__data {
     order: 4;
   }
 }
+
 @media screen and (max-width: 320px) {
   .home {
     row-gap: 2rem;
   }
+
   .home__img {
     width: 200px;
   }
 }
+
 @media screen and (min-width: 576px) {
   .home {
     padding: 4rem 0 2rem;
   }
+
   .home__social {
     padding-top: 0;
     padding-bottom: 2.5rem;
     flex-direction: row;
     align-self: flex-end;
   }
+
   .home__social-icon {
     margin-bottom: 0;
     margin-right: var(--mb-4);
   }
+
   .home__img {
     width: 300px;
     bottom: 25%;
   }
+
   .about__container {
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     text-align: initial;
   }
+
   .skills__container {
     grid-template-columns: 0.7fr;
     justify-content: center;
     column-gap: 1rem;
   }
+
   .work__container {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 2rem;
     padding-top: 2rem;
   }
+
   .contact__form {
     width: 360px;
     padding-top: 2rem;
   }
+
   .contact__container {
     justify-items: center;
   }
 }
+
 @media screen and (min-width: 768px) {
   body {
     margin: 0;
   }
+
   .section {
     padding-top: 4rem;
     padding-bottom: 3rem;
   }
+
   .section-title {
     margin-bottom: var(--mb-6);
   }
+
   .section-title::after {
     width: 80px;
     top: 3rem;
   }
+
   .nav {
     height: calc(var(--header-height) + 1.5rem);
   }
+
   .nav__list {
     display: flex;
     padding-top: 0;
   }
+
   .nav__item {
     margin-left: var(--mb-6);
     margin-bottom: 0;
   }
+
   .nav__toggle {
     display: none;
   }
+
   .nav__link {
-    color: var(--second-color);
+    color: var(--text-color);
   }
+
   .home {
     padding: 8rem 0 2rem;
   }
+
   .home__img {
     width: 400px;
     bottom: 10%;
   }
+
   .about__container {
     padding-top: 2rem;
   }
+
   .about__img img {
     width: 300px;
   }
+
   .skills__container {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 2rem;
     align-items: center;
     text-align: initial;
   }
+
   .work__container {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 2rem;
   }
 }
+
 @media screen and (min-width: 992px) {
   .bd-grid {
     margin-left: auto;
     margin-right: auto;
   }
+
   .home {
     padding: 10rem 0 2rem;
   }
+
   .home__img {
     width: 450px;
   }
 }
+
 /* ==== Coming Soon Spinner (for work cards) ==== */
 .work__comingsoon {
   width: 330px;
   height: 330px;
-  background: rgba(255, 255, 255);
+  background: var(--surface-color);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -786,46 +1007,60 @@ img {
   justify-content: center;
   box-shadow:
     0 5px 15px rgba(0, 0, 0, 0.5),
-    inset 0 0 15px rgba(94,240,255,0.25);
+    inset 0 0 15px rgba(94, 240, 255, 0.25);
   transform: perspective(600px) rotateX(0deg) rotateY(0deg);
-  transition: all 0.4s ease;
+  /* بدون important: تا انیمیشن ورود ScrollReveal دست‌نخورده بمونه */
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
   backdrop-filter: blur(8px);
 }
+
 .work__comingsoon:hover {
-  transform: perspective(800px) rotateX(8deg) rotateY(-8deg) scale(1.05);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transform: translateY(-10px) !important;
   box-shadow:
-    0 10px 25px rgba(94,240,255,0.3),
-    0 0 35px rgba(200,107,255,0.25);
+    0 22px 32px -16px hsla(var(--hue-color), 89%, 60%, 0.35),
+    0 8px 16px -8px rgba(14, 36, 49, 0.2) !important;
 }
+
 /* Spinner Base */
 .spinner {
   --scale: 1;
   --rot: 0deg;
   width: 70px;
   height: 70px;
-  border: 3px solid rgba(255,255,255,0.1);
-  border-top: 3px solid rgba(94,240,255,0.7);
-  border-right: 3px solid rgba(200,107,255,0.5);
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid rgba(94, 240, 255, 0.7);
+  border-right: 3px solid rgba(200, 107, 255, 0.5);
   border-radius: 50%;
   animation: spin 1.5s linear infinite;
   box-shadow:
-    0 0 10px rgba(94,240,255,0.3),
-    0 0 20px rgba(200,107,255,0.2);
+    0 0 10px rgba(94, 240, 255, 0.3),
+    0 0 20px rgba(200, 107, 255, 0.2);
   backdrop-filter: blur(8px);
   transform: rotateZ(var(--rot)) rotateX(18deg) rotateY(-8deg) scale(var(--scale));
   transition: --scale 0.3s ease;
 }
+
 .work__comingsoon:hover .spinner {
   --scale: 1.05;
   box-shadow:
-    0 0 15px rgba(94,240,255,0.6),
-    0 0 35px rgba(200,107,255,0.4);
+    0 0 15px rgba(94, 240, 255, 0.6),
+    0 0 35px rgba(200, 107, 255, 0.4);
 }
+
 @keyframes spin {
-  from { --rot: 0deg; }
-  to { --rot: 360deg; }
+  from {
+    --rot: 0deg;
+  }
+
+  to {
+    --rot: 360deg;
+  }
 }
+
 .ring {
   position: absolute;
   inset: 0;
@@ -833,36 +1068,44 @@ img {
   -webkit-mask: radial-gradient(farthest-side, transparent 70%, black 71%);
   mask: radial-gradient(farthest-side, transparent 70%, black 71%);
 }
+
 .r1 {
   background: conic-gradient(from 120deg, #5ef0ff, #fff 25%, transparent 55%);
   transform: translateZ(10px) scale(1.06);
 }
+
 .r2 {
   background: conic-gradient(from -40deg, #c86bff, #fff 18%, transparent 45%);
   transform: scale(0.9);
   mix-blend-mode: screen;
 }
+
 .r3 {
   background: conic-gradient(from 200deg, #fff 15%, #5ef0ff 40%, #c86bff 65%);
   transform: translateZ(-6px) scale(0.74);
   opacity: 0.9;
 }
+
 .core {
   position: absolute;
-  left: 50%; top: 50%;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%) translateZ(12px);
-  width: 52%; height: 52%;
+  width: 52%;
+  height: 52%;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.4) 25%, rgba(255,255,255,0.02) 60%);
+  background: radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.4) 25%, rgba(255, 255, 255, 0.02) 60%);
 }
+
 .work__comingsoon:hover .label {
   text-shadow:
-    1px 1px 2px rgba(0,0,0,0.5),
-    0 0 12px rgba(255,255,255,0.8),
-    0 0 25px rgba(94,240,255,0.75),
-    0 0 45px rgba(200,107,255,0.55);
+    1px 1px 2px rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(255, 255, 255, 0.8),
+    0 0 25px rgba(94, 240, 255, 0.75),
+    0 0 45px rgba(200, 107, 255, 0.55);
   transform: scale(1.05);
 }
+
 /* Coming Soon text */
 .label {
   margin-top: 16px;
@@ -870,93 +1113,122 @@ img {
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0.9) 0%,
-    rgba(94,240,255,0.65) 50%,
-    rgba(200,107,255,0.55) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(94, 240, 255, 0.65) 50%,
+      rgba(200, 107, 255, 0.55) 100%);
   /* -webkit-background-clip: text; */
-  -webkit-text-fill-color: rgba(255,255,255,0.9);
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.9);
   text-shadow:
-    1px 1px 2px rgba(0,0,0,0.4),
-    0 0 10px rgba(94,240,255,0.4),
-    0 0 20px rgba(200,107,255,0.25);
+    1px 1px 2px rgba(0, 0, 0, 0.4),
+    0 0 10px rgba(94, 240, 255, 0.4),
+    0 0 20px rgba(200, 107, 255, 0.25);
   transition: all 0.3s ease;
 }
+
 /* حالت سه‌بعدی و درخشان هنگام هاور */
 .label:hover {
   text-shadow:
-    1px 1px 2px rgba(0,0,0,0.5),
-    0 0 12px rgba(255,255,255,0.8),
-    0 0 25px rgba(94,240,255,0.75),
-    0 0 45px rgba(200,107,255,0.55);
+    1px 1px 2px rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(255, 255, 255, 0.8),
+    0 0 25px rgba(94, 240, 255, 0.75),
+    0 0 45px rgba(200, 107, 255, 0.55);
   transform: scale(1.05);
 }
+
 .neon {
   text-shadow:
-    0 0 6px rgba(255,255,255,0.9),
-    0 0 18px rgba(94,240,255,0.45),
-    0 0 30px rgba(200,107,255,0.25);
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(94, 240, 255, 0.45),
+    0 0 30px rgba(200, 107, 255, 0.25);
   animation: flicker 3s linear infinite;
 }
+
 /* استایل اسپینر کوچک داخل دکمه */
 /* حالت عادی دکمه */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; /* فاصله بین اسپینر و متن */
+  gap: 8px;
+  /* فاصله بین اسپینر و متن */
   position: relative;
 }
+
 /* حالت در حال بارگذاری */
 .button.loading {
   pointer-events: none;
   opacity: 0.85;
 }
+
 /* اسپینر هماهنگ با تم (اینجا سفید فرض شده، می‌تونی تغییر بدی) */
 .button.loading::before {
   content: "";
   width: 16px;
   height: 16px;
-  border: 2px solid #fff; /* رنگ اسپینر */
+  border: 2px solid #fff;
+  /* رنگ اسپینر */
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
+
 /* ساختار کلی فیلدها */
 .input-group {
   position: relative;
   margin-bottom: 1.5rem;
 }
+
 .contact__input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   outline: none;
   font-size: 1rem;
   background: transparent;
+  color: var(--text-color);
+  transition: border-color 0.3s ease;
 }
+
+/* حالت خطا: بوردر قرمز + لرزش هنگام کلیک روی Submit با فیلد خالی */
+.contact__input.input-error {
+  border-color: #e53935;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+.contact__input.shake {
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
 .input-group label {
   position: absolute;
   left: 12px;
   top: 12px;
-  color: #777;
+  color: var(--text-muted);
   font-size: 1rem;
-  background: white;
+  background: var(--bg-color);
   padding: 0 4px;
   transition: all 0.2s ease;
   pointer-events: none;
 }
+
 /* وقتی کاربر درون باکس کلیک می‌کند یا مقدار دارد */
-.contact__input:focus + label,
-.contact__input:not(:placeholder-shown) + label {
+.contact__input:focus+label,
+.contact__input:not(:placeholder-shown)+label {
   top: -10px;
   left: 10px;
   font-size: 0.8rem;
-  color: #2196f3; /* رنگ آبی تم */
+  color: #2196f3;
+  /* رنگ آبی تم */
 }
+
 /* پیام خطا زیر هر فیلد */
 .error-message {
   color: red;
@@ -964,14 +1236,321 @@ img {
   position: absolute;
   bottom: 8px;
   left: 5px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
 }
+
+/* ظاهر شدن نرم پیام خطا (به‌جای ظاهر شدن یهویی) */
+.error-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* انیمیشن چرخش */
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
+
 @keyframes flicker {
-  0%,19%,21%,23%,100% { opacity:1; }
-  20%,22% { opacity:0.8; }
+
+  0%,
+  19%,
+  21%,
+  23%,
+  100% {
+    opacity: 1;
+  }
+
+  20%,
+  22% {
+    opacity: 0.8;
+  }
+}
+
+/* بلند شدن نرم دکمه Call Me هنگام هاور */
+.flag-button {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+.flag-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 28px -12px hsla(var(--hue-color), 89%, 60%, 0.5);
+}
+
+.flag-button:active {
+  transform: translateY(-6px);
+  transition-duration: 0.15s;
+}
+
+/* ==================== زبان (فارسی/انگلیسی) ==================== */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: var(--font-semi);
+  color: var(--text-color);
+  background-color: transparent;
+  border: 1.5px solid var(--text-color);
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.lang-toggle:hover {
+  color: #fff;
+  background-color: var(--first-color);
+  border-color: var(--first-color);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 18px -10px hsla(var(--hue-color), 89%, 60%, 0.5);
+}
+
+/* بج کوچیک کد زبان (EN/FA) که پشت عنوان زبان مقصد میاد */
+.lang-toggle__badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.7rem;
+  background-color: var(--first-color);
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.lang-toggle:hover .lang-toggle__badge {
+  background-color: #fff;
+  color: var(--first-color);
+}
+
+/* ==================== تم (روشن/تاریک) ==================== */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  background-color: transparent;
+  border: 1.5px solid var(--text-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  color: #fff;
+  background-color: var(--first-color);
+  border-color: var(--first-color);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 18px -10px hsla(var(--hue-color), 89%, 60%, 0.5);
+}
+
+/* چرخش فقط روی آیکون داخل دکمه اجرا می‌شه، نه کل دکمه؛ وگرنه tooltip (که pseudo-element خود دکمه‌ست) هم کج می‌شد */
+.theme-toggle i {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-toggle:hover i {
+  transform: rotate(20deg);
+}
+
+/* Tooltip دکمه‌ی تم: متنش با data-tooltip از main.js تنظیم و متناسب با تم/زبان فعلی به‌روز می‌شه */
+.theme-toggle::before,
+.theme-toggle::after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+  z-index: var(--z-fixed);
+}
+
+.theme-toggle::before {
+  content: '';
+  margin-top: 4px;
+  border: 5px solid transparent;
+  border-top-width: 0;
+  border-bottom-color: var(--second-color);
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.theme-toggle::after {
+  content: attr(data-tooltip);
+  margin-top: 9px;
+  transform: translateX(-50%) translateY(-4px);
+  white-space: nowrap;
+  background-color: var(--second-color);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.35rem 0.7rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.theme-toggle:hover::before,
+.theme-toggle:hover::after,
+.theme-toggle:focus-visible::before,
+.theme-toggle:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* در حالت موبایل، دکمه‌های زبان/تم رو کنار آیکون همبرگری نشون می‌دیم */
+@media screen and (max-width: 767px) {
+  .nav__actions {
+    order: 2;
+  }
+  .nav__toggle {
+    order: 3;
+  }
+}
+
+/* ==================== پشتیبانی راست‌به‌چپ (فارسی) ==================== */
+html[dir="rtl"] {
+  --body-font: "Vazirmatn", "Poppins", sans-serif;
+}
+
+html[dir="rtl"] body {
+  letter-spacing: 0;
+}
+
+/* منوی موبایل: از چپ باز می‌شه به‌جای راست */
+@media screen and (max-width: 767px) {
+  html[dir="rtl"] .nav__menu {
+    right: auto;
+    left: -100%;
+  }
+  html[dir="rtl"] .nav__menu.show {
+    left: 0;
+    right: auto;
+  }
+}
+
+/* عکس پروفایل هیرو: سمت چپ به‌جای راست */
+html[dir="rtl"] .home__img {
+  right: auto;
+  left: 0;
+}
+
+/* فاصله‌ی آیکون‌های شبکه‌ی اجتماعی: از سمت چپ */
+html[dir="rtl"] .home__social-icon {
+  margin-right: 0;
+  margin-left: var(--mb-2);
+}
+
+@media screen and (min-width: 576px) {
+  html[dir="rtl"] .home__social-icon {
+    margin-right: 0;
+    margin-left: var(--mb-4);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  html[dir="rtl"] .home__social-icon {
+    margin-left: var(--mb-2);
+  }
+}
+
+/* چیدمان متن مهارت‌ها: راست‌چین */
+html[dir="rtl"] .skills__container {
+  text-align: right;
+}
+
+/* لیبل شناور فرم تماس: از سمت راست ورودی */
+html[dir="rtl"] .input-group label {
+  left: auto;
+  right: 12px;
+}
+
+html[dir="rtl"] .contact__input:focus + label,
+html[dir="rtl"] .contact__input:not(:placeholder-shown) + label {
+  left: auto;
+  right: 10px;
+}
+
+/* پیام خطای فرم: زیر سمت راست ورودی */
+html[dir="rtl"] .error-message {
+  left: auto;
+  right: 5px;
+}
+
+/* دکمه‌ی بستن پاپ‌آپ: بالا-چپ به‌جای بالا-راست */
+html[dir="rtl"] .popup__close {
+  right: auto;
+  left: 1rem;
+}
+
+/* ==================== تم تاریک ==================== */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-color: #0f1720;
+  --surface-color: #182231;
+  --text-color: #e8ecf1;
+  --text-muted: #92a0b3;
+  --border-color: #33404f;
+  --track-color: #2a3444;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --header-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* اسکرول‌بار و متن انتخاب‌شده هماهنگ با تم تاریک (اکثر مرورگرها با color-scheme خودکار انجامش می‌دن،
+   این فقط برای فایرفاکس/موارد قدیمی‌تره) */
+html[data-theme="dark"] ::selection {
+  background: var(--first-color);
+  color: #fff;
+}
+
+/* روی تم تاریک، پس‌زمینه‌ی پاپ‌آپ کمی روشن‌تر از بک‌گراند صفحه‌ست، پس یه بوردر ظریف هم اضافه می‌کنیم */
+html[data-theme="dark"] .popup__content {
+  border: 1px solid var(--border-color);
+}
+
+html[data-theme="dark"] .skills__data {
+  border: 1px solid var(--border-color);
+}
+
+/* ==================== انیمیشن دایره‌ای تعویض تم (View Transitions API) ====================
+   جلوگیری از فِیدِ پیش‌فرض مرورگر، تا فقط انیمیشن دایره‌ای که در main.js تعریف شده اجرا بشه */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
 }

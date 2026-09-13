@@ -1,4 +1,233 @@
-/*===== MENU SHOW =====*/ 
+/*===== زبان (فارسی/انگلیسی) =====*/
+const translations = {
+    en: {
+        nav_home: "Home",
+        nav_about: "About",
+        nav_skills: "Skills",
+        nav_work: "Portfolio",
+        nav_contact: "Contact",
+        theme_tooltip_to_dark: "Switch to dark mode",
+        theme_tooltip_to_light: "Switch to light mode",
+        home_title: `Hi,<br>I'am <span class="home__title-color">Alireza</span><br> Web Designer`,
+        home_call: "Call Me",
+        about_title: "About",
+        about_subtitle: "I'm Alireza",
+        about_text: "I am a Front-end and Full-stack developer and have been working with HTML, CSS, and JS for about 3 years and have been working with React and VueJS frameworks for about 2 years. I love Front-end challenges and along with project development, I like to improve my knowledge in related fields. I also have some familiarity with Python and have completed the C# Windows Form course.",
+        skills_title: "Skills",
+        skills_subtitle: "Professional Skills",
+        work_title: "Portfolio",
+        proj1_title: "Lugx Gaming",
+        proj2_title: "Online Game Shop",
+        proj3_title: "Barista Cafe",
+        proj4_title: "Vue SPA",
+        proj5_title: "Orkideh Store",
+        work_new_project: "New Project",
+        work_coming_soon: "Coming Soon",
+        contact_title: "Contact",
+        contact_name: "Name",
+        contact_email: "Email",
+        contact_message: "Message",
+        contact_submit: "Send Message",
+        contact_submitting: "Submitting...",
+        footer_copy: "© Alireza Akhoondi — All rights reserved",
+        err_name_required: "Name is required.",
+        err_email_required: "Email is required.",
+        err_message_required: "Message is required.",
+        alert_success_title: "Your message has been sent successfully!",
+        alert_success_text: "Thank you for your feedback🙏. Your message will be responded to via email soon.",
+        alert_error_title: "Error sending message!",
+        alert_error_text: "Please try again.",
+        page_title: "Alireza Akhoondi | Front-End Developer — Full-Stack Developer",
+        page_description: "Portfolio of Alireza Akhoondi, a front-end and full-stack web developer working with HTML, CSS, JavaScript, React, Vue.js, Tailwind CSS, Vuetify and Next.js. Browse projects and get in touch."
+    },
+    fa: {
+        nav_home: "خانه",
+        nav_about: "درباره من",
+        nav_skills: "مهارت‌ها",
+        nav_work: "نمونه‌کارها",
+        nav_contact: "تماس",
+        theme_tooltip_to_dark: "تغییر به حالت تاریک",
+        theme_tooltip_to_light: "تغییر به حالت روشن",
+        home_title: `سلام،<br><span class="home__title-color">علیرضا</span> هستم<br>توسعه‌دهنده وب`,
+        home_call: "تماس با من",
+        about_title: "درباره من",
+        about_subtitle: "من علیرضا هستم",
+        about_text: "من یک توسعه‌دهنده‌ی فرانت‌اند و فول‌استک هستم و حدود ۳ سال با HTML، CSS و JS کار کرده‌ام و حدود ۲ سال هم با فریم‌ورک‌های React و VueJS کار می‌کنم. به چالش‌های فرانت‌اند علاقه دارم و در کنار توسعه‌ی پروژه، دوست دارم دانشم رو در زمینه‌های مرتبط ارتقا بدم. همچنین تا حدی با پایتون آشنا هستم و دوره‌ی سی‌شارپ ویندوز فرم رو هم گذرونده‌ام.",
+        skills_title: "مهارت‌ها",
+        skills_subtitle: "مهارت‌های حرفه‌ای",
+        work_title: "نمونه‌کارها",
+        proj1_title: "Lugx Gaming",
+        proj2_title: "فروشگاه آنلاین بازی",
+        proj3_title: "کافه باریستا",
+        proj4_title: "Vue SPA",
+        proj5_title: "فروشگاه ارکیده",
+        work_new_project: "پروژه‌ی جدید",
+        work_coming_soon: "به‌زودی",
+        contact_title: "تماس با من",
+        contact_name: "نام",
+        contact_email: "ایمیل",
+        contact_message: "پیام",
+        contact_submit: "ارسال پیام",
+        contact_submitting: "در حال ارسال...",
+        footer_copy: "© تمام حقوق برای علیرضا آخوندی محفوظ است",
+        err_name_required: "نام الزامی است.",
+        err_email_required: "ایمیل الزامی است.",
+        err_message_required: "پیام الزامی است.",
+        alert_success_title: "پیام شما با موفقیت ارسال شد!",
+        alert_success_text: "با تشکر از بازخورد شما 🙏. به‌زودی از طریق ایمیل پاسخ داده می‌شود.",
+        alert_error_title: "خطا در ارسال پیام!",
+        alert_error_text: "لطفاً دوباره تلاش کنید.",
+        page_title: "علیرضا آخوندی | توسعه‌دهنده فرانت‌اند و فول‌استک",
+        page_description: "نمونه‌کارهای علیرضا آخوندی، توسعه‌دهنده‌ی فرانت‌اند و فول‌استک با تخصص در HTML، CSS، جاوااسکریپت، React، Vue.js، Tailwind CSS، Vuetify و Next.js."
+    }
+};
+
+let currentLang = 'en';
+
+function applyLanguage(lang) {
+    if (!translations[lang]) lang = 'en';
+    currentLang = lang;
+
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key] !== undefined) {
+            el.innerHTML = translations[lang][key];
+        }
+    });
+
+    // فقط برای تجربه‌ی کاربری (عنوان تب و توضیح مرورگر) — نسخه‌ی ایندکس‌شده در گوگل همچنان انگلیسیه
+    document.title = translations[lang].page_title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', translations[lang].page_description);
+
+    const langToggleBtn = document.getElementById('lang-toggle');
+    if (langToggleBtn) {
+        const targetLang = lang === 'fa' ? 'en' : 'fa';
+        const label = langToggleBtn.querySelector('.lang-toggle__label');
+        const badge = langToggleBtn.querySelector('.lang-toggle__badge');
+        if (label) label.textContent = targetLang === 'en' ? 'English' : 'فارسی';
+        if (badge) badge.textContent = targetLang === 'en' ? 'EN' : 'FA';
+    }
+
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+
+    // چون متن tooltip دکمه‌ی تم به زبان بستگی داره، با تغییر زبان دوباره به‌روزش می‌کنیم
+    updateThemeTooltip();
+}
+
+function detectInitialLang() {
+    try {
+        const saved = localStorage.getItem('site-lang');
+        if (saved === 'en' || saved === 'fa') return saved;
+    } catch (e) {}
+    const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    return navLang.indexOf('fa') === 0 ? 'fa' : 'en';
+}
+
+/*===== تم (روشن/تاریک) =====*/
+function applyTheme(theme) {
+    if (theme !== 'dark' && theme !== 'light') theme = 'light';
+
+    document.documentElement.setAttribute('data-theme', theme);
+
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    if (themeToggleBtn) {
+        // آیکون همیشه نشون‌دهنده‌ی تمی هست که با کلیک بهش می‌ری (مثل دکمه‌ی زبان)
+        themeToggleBtn.innerHTML = theme === 'dark'
+            ? "<i class='bx bx-sun'></i>"
+            : "<i class='bx bx-moon'></i>";
+    }
+
+    // رنگ نوار آدرس مرورگر موبایل هم هماهنگ با تم بشه
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) metaTheme.setAttribute('content', theme === 'dark' ? '#0f1720' : '#3e6ff4');
+
+    try { localStorage.setItem('site-theme', theme); } catch (e) {}
+
+    updateThemeTooltip();
+}
+
+// متن tooltip دکمه‌ی تم رو متناسب با تمی که با کلیک بهش می‌ریم (و زبان فعلی) تنظیم می‌کنه
+function updateThemeTooltip() {
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    if (!themeToggleBtn) return;
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const key = isDark ? 'theme_tooltip_to_light' : 'theme_tooltip_to_dark';
+    themeToggleBtn.setAttribute('data-tooltip', translations[currentLang][key]);
+}
+
+function detectInitialTheme() {
+    try {
+        const saved = localStorage.getItem('site-theme');
+        if (saved === 'light' || saved === 'dark') return saved;
+    } catch (e) {}
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+}
+
+// تغییر تم با انیمیشن دایره‌ای که از نقطه‌ی کلیک باز می‌شه (شبیه تلگرام)، با استفاده از View Transitions API
+function toggleTheme(event) {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // مرورگرهایی که این API رو ندارن (مثل فایرفاکس) همون رفتار قبلی رو دارن: تعویض آنی تم
+    if (!document.startViewTransition || reduceMotion) {
+        applyTheme(newTheme);
+        return;
+    }
+
+    const x = event ? event.clientX : window.innerWidth / 2;
+    const y = event ? event.clientY : window.innerHeight / 2;
+    const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+        applyTheme(newTheme);
+    });
+
+    transition.ready.then(() => {
+        document.documentElement.animate(
+            {
+                clipPath: [
+                    `circle(0px at ${x}px ${y}px)`,
+                    `circle(${endRadius}px at ${x}px ${y}px)`
+                ]
+            },
+            {
+                duration: 500,
+                easing: 'ease-in-out',
+                pseudoElement: '::view-transition-new(root)'
+            }
+        );
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    applyLanguage(detectInitialLang());
+    applyTheme(detectInitialTheme());
+
+    const langToggleBtn = document.getElementById('lang-toggle');
+    if (langToggleBtn) {
+        langToggleBtn.addEventListener('click', () => {
+            applyLanguage(currentLang === 'fa' ? 'en' : 'fa');
+        });
+    }
+
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', (event) => {
+            toggleTheme(event);
+        });
+    }
+});
+
+/*===== MENU SHOW =====*/
 const showMenu = (toggleId, navId) =>{
     const toggle = document.getElementById(toggleId),
     nav = document.getElementById(navId)
@@ -59,7 +288,12 @@ const sr = ScrollReveal({
 sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
 sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
 sr.reveal('.home__social-icon',{ interval: 200}); 
-sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200}); 
+sr.reveal('.skills__data, .work__img, .contact__input',{
+    interval: 200,
+    // بعد از تمام شدن انیمیشن ورود، یه کلاس اضافه می‌کنیم تا ترنزیشن سریع هاور
+    // (رفتن و برگشتن) بدون تداخل با ترنزیشن کند ScrollReveal اعمال بشه
+    afterReveal: el => el.classList.add('is-revealed')
+});
 
 ////////////////////////Skills///////////////////////////
 document.addEventListener("DOMContentLoaded", function () {
@@ -72,43 +306,58 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// داده‌های پروژه‌ها
+// داده‌های پروژه‌ها (عنوان/توضیح دوزبانه)
 const projects = {
     project1: {
-        title: "Lugx Gaming",
-        description: "A professional gaming store template built with modern web technologies.",
+        title: { en: "Lugx Gaming", fa: "Lugx Gaming" },
+        description: {
+            en: "A professional gaming store template built with modern web technologies.",
+            fa: "یک قالب حرفه‌ای فروشگاه گیمینگ که با تکنولوژی‌های مدرن وب ساخته شده است."
+        },
         media: [
             "assets/img/g1.jpg",
             "assets/img/gm1.mp4"
         ]
     },
     project2: {
-        title: "Online Game Shop",
-        description: "Complete e-commerce solution for digital game assets.",
+        title: { en: "Online Game Shop", fa: "فروشگاه آنلاین بازی" },
+        description: {
+            en: "Complete e-commerce solution for digital game assets.",
+            fa: "یک راه‌حل کامل فروشگاهی برای دارایی‌های دیجیتال بازی."
+        },
         media: [
             "assets/img/og1.jpg",
             "assets/img/ogm1.mp4"
         ]
     },
     project3: {
-        title: "Barista Cafe",
-        description: "A beautiful cafe website design.",
+        title: { en: "Barista Cafe", fa: "کافه باریستا" },
+        description: {
+            en: "A beautiful cafe website design.",
+            fa: "طراحی زیبا برای وب‌سایت یک کافه."
+        },
         media: [
             "assets/img/cafe.jpg",
             "assets/img/mcafe.mp4",
         ]
     },
     project4: {
-        title: "Vue SPA",
-        description: "Single Page Application using Vue.js.",
+        title: { en: "Vue SPA", fa: "اپلیکیشن تک‌صفحه‌ای Vue" },
+        description: {
+            en: "Single Page Application using Vue.js.",
+            fa: "یک اپلیکیشن تک‌صفحه‌ای (SPA) ساخته‌شده با Vue.js."
+        },
         media: [
             "assets/img/vue.jpg",
             "assets/img/mvue.mp4"
         ]
     },
     project5: {
-        title: "Orkideh Sewing Machine Store",
-        description: "Online store for buying, selling and repairing sewing machines and their accessories",
+        title: { en: "Orkideh Sewing Machine Store", fa: "فروشگاه چرخ خیاطی ارکیده" },
+        description: {
+            en: "Online store for buying, selling and repairing sewing machines and their accessories",
+            fa: "فروشگاه آنلاین خرید، فروش و تعمیر چرخ خیاطی و لوازم جانبی آن"
+        },
         media: [
             "assets/img/sewing.jpg",
             "assets/img/sewing1.mp4"
@@ -130,9 +379,10 @@ workItems.forEach(item => {
         const project = projects[projectId];
 
         if (project) {
-            // تنظیم عنوان و توضیحات
-            popupTitle.textContent = project.title;
-            popupDescription.textContent = project.description;
+            // تنظیم عنوان و توضیحات بر اساس زبان فعلی
+            const localizedTitle = project.title[currentLang] || project.title.en;
+            popupTitle.textContent = localizedTitle;
+            popupDescription.textContent = project.description[currentLang] || project.description.en;
 
             // پاک کردن گالری قبلی
             popupGallery.innerHTML = '';
@@ -143,14 +393,14 @@ workItems.forEach(item => {
                 if (isVideo) {
                     const video = document.createElement('video');
                     video.src = media;
-                    video.alt = project.title;
+                    video.alt = localizedTitle;
                     video.controls = true;
                     video.className = 'popup__media';
                     popupGallery.appendChild(video);
                 } else {
                     const img = document.createElement('img');
                     img.src = media;
-                    img.alt = project.title;
+                    img.alt = localizedTitle;
                     img.className = 'popup__media';
                     popupGallery.appendChild(img);
                 }
@@ -179,59 +429,85 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const contactForm = document.getElementById('contactForm');
   const contactSubmit = document.getElementById('contactSubmit');
+  const submitLabel = contactSubmit.querySelector('.btn-label');
   const inputs = contactForm.querySelectorAll('.contact__input');
+
+  // لرزوندن دوباره‌ی فیلد حتی اگه کلاس shake از قبل روش باشه (با remove + reflow + add)
+  function triggerShake(el) {
+    el.classList.remove('shake');
+    void el.offsetWidth;
+    el.classList.add('shake');
+  }
+
+  // به محض شروع تایپ، حالت خطا (بوردر قرمز + پیام) از فیلد برداشته بشه
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      input.classList.remove('input-error');
+      const errorMsg = input.parentElement.querySelector('.error-message');
+      if (errorMsg) errorMsg.classList.remove('show');
+    });
+  });
 
   contactSubmit.addEventListener('click', function (e) {
     e.preventDefault();
 
     let isValid = true;
+    const t = translations[currentLang];
 
     // پاک کردن خطاهای قبلی
-    contactForm.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+    contactForm.querySelectorAll('.error-message').forEach(el => {
+      el.textContent = '';
+      el.classList.remove('show');
+    });
+    inputs.forEach(input => input.classList.remove('input-error'));
 
     // بررسی فیلدها
     inputs.forEach(input => {
       if (!input.value.trim()) {
         const errorMsg = input.parentElement.querySelector('.error-message');
-        errorMsg.textContent = `${input.name === "user_name" ? "Name" : input.name === "user_email" ? "Email" : "Message"} is required.`;
+        const key = input.name === "user_name" ? "err_name_required" : input.name === "user_email" ? "err_email_required" : "err_message_required";
+        errorMsg.textContent = t[key];
+        errorMsg.classList.add('show');
+        input.classList.add('input-error');
+        triggerShake(input);
         isValid = false;
       }
     });
 
     if (!isValid) return; // اگر فیلد ناقص بود، ارسال انجام نشود
 
-    // شروع ارسال
+    // شروع ارسال (فقط متن لیبل عوض می‌شه، آیکون‌ها دست‌نخورده می‌مونن)
     contactSubmit.classList.add('loading');
     contactSubmit.disabled = true;
-    contactSubmit.textContent = "Submitting...";
+    submitLabel.textContent = t.contact_submitting;
 
     emailjs.sendForm('service_19d6kpg', 'template_fruq6c6', contactForm)
       .then(() => {
         Swal.fire({
           icon: 'success',
-          title: 'Your message has been sent successfully!',
-          text: 'Thank you for your feedback🙏. Your message will be responded to via email soon.',
+          title: translations[currentLang].alert_success_title,
+          text: translations[currentLang].alert_success_text,
           showConfirmButton: false,
           timer: 2000
         });
 
         contactSubmit.classList.remove('loading');
         contactSubmit.disabled = false;
-        contactSubmit.textContent = "Submit";
+        submitLabel.textContent = translations[currentLang].contact_submit;
         contactForm.reset();
       })
       .catch((error) => {
         Swal.fire({
           icon: 'error',
-          title: 'Error sending message!',
-          text: 'Please try again.',
+          title: translations[currentLang].alert_error_title,
+          text: translations[currentLang].alert_error_text,
           showConfirmButton: false,
           timer: 2000
         });
 
         contactSubmit.classList.remove('loading');
         contactSubmit.disabled = false;
-        contactSubmit.textContent = "Submit";
+        submitLabel.textContent = translations[currentLang].contact_submit;
         console.error('EmailJS error:', error);
       });
   });
