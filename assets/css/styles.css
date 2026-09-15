@@ -137,11 +137,19 @@ img {
 /*===== CLASS CSS ===== */
 .section-title {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   font-size: var(--h2-font-size);
   color: var(--first-color);
   margin-top: var(--mb-2);
   margin-bottom: var(--mb-4);
   text-align: center;
+}
+
+.section-title__icon {
+  font-size: 0.9em;
 }
 
 .section-title::after {
@@ -208,7 +216,14 @@ img {
 
 .nav__link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
   color: #fff;
+}
+
+.nav__link-icon {
+  margin-inline-end: 6px;
+  font-size: 1.1rem;
 }
 
 .nav__link:hover {
@@ -550,16 +565,22 @@ img {
 
 .skills__icon {
   font-size: 2rem;
+  transition: filter 0.3s ease;
   /* color: var(--first-color); */
 }
 
 .skills__bar {
+  position: relative;
   width: 100%;
-  height: 0.5rem;
+  height: 1.6rem;
   background-color: var(--track-color);
   border-radius: 0.5rem;
   overflow: hidden;
   margin-bottom: 0.5rem;
+  /* display:flex + justify-content:flex-start باعث می‌شه نوار پر شونده از سمت "شروع" اضافه بشه:
+     چپ در حالت LTR (انگلیسی)، راست در حالت RTL (فارسی) — بدون نیاز به override دستی جهت */
+  display: flex;
+  justify-content: flex-start;
 }
 
 .skill__progress {
@@ -570,9 +591,17 @@ img {
   transition: width 0.6s ease;
 }
 
-.skills__percentage {
-  font-weight: bold;
+/* درصد داخل خود نوار، همیشه وسط‌چین و مستقل از عرضِ در حال رشدِ رنگی، تا از همون ۰٪ هم خوانا باشه */
+.skill__progress-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--text-color);
+  pointer-events: none;
 }
 
 .skills__img-container {
@@ -1539,6 +1568,14 @@ html[data-theme="dark"] .popup__content {
 
 html[data-theme="dark"] .skills__data {
   border: 1px solid var(--border-color);
+}
+
+/* آیکون‌های Next.js/TailwindCSS/Vuetify به‌صورت SVG رنگی خارجی (img) هستن، نه فونت-آیکون؛
+   پس با color قابل رنگ‌آمیزی نیستن. تو تم تاریک با filter سفیدشون می‌کنیم، مثل بقیه‌ی آیکون‌ها */
+html[data-theme="dark"] .skills__icon[alt="Next.js"],
+html[data-theme="dark"] .skills__icon[alt="TailwindCSS"],
+html[data-theme="dark"] .skills__icon[alt="Vuetify"] {
+  filter: brightness(0) invert(1);
 }
 
 /* ==================== انیمیشن دایره‌ای تعویض تم (View Transitions API) ====================

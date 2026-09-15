@@ -12,7 +12,7 @@ const translations = {
         home_call: "Call Me",
         about_title: "About",
         about_subtitle: "I'm Alireza",
-        about_text: "I am a Front-end and Full-stack developer and have been working with HTML, CSS, and JS for about 3 years and have been working with React and VueJS frameworks for about 2 years. I love Front-end challenges and along with project development, I like to improve my knowledge in related fields. I also have some familiarity with Python and have completed the C# Windows Form course.",
+        about_text: "I am a Front-End and Full-Stack developer with approximately four years of experience working with HTML, CSS, JavaScript, and React. For the past two years, I have been developing various projects—both independently and as part of a team—using the Next.js framework. One of my portfolio highlights is the end-to-end development of a large-scale online store, featuring an admin panel, an authentication system, and API integration. Additionally, I have two years of experience working with Vue.js and the Vuetify library, including participation in team-based projects built on these technologies. I also have two years of experience in website design using WordPress.",
         skills_title: "Skills",
         skills_subtitle: "Professional Skills",
         work_title: "Portfolio",
@@ -29,6 +29,7 @@ const translations = {
         contact_message: "Message",
         contact_submit: "Send Message",
         contact_submitting: "Submitting...",
+        footer_title: "Alireza",
         footer_copy: "© Alireza Akhoondi — All rights reserved",
         err_name_required: "Name is required.",
         err_email_required: "Email is required.",
@@ -52,7 +53,7 @@ const translations = {
         home_call: "تماس با من",
         about_title: "درباره من",
         about_subtitle: "من علیرضا هستم",
-        about_text: "من یک توسعه‌دهنده‌ی فرانت‌اند و فول‌استک هستم و حدود ۳ سال با HTML، CSS و JS کار کرده‌ام و حدود ۲ سال هم با فریم‌ورک‌های React و VueJS کار می‌کنم. به چالش‌های فرانت‌اند علاقه دارم و در کنار توسعه‌ی پروژه، دوست دارم دانشم رو در زمینه‌های مرتبط ارتقا بدم. همچنین تا حدی با پایتون آشنا هستم و دوره‌ی سی‌شارپ ویندوز فرم رو هم گذرونده‌ام.",
+        about_text: "برنامه‌نویس Front-End و Full-Stack هستم و حدود ۴ سال است که با HTML، CSS، Js و React کار می‌کنم و حدود ۲ سال نیز با فریمورک NextJs مشغول توسعه پروژه‌های مختلف به صورت تیمی و شخصی بوده‌ام. یکی از نمونه‌کارهای من، پیاده‌سازی کامل یک فروشگاه آنلاین بزرگ از صفر تا صد شامل پنل مدیریتی، سیستم احراز هویت و کار با APIها می‌باشد. همچنین حدود ۲ سال است که با VueJs و کتابخانه Vuetify کار می‌کنم و تجربه حضور در پروژه‌های تیمی مبتنی بر Vue و Vuetify را دارم. همچنین سابقه ۲ سال فعالیت در حوزه طراحی وبسایت با وردپرس را نیز دارا هستم.",
         skills_title: "مهارت‌ها",
         skills_subtitle: "مهارت‌های حرفه‌ای",
         work_title: "نمونه‌کارها",
@@ -69,6 +70,7 @@ const translations = {
         contact_message: "پیام",
         contact_submit: "ارسال پیام",
         contact_submitting: "در حال ارسال...",
+        footer_title: "علیرضا",
         footer_copy: "© تمام حقوق برای علیرضا آخوندی محفوظ است",
         err_name_required: "نام الزامی است.",
         err_email_required: "ایمیل الزامی است.",
@@ -116,6 +118,14 @@ function applyLanguage(lang) {
 
     // چون متن tooltip دکمه‌ی تم به زبان بستگی داره، با تغییر زبان دوباره به‌روزش می‌کنیم
     updateThemeTooltip();
+
+    // درصد مهارت‌ها هم باید با تغییر زبان، رقم‌هاشون فارسی/انگلیسی بشه
+    // (بر اساس مقداری که همین الآن روی هر نوار نمایش داده شده، نه لزوماً مقدار نهایی؛
+    // چون ممکنه هنوز انیمیشنِ پر شدنش تموم نشده باشه)
+    document.querySelectorAll('.skill__progress-value').forEach(valueLabel => {
+        const current = parseInt(valueLabel.dataset.current, 10) || 0;
+        valueLabel.textContent = formatSkillPercentage(current);
+    });
 }
 
 function detectInitialLang() {
@@ -125,6 +135,15 @@ function detectInitialLang() {
     } catch (e) {}
     const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
     return navLang.indexOf('fa') === 0 ? 'fa' : 'en';
+}
+
+// تبدیل ارقام انگلیسی به فارسی (برای نمایش درصدهای مهارت‌ها در حالت زبان فارسی)
+function toPersianDigits(num) {
+    return String(num).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+}
+
+function formatSkillPercentage(value) {
+    return currentLang === 'fa' ? toPersianDigits(value) + '٪' : value + '%';
 }
 
 /*===== تم (روشن/تاریک) =====*/
@@ -211,6 +230,7 @@ function toggleTheme(event) {
 document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(detectInitialLang());
     applyTheme(detectInitialTheme());
+    initSkillBars();
 
     const langToggleBtn = document.getElementById('lang-toggle');
     if (langToggleBtn) {
@@ -271,10 +291,47 @@ const scrollActive = () =>{
 }
 window.addEventListener('scroll', scrollActive)
 
-document.querySelectorAll('.skill__progress').forEach(el => {
-  let percent = el.getAttribute('data-skill');
-  el.style.width = percent + '%';
-});
+////////////////////////Skills///////////////////////////
+// همه‌ی نوارها رو قبل از هر انیمیشنی رو صفر (و با رقم درست فارسی/انگلیسی) مقداردهی اولیه می‌کنه
+function initSkillBars() {
+    document.querySelectorAll('.skills__data').forEach(skillEl => {
+        const progressBar = skillEl.querySelector('.skill__progress');
+        const valueLabel = skillEl.querySelector('.skill__progress-value');
+        if (progressBar) progressBar.style.width = '0%';
+        if (valueLabel) {
+            valueLabel.dataset.current = '0';
+            valueLabel.textContent = formatSkillPercentage(0);
+        }
+    });
+}
+
+// نوار + عدد داخلش رو با هم از صفر تا مقدار هدف می‌شمره؛ جهت پر شدن (چپ‌به‌راست/راست‌به‌چپ)
+// خودش با CSS (که به html[dir] وابسته‌ست) هماهنگ می‌شه، اینجا فقط عرض/درصد رو تغییر می‌دیم
+function animateSkillBar(skillEl) {
+    const target = parseInt(skillEl.getAttribute('data-skill'), 10) || 0;
+    const progressBar = skillEl.querySelector('.skill__progress');
+    const valueLabel = skillEl.querySelector('.skill__progress-value');
+    if (!progressBar) return;
+
+    const duration = 1200;
+    const startTime = performance.now();
+
+    function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+
+        progressBar.style.width = current + '%';
+        if (valueLabel) {
+            valueLabel.dataset.current = String(current);
+            valueLabel.textContent = formatSkillPercentage(current);
+        }
+
+        if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+}
 
 /*===== SCROLL REVEAL ANIMATION =====*/
 const sr = ScrollReveal({
@@ -285,25 +342,19 @@ const sr = ScrollReveal({
 //     reset: true
 });
 
-sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
-sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
-sr.reveal('.home__social-icon',{ interval: 200}); 
+sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{});
+sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400});
+sr.reveal('.home__social-icon',{ interval: 200});
 sr.reveal('.skills__data, .work__img, .contact__input',{
     interval: 200,
+    // همون لحظه‌ای که کارت وارد دید می‌شه و شروع به ظاهر شدن می‌کنه (نه بعد از تموم شدن انیمیشن ورودش)
+    // نوار مهارتش هم بدون تاخیر از صفر شروع کنه به پر شدن
+    beforeReveal: el => {
+        if (el.classList.contains('skills__data')) animateSkillBar(el);
+    },
     // بعد از تمام شدن انیمیشن ورود، یه کلاس اضافه می‌کنیم تا ترنزیشن سریع هاور
     // (رفتن و برگشتن) بدون تداخل با ترنزیشن کند ScrollReveal اعمال بشه
     afterReveal: el => el.classList.add('is-revealed')
-});
-
-////////////////////////Skills///////////////////////////
-document.addEventListener("DOMContentLoaded", function () {
-    const skillBars = document.querySelectorAll(".skills__data");
-
-    skillBars.forEach(skill => {
-      const percentage = skill.getAttribute("data-skill");
-      const progressBar = skill.querySelector(".skill__progress");
-      progressBar.style.width = percentage + "%";
-    });
 });
 
 // داده‌های پروژه‌ها (عنوان/توضیح دوزبانه)
