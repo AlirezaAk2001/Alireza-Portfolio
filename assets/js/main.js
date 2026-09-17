@@ -6,6 +6,7 @@ const translations = {
         nav_skills: "Skills",
         nav_work: "Portfolio",
         nav_contact: "Contact",
+        resume_download: "Download Resume",
         theme_tooltip_to_dark: "Switch to dark mode",
         theme_tooltip_to_light: "Switch to light mode",
         home_title: `Hi,<br>I'am <span class="home__title-color">Alireza</span><br> Web Designer`,
@@ -47,13 +48,14 @@ const translations = {
         nav_skills: "مهارت‌ها",
         nav_work: "نمونه‌کارها",
         nav_contact: "تماس",
+        resume_download: "دانلود رزومه",
         theme_tooltip_to_dark: "تغییر به حالت تاریک",
         theme_tooltip_to_light: "تغییر به حالت روشن",
         home_title: `سلام،<br><span class="home__title-color">علیرضا</span> هستم<br>توسعه‌دهنده وب`,
         home_call: "تماس با من",
         about_title: "درباره من",
         about_subtitle: "من علیرضا هستم",
-        about_text: "برنامه‌نویس Front-End و Full-Stack هستم و حدود ۴ سال است که با HTML، CSS، Js و React کار می‌کنم و حدود ۲ سال نیز با فریمورک NextJs مشغول توسعه پروژه‌های مختلف به صورت تیمی و شخصی بوده‌ام. یکی از نمونه‌کارهای من، پیاده‌سازی کامل یک فروشگاه آنلاین بزرگ از صفر تا صد شامل پنل مدیریتی، سیستم احراز هویت و کار با APIها می‌باشد. همچنین حدود ۲ سال است که با VueJs و کتابخانه Vuetify کار می‌کنم و تجربه حضور در پروژه‌های تیمی مبتنی بر Vue و Vuetify را دارم. همچنین سابقه ۲ سال فعالیت در حوزه طراحی وبسایت با وردپرس را نیز دارا هستم.",
+        about_text: "برنامه‌نویس Front-End و Full-Stack هستم و حدود ۴ سال است که با HTML, CSS, Js و React کار می‌کنم و حدود ۲ سال نیز با فریمورک NextJs مشغول توسعه پروژه‌های مختلف به صورت تیمی و شخصی بوده‌ام. یکی از نمونه‌کارهای من، پیاده‌سازی کامل یک فروشگاه آنلاین بزرگ از صفر تا صد شامل پنل مدیریتی، سیستم احراز هویت و کار با APIها می‌باشد. همچنین حدود ۲ سال است که با VueJs و کتابخانه Vuetify کار می‌کنم و تجربه حضور در پروژه‌های تیمی مبتنی بر Vue و Vuetify را دارم. همچنین سابقه ۲ سال فعالیت در حوزه طراحی وبسایت با وردپرس را نیز دارا هستم.",
         skills_title: "مهارت‌ها",
         skills_subtitle: "مهارت‌های حرفه‌ای",
         work_title: "نمونه‌کارها",
@@ -111,7 +113,7 @@ function applyLanguage(lang) {
         const label = langToggleBtn.querySelector('.lang-toggle__label');
         const badge = langToggleBtn.querySelector('.lang-toggle__badge');
         if (label) label.textContent = targetLang === 'en' ? 'English' : 'فارسی';
-        if (badge) badge.textContent = targetLang === 'en' ? 'EN' : 'FA';
+        if (badge) badge.textContent = targetLang === 'en' ? 'EN' : 'فا';
     }
 
     try { localStorage.setItem('site-lang', lang); } catch (e) {}
@@ -133,8 +135,8 @@ function detectInitialLang() {
         const saved = localStorage.getItem('site-lang');
         if (saved === 'en' || saved === 'fa') return saved;
     } catch (e) {}
-    const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-    return navLang.indexOf('fa') === 0 ? 'fa' : 'en';
+    // بدون تنظیم قبلی، زبان پیش‌فرض سایت فارسیه (صرف‌نظر از زبان مرورگر)
+    return 'fa';
 }
 
 // تبدیل ارقام انگلیسی به فارسی (برای نمایش درصدهای مهارت‌ها در حالت زبان فارسی)
@@ -362,8 +364,54 @@ const projects = {
     project1: {
         title: { en: "Lugx Gaming", fa: "Lugx Gaming" },
         description: {
-            en: "A professional gaming store template built with modern web technologies.",
-            fa: "یک قالب حرفه‌ای فروشگاه گیمینگ که با تکنولوژی‌های مدرن وب ساخته شده است."
+            en: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">Overview</p>
+                    <div class="popup__desc-inner">
+                        <p>A multi-page gaming e-commerce storefront covering the full shopping journey, from the homepage to product details, the shop listing, and sign-in.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Tech Stack</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>Bootstrap 5</li><li>jQuery</li><li>Isotope.js</li><li>Owl Carousel</li><li>Swiper</li><li>Animate.css</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Key Features</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>Filterable and sortable shop grid (Isotope.js)</li>
+                    <li>Homepage banner and testimonial carousels</li>
+                    <li>Dedicated product details, contact, and sign-in/login pages</li>
+                    <li>Scroll-triggered entrance animations throughout</li>
+                    <li>Fully responsive, mobile-first layout</li>
+                </ul>
+                    </div>
+                </div>`,
+            fa: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">معرفی</p>
+                    <div class="popup__desc-inner">
+                        <p>یک فروشگاه چندصفحه‌ای گیمینگ که کل مسیر خرید، از صفحه‌ی اصلی تا جزئیات محصول، لیست فروشگاه و صفحه‌ی ورود رو پوشش می‌ده.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">تکنولوژی‌ها</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>Bootstrap 5</li><li>jQuery</li><li>Isotope.js</li><li>Owl Carousel</li><li>Swiper</li><li>Animate.css</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">ویژگی‌های کلیدی</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>گرید فروشگاه با قابلیت فیلتر و مرتب‌سازی (Isotope.js)</li>
+                    <li>اسلایدرهای بنر و معرفی در صفحه‌ی اصلی</li>
+                    <li>صفحات اختصاصی جزئیات محصول، تماس و ورود/ثبت‌نام</li>
+                    <li>انیمیشن‌های نرم هنگام اسکرول در سراسر صفحه</li>
+                    <li>طراحی کاملاً واکنش‌گرا و موبایل‌محور</li>
+                </ul>
+                    </div>
+                </div>`
         },
         media: [
             "assets/img/g1.jpg",
@@ -373,8 +421,54 @@ const projects = {
     project2: {
         title: { en: "Online Game Shop", fa: "فروشگاه آنلاین بازی" },
         description: {
-            en: "Complete e-commerce solution for digital game assets.",
-            fa: "یک راه‌حل کامل فروشگاهی برای دارایی‌های دیجیتال بازی."
+            en: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">Overview</p>
+                    <div class="popup__desc-inner">
+                        <p>A single-page e-commerce app for digital games and gaming consoles, built with a component-driven React architecture and a mock REST API for realistic client-server interaction.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Tech Stack</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>React</li><li>React Router</li><li>TanStack Query</li><li>Axios</li><li>Material UI</li><li>Swiper</li><li>json-server</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Key Features</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>Category-based browsing (consoles, featured titles, special collections)</li>
+                    <li>Dedicated search page with live results</li>
+                    <li>Product filtering and a card-based catalog grid</li>
+                    <li>Shopping cart module</li>
+                    <li>Async data fetching and caching via React Query against a mock backend</li>
+                </ul>
+                    </div>
+                </div>`,
+            fa: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">معرفی</p>
+                    <div class="popup__desc-inner">
+                        <p>یک اپلیکیشن تک‌صفحه‌ای فروش بازی و کنسول‌های گیمینگ، با معماری کامپوننت‌محور React و یک REST API شبیه‌سازی‌شده برای تجربه‌ی واقعی ارتباط کلاینت-سرور.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">تکنولوژی‌ها</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>React</li><li>React Router</li><li>TanStack Query</li><li>Axios</li><li>Material UI</li><li>Swiper</li><li>json-server</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">ویژگی‌های کلیدی</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>مرور محصولات بر اساس دسته‌بندی (کنسول‌ها، عنوان‌های ویژه، مجموعه‌های خاص)</li>
+                    <li>صفحه‌ی اختصاصی جستجو با نتایج آنی</li>
+                    <li>فیلتر محصولات و گرید کارت‌محور فروشگاه</li>
+                    <li>ماژول سبد خرید</li>
+                    <li>واکشی و کش داده‌ها به‌صورت ناهمگام با React Query</li>
+                </ul>
+                    </div>
+                </div>`
         },
         media: [
             "assets/img/og1.jpg",
@@ -384,8 +478,52 @@ const projects = {
     project3: {
         title: { en: "Barista Cafe", fa: "کافه باریستا" },
         description: {
-            en: "A beautiful cafe website design.",
-            fa: "طراحی زیبا برای وب‌سایت یک کافه."
+            en: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">Overview</p>
+                    <div class="popup__desc-inner">
+                        <p>A responsive marketing website for a coffee shop, built around full-screen imagery and atmosphere, plus an online table reservation page.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Tech Stack</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>Bootstrap</li><li>jQuery</li><li>Vegas.js</li><li>Bootstrap Icons</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Key Features</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>Full-screen animated background slideshow (Vegas.js)</li>
+                    <li>Dedicated table reservation page</li>
+                    <li>Sticky navigation with smooth scrolling</li>
+                    <li>Responsive image and video sections showcasing the cafe's atmosphere</li>
+                </ul>
+                    </div>
+                </div>`,
+            fa: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">معرفی</p>
+                    <div class="popup__desc-inner">
+                        <p>یک وب‌سایت معرفی و تبلیغاتی برای یک کافی‌شاپ، با محوریت تصاویر تمام‌صفحه و فضاسازی، به‌همراه یک صفحه‌ی رزرو میز آنلاین.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">تکنولوژی‌ها</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>Bootstrap</li><li>jQuery</li><li>Vegas.js</li><li>Bootstrap Icons</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">ویژگی‌های کلیدی</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>اسلایدشوی پس‌زمینه‌ی تمام‌صفحه با انیمیشن (Vegas.js)</li>
+                    <li>صفحه‌ی اختصاصی رزرو میز</li>
+                    <li>ناوبری چسبان (Sticky) با اسکرول نرم</li>
+                    <li>بخش‌های تصویری و ویدیویی واکنش‌گرا برای نمایش فضای کافه</li>
+                </ul>
+                    </div>
+                </div>`
         },
         media: [
             "assets/img/cafe.jpg",
@@ -395,8 +533,54 @@ const projects = {
     project4: {
         title: { en: "Vue SPA", fa: "اپلیکیشن تک‌صفحه‌ای Vue" },
         description: {
-            en: "Single Page Application using Vue.js.",
-            fa: "یک اپلیکیشن تک‌صفحه‌ای (SPA) ساخته‌شده با Vue.js."
+            en: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">Overview</p>
+                    <div class="popup__desc-inner">
+                        <p>A single-page application demonstrating full CRUD workflows and client-side routing in Vue 3, built by consuming a public REST API for posts and users.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Tech Stack</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>Vue 3</li><li>Vue Router</li><li>Axios</li><li>Bootstrap 5</li><li>SweetAlert2</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Key Features</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>Full CRUD for posts: create, view, edit, and list</li>
+                    <li>User listing and detail views</li>
+                    <li>Client-side routing between views with Vue Router</li>
+                    <li>Interactive confirmation and alert dialogs (SweetAlert2)</li>
+                    <li>Asynchronous REST API integration via Axios</li>
+                </ul>
+                    </div>
+                </div>`,
+            fa: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">معرفی</p>
+                    <div class="popup__desc-inner">
+                        <p>یک اپلیکیشن تک‌صفحه‌ای که چرخه‌ی کامل CRUD و مسیریابی سمت کلاینت رو در Vue 3 نشون می‌ده، با اتصال به یک REST API عمومی برای مدیریت پست‌ها و کاربران.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">تکنولوژی‌ها</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>Vue 3</li><li>Vue Router</li><li>Axios</li><li>Bootstrap 5</li><li>SweetAlert2</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">ویژگی‌های کلیدی</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>CRUD کامل برای پست‌ها: ایجاد، مشاهده، ویرایش و فهرست</li>
+                    <li>نمایش فهرست و جزئیات کاربران</li>
+                    <li>مسیریابی سمت کلاینت بین صفحات با Vue Router</li>
+                    <li>دیالوگ‌های تأیید و هشدار تعاملی (SweetAlert2)</li>
+                    <li>اتصال ناهمگام به REST API با Axios</li>
+                </ul>
+                    </div>
+                </div>`
         },
         media: [
             "assets/img/vue.jpg",
@@ -406,8 +590,56 @@ const projects = {
     project5: {
         title: { en: "Orkideh Sewing Machine Store", fa: "فروشگاه چرخ خیاطی ارکیده" },
         description: {
-            en: "Online store for buying, selling and repairing sewing machines and their accessories",
-            fa: "فروشگاه آنلاین خرید، فروش و تعمیر چرخ خیاطی و لوازم جانبی آن"
+            en: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">Overview</p>
+                    <div class="popup__desc-inner">
+                        <p>A complete, end-to-end online store for buying, selling, and repairing sewing machines and accessories, designed and built solo from the database to the UI.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Tech Stack</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>Next.js</li><li>React</li><li>PostgreSQL</li><li>Prisma ORM</li><li>Material UI</li><li>JWT</li><li>Google OAuth</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">Key Features</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>Full admin dashboard: products, categories, orders, comments, and homepage banners</li>
+                    <li>Animated, tab-based user panel (orders, addresses, cart, favorites, account settings) with smooth Framer Motion transitions</li>
+                    <li>Accounts with email/password or Google sign-in, email verification, and password recovery</li>
+                    <li>Product catalog with categories, search, and detail pages</li>
+                    <li>Online payment integration and order tracking</li>
+                    <li>Fully custom UI, designed end-to-end by the developer</li>
+                </ul>
+                    </div>
+                </div>`,
+            fa: `<div class="popup__desc-card">
+                    <p class="popup__desc-label">معرفی</p>
+                    <div class="popup__desc-inner">
+                        <p>یک فروشگاه آنلاین کامل و end-to-end برای خرید، فروش و تعمیر چرخ خیاطی و لوازم جانبی آن، که از پایگاه‌داده تا رابط کاربری تماماً توسط خودم طراحی و توسعه داده شده.</p>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">تکنولوژی‌ها</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-tags"><li>Next.js</li><li>React</li><li>PostgreSQL</li><li>Prisma ORM</li><li>Material UI</li><li>JWT</li><li>Google OAuth</li></ul>
+                    </div>
+                </div>
+                <div class="popup__desc-card">
+                    <p class="popup__desc-label">ویژگی‌های کلیدی</p>
+                    <div class="popup__desc-inner">
+                        <ul class="popup__desc-features">
+                    <li>پنل ادمین کامل: مدیریت محصولات، دسته‌بندی‌ها، سفارش‌ها، نظرات و بنرهای صفحه‌ی اصلی</li>
+                    <li>پنل کاربری تب‌بندی‌شده و انیمیشنی (سفارش‌ها، آدرس‌ها، سبد خرید، علاقه‌مندی‌ها، تنظیمات حساب) با ترنزیشن‌های نرم Framer Motion</li>
+                    <li>حساب کاربری با ورود از طریق ایمیل/رمز عبور یا گوگل، تأیید ایمیل و بازیابی رمز عبور</li>
+                    <li>کاتالوگ محصولات با دسته‌بندی، جستجو و صفحات جزئیات</li>
+                    <li>اتصال به درگاه پرداخت آنلاین و پیگیری سفارش</li>
+                    <li>رابط کاربری کاملاً اختصاصی، طراحی‌شده از صفر توسط خودم</li>
+                </ul>
+                    </div>
+                </div>`
         },
         media: [
             "assets/img/sewing.jpg",
@@ -433,7 +665,7 @@ workItems.forEach(item => {
             // تنظیم عنوان و توضیحات بر اساس زبان فعلی
             const localizedTitle = project.title[currentLang] || project.title.en;
             popupTitle.textContent = localizedTitle;
-            popupDescription.textContent = project.description[currentLang] || project.description.en;
+            popupDescription.innerHTML = project.description[currentLang] || project.description.en;
 
             // پاک کردن گالری قبلی
             popupGallery.innerHTML = '';
@@ -457,22 +689,17 @@ workItems.forEach(item => {
                 }
             });
 
-            // نمایش پاپ‌آپ
+            // نمایش پاپ‌آپ؛ اسکرول صفحه‌ی اصلی رو قفل می‌کنیم تا فقط خودِ پاپ‌آپ اسکرول بخوره
             popup.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
     });
 });
 
-// بستن پاپ‌آپ
+// بستن پاپ‌آپ — فقط با کلیک روی آیکون ضربدر (کلیک روی پس‌زمینه دیگه پاپ‌آپ رو نمی‌بنده)
 closePopup.addEventListener('click', () => {
     popup.style.display = 'none';
-});
-
-// بستن پاپ‌آپ با کلیک روی پس‌زمینه
-popup.addEventListener('click', (e) => {
-    if (e.target === popup) {
-        popup.style.display = 'none';
-    }
+    document.body.style.overflow = '';
 });
 
 document.addEventListener("DOMContentLoaded", function () {
