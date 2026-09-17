@@ -849,6 +849,8 @@ img {
   list-style: none;
   padding: 0;
   margin: 0;
+  /* اسم تکنولوژی‌ها همیشه انگلیسیه، پس ترتیبشون مستقل از جهت صفحه همیشه چپ‌به‌راست بمونه */
+  direction: ltr;
 }
 
 .popup__desc-tags li {
