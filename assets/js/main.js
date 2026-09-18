@@ -31,7 +31,7 @@ const translations = {
         contact_submit: "Send Message",
         contact_submitting: "Submitting...",
         footer_title: "Alireza",
-        footer_copy: "© Alireza Akhoondi — All rights reserved",
+        footer_copy: "© {year} Alireza Akhoondi — All rights reserved",
         err_name_required: "Name is required.",
         err_email_required: "Email is required.",
         err_message_required: "Message is required.",
@@ -73,7 +73,7 @@ const translations = {
         contact_submit: "ارسال پیام",
         contact_submitting: "در حال ارسال...",
         footer_title: "علیرضا",
-        footer_copy: "© تمام حقوق برای علیرضا آخوندی محفوظ است",
+        footer_copy: "{year} © تمام حقوق برای علیرضا آخوندی محفوظ است",
         err_name_required: "نام الزامی است.",
         err_email_required: "ایمیل الزامی است.",
         err_message_required: "پیام الزامی است.",
@@ -88,6 +88,15 @@ const translations = {
 
 let currentLang = 'en';
 
+// انگلیسی: سال میلادی — فارسی: سال شمسی با ارقام فارسی
+function getFooterYear(lang) {
+    const now = new Date();
+    if (lang === 'fa') {
+        return new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).format(now);
+    }
+    return String(now.getFullYear());
+}
+
 function applyLanguage(lang) {
     if (!translations[lang]) lang = 'en';
     currentLang = lang;
@@ -98,7 +107,7 @@ function applyLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key] !== undefined) {
-            el.innerHTML = translations[lang][key];
+            el.innerHTML = translations[lang][key].replace('{year}', getFooterYear(lang));
         }
     });
 
