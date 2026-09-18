@@ -1796,3 +1796,105 @@ html[data-theme="dark"] .skills__icon[alt="Vuetify"] {
 ::view-transition-new(root) {
   z-index: 2;
 }
+
+/* ==================== Toast (جایگزین SweetAlert2 برای پیام‌های موفقیت/خطای فرم تماس) ==================== */
+.toast-container {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  z-index: var(--z-fixed);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  width: min(380px, calc(100% - 2rem));
+  pointer-events: none;
+}
+
+.toast {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.7rem;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  box-shadow: var(--card-shadow);
+  /* با border-inline-start به‌جای left/right، خط رنگی خودکار سمت درست (راست در RTL، چپ در LTR) نمایش داده می‌شه */
+  border-inline-start: 4px solid var(--first-color);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.toast--success {
+  border-inline-start-color: #2e7d32;
+}
+
+.toast--error {
+  border-inline-start-color: #e53935;
+}
+
+.toast__icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.toast--success .toast__icon {
+  color: #2e7d32;
+}
+
+.toast--error .toast__icon {
+  color: #e53935;
+}
+
+.toast__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast__title {
+  font-weight: var(--font-semi);
+  font-size: 0.95rem;
+  margin: 0 0 0.15rem;
+}
+
+.toast__text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.toast__close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.toast__close:hover {
+  color: var(--text-color);
+}
+
+@media screen and (max-width: 400px) {
+  .toast-container {
+    bottom: 1rem;
+  }
+}

@@ -36,7 +36,7 @@ const translations = {
         err_email_required: "Email is required.",
         err_message_required: "Message is required.",
         alert_success_title: "Your message has been sent successfully!",
-        alert_success_text: "Thank you for your feedback🙏. Your message will be responded to via email soon.",
+        alert_success_text: "Thank you for your feedback🙏. Your feedback will be responded to via email soon.",
         alert_error_title: "Error sending message!",
         alert_error_text: "Please try again.",
         page_title: "Alireza Akhoondi | Front-End Developer — Full-Stack Developer",
@@ -78,7 +78,7 @@ const translations = {
         err_email_required: "ایمیل الزامی است.",
         err_message_required: "پیام الزامی است.",
         alert_success_title: "پیام شما با موفقیت ارسال شد!",
-        alert_success_text: "با تشکر از بازخورد شما 🙏. به‌زودی از طریق ایمیل پاسخ داده می‌شود.",
+        alert_success_text: "با تشکر از بازخورد شما 🙏. به‌زودی بازخورد شما از طریق ایمیل پاسخ داده می‌شود.",
         alert_error_title: "خطا در ارسال پیام!",
         alert_error_text: "لطفاً دوباره تلاش کنید.",
         page_title: "علیرضا آخوندی | توسعه‌دهنده فرانت‌اند و فول‌استک",
@@ -788,6 +788,52 @@ closePopup.addEventListener('click', () => {
     document.body.style.overflow = '';
 });
 
+/*===== Toast (جایگزین SweetAlert2 برای پیام‌های موفقیت/خطای فرم تماس) =====*/
+function ensureToastContainer() {
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+    return container;
+}
+
+function showToast({ type = 'success', title = '', text = '', duration = 3500 }) {
+    const container = ensureToastContainer();
+
+    const toast = document.createElement('div');
+    toast.className = `toast toast--${type}`;
+
+    const iconClass = type === 'success' ? 'bx bx-check-circle' : 'bx bx-x-circle';
+
+    toast.innerHTML = `
+        <i class="${iconClass} toast__icon"></i>
+        <div class="toast__body">
+            ${title ? `<p class="toast__title"></p>` : ''}
+            ${text ? `<p class="toast__text"></p>` : ''}
+        </div>
+        <button type="button" class="toast__close" aria-label="Close"><i class='bx bx-x'></i></button>
+    `;
+    // متن رو با textContent ست می‌کنیم (نه innerHTML) تا اگه یه‌وقت متن ترجمه شامل کاراکتر خاصی بود، امن بمونه
+    if (title) toast.querySelector('.toast__title').textContent = title;
+    if (text) toast.querySelector('.toast__text').textContent = text;
+
+    container.appendChild(toast);
+    // یک فریم صبر می‌کنیم تا حالت اولیه (مخفی) واقعاً اعمال بشه، بعد کلاس show رو اضافه کنیم تا ترنزیشن ورود اجرا بشه
+    requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('show')));
+
+    let dismissTimer;
+    const dismiss = () => {
+        clearTimeout(dismissTimer);
+        toast.classList.remove('show');
+        toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+    };
+
+    toast.querySelector('.toast__close').addEventListener('click', dismiss);
+    dismissTimer = setTimeout(dismiss, duration);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   emailjs.init("01DP55z4IT14nN_aQ");
 
@@ -847,12 +893,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     emailjs.sendForm('service_19d6kpg', 'template_fruq6c6', contactForm)
       .then(() => {
-        Swal.fire({
-          icon: 'success',
+        showToast({
+          type: 'success',
           title: translations[currentLang].alert_success_title,
-          text: translations[currentLang].alert_success_text,
-          showConfirmButton: false,
-          timer: 2000
+          text: translations[currentLang].alert_success_text
         });
 
         contactSubmit.classList.remove('loading');
@@ -861,12 +905,10 @@ document.addEventListener("DOMContentLoaded", function () {
         contactForm.reset();
       })
       .catch((error) => {
-        Swal.fire({
-          icon: 'error',
+        showToast({
+          type: 'error',
           title: translations[currentLang].alert_error_title,
-          text: translations[currentLang].alert_error_text,
-          showConfirmButton: false,
-          timer: 2000
+          text: translations[currentLang].alert_error_text
         });
 
         contactSubmit.classList.remove('loading');
