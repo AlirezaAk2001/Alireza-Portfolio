@@ -250,27 +250,42 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /*===== MENU SHOW =====*/
-const showMenu = (toggleId, navId) =>{
-    const toggle = document.getElementById(toggleId),
-    nav = document.getElementById(navId)
+const navToggleBtn = document.getElementById('nav-toggle')
+const navMenuEl = document.getElementById('nav-menu')
+const navOverlayEl = document.getElementById('nav-overlay')
 
-    if(toggle && nav){
-        toggle.addEventListener('click', ()=>{
-            nav.classList.toggle('show')
-        })
+// باز/بسته کردن سایدبار موبایل؛ کلاس سایدبار، حالت ضربدری دکمه، aria، لایه‌ی محو‌کننده‌ی پشت
+// و قفل اسکرول صفحه‌ی اصلی (کلاس menu-open روی html) همه از همین‌جا با هم هماهنگ می‌شن
+function setMenuOpen(isOpen){
+    if(!navMenuEl) return
+    navMenuEl.classList.toggle('show', isOpen)
+    if(navToggleBtn){
+        navToggleBtn.classList.toggle('open', isOpen)
+        navToggleBtn.setAttribute('aria-expanded', String(isOpen))
     }
+    if(navOverlayEl) navOverlayEl.classList.toggle('is-visible', isOpen)
+    document.documentElement.classList.toggle('menu-open', isOpen)
 }
-showMenu('nav-toggle','nav-menu')
+
+if(navToggleBtn && navMenuEl){
+    navToggleBtn.addEventListener('click', ()=>{
+        setMenuOpen(!navMenuEl.classList.contains('show'))
+    })
+}
+
+// کلیک روی بخش محو‌شده‌ی بیرون از سایدبار هم اون رو می‌بنده
+if(navOverlayEl) navOverlayEl.addEventListener('click', ()=> setMenuOpen(false))
+
+// اگه سایدبار باز باشه و عرض پنجره به حالت دسکتاپ برسه، حالت باز (و قفل اسکرول) نباید باقی بمونه
+window.matchMedia('(min-width: 768px)').addEventListener('change', e => {
+    if(e.matches) setMenuOpen(false)
+})
 
 /*==================== REMOVE MENU MOBILE ====================*/
 const navLink = document.querySelectorAll('.nav__link')
 
-function linkAction(){
-    const navMenu = document.getElementById('nav-menu')
-    // When we click on each nav__link, we remove the show-menu class
-    navMenu.classList.remove('show')
-}
-navLink.forEach(n => n.addEventListener('click', linkAction))
+// وقتی روی هر nav__link کلیک می‌شه، سایدبار (و لایه‌ی محو‌کننده/قفل اسکرول) بسته می‌شه
+navLink.forEach(n => n.addEventListener('click', ()=> setMenuOpen(false)))
 
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll('section[id]');

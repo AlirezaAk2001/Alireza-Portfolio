@@ -122,10 +122,12 @@
                     <span class="lang-toggle__badge">فا</span>
                 </button>
             </div>
-            <div class="nav__toggle" id="nav-toggle">
-                <i class='bx bx-menu'></i>
-            </div>
+            <button type="button" class="nav__toggle flag-button" id="nav-toggle" aria-label="Toggle menu"
+                aria-controls="nav-menu" aria-expanded="false">
+                <span class="nav__toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+            </button>
         </nav>
+        <div class="nav__overlay" id="nav-overlay" aria-hidden="true"></div>
     </header>
     <main class="l-main">
         <!--===== HOME =====-->

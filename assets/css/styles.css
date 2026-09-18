@@ -215,17 +215,76 @@ html[dir="rtl"] .section-title::after {
   font-weight: var(--font-semi);
 }
 
+.nav__overlay {
+  display: none;
+}
+
 @media screen and (max-width: 767px) {
+  /* سایدبار شیشه‌ای: پس‌زمینه‌ی نیمه‌شفاف + محو کردن (blur) هر چیزی که پشتشه؛
+     لبه‌ی داخلی (border-inline-start و گردی گوشه‌ها) با logical property تعریف شده تا در فارسی/انگلیسی خودکار سمت درست بیفته */
   .nav__menu {
     position: fixed;
+    z-index: 2;
     top: var(--header-height);
-    right: -100%;
+    bottom: 0;
+    right: 0;
     width: 80%;
-    height: 100%;
     padding: 2rem;
-    background-color: var(--second-color);
-    transition: 0.5s;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: linear-gradient(160deg,
+        hsla(var(--hue-color), 60%, 20%, 0.6),
+        hsla(var(--hue-color), 56%, 10%, 0.72));
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    border-inline-start: 1px solid rgba(255, 255, 255, 0.16);
+    border-start-start-radius: 1.5rem;
+    border-end-start-radius: 1.5rem;
+    /* سایه فقط به سمت داخل (صفحه) می‌افته؛ spread منفی مانع نشت سایه به بالا روی هدر می‌شه (نسخه‌ی RTL پایین‌تر آینه‌ست) */
+    box-shadow: -30px 0 36px -28px rgba(0, 0, 0, 0.5);
+    /* بسته: بیرون از صفحه (translateX روی GPU انیمیت می‌شه، نه right/left که هر فریم layout می‌خواد) و visibility: hidden
+       (با تأخیر برابر مدت انیمیشن، تا موقع بسته شدن انیمیشن دیده بشه) تا لینک‌های داخلش با Tab فوکوس نگیرن.
+       منحنی (0.4, 0, 0.2, 1) سرعت اولیه و انتهایی صفر داره، یعنی شروع و پایان کاملاً نرم */
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0s linear 0.5s;
   }
+
+  .nav__menu.show {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0s linear 0s;
+  }
+
+  /* لایه‌ی محو‌کننده‌ی صفحه‌ی اصلی زیر سایدبار (هدر بیرونش می‌مونه تا دکمه‌ی ضربدر/تم/زبان همچنان واضح باشن) */
+  .nav__overlay {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    top: var(--header-height);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(8, 12, 28, 0.35);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.55s;
+  }
+
+  .nav__overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* وقتی سایدبار موبایل بازه، اسکرول صفحه‌ی اصلی قطع می‌شه؛ scrollbar-gutter مانع پرش چیدمان (در مرورگرهای دسکتاپ با اسکرول‌بار کلاسیک) می‌شه */
+html.menu-open {
+  overflow: hidden;
+  scrollbar-gutter: stable;
 }
 
 .nav__item {
@@ -271,48 +330,104 @@ html[dir="rtl"] .nav__link::after {
   color: var(--text-color);
 }
 
+/* دکمه‌ی منوی موبایل: هم‌قواره با دکمه‌های تم/رزومه‌ی هدر (دایره‌ی ۲.۲rem با بوردر)؛ سه خط گرد که با باز شدن سایدبار
+   به ضربدر تبدیل می‌شن. افکت بالا رفتن نرم هاور هم از کلاس flag-button (در HTML) میاد.
+   نمایشش در دسکتاپ (display: none) پایین‌تر و داخل media query مربوطه تعریف شده */
 .nav__toggle {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
   color: var(--text-color);
-  font-size: 1.5rem;
+  background-color: transparent;
+  border: 1.5px solid var(--text-color);
+  border-radius: 50%;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.nav__toggle .hamburger {
-  width: 30px;
-  height: 24px;
+/* با specificity بالاتر از .flag-button تا ترنزیشن اون (که border-color نداره) این ترنزیشن رو override نکنه */
+.nav__toggle.flag-button {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 0.4s ease,
+              color 0.4s ease,
+              border-color 0.4s ease;
+}
+
+/* هدر موبایل فقط حدود ۶px فضای خالی بالا/پایین دکمه داره؛ بالا رفتن پیش‌فرض flag-button (۵px هاور، ۶px هنگام لمس)
+   دکمه رو به لبه‌ی بالای صفحه می‌چسبونه، پس برای این دکمه کوتاه‌تر می‌شه */
+.nav__toggle.flag-button:hover {
+  transform: translateY(-2px);
+}
+
+.nav__toggle.flag-button:active {
+  transform: translateY(-3px);
+}
+
+.nav__toggle:hover,
+.nav__toggle.open {
+  color: #fff;
+  background-color: var(--first-color);
+  border-color: var(--first-color);
+}
+
+/* align-items: flex-start در ستون flex، خودکار سمت شروعِ جهت صفحه رو می‌گیره (راست در فارسی، چپ در انگلیسی) */
+.nav__toggle-icon {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 4px;
+  width: 16px;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.nav__toggle .bar {
-  height: 4px;
+.nav__toggle-icon span {
+  display: block;
   width: 100%;
-  background-color: var(--text-color);
-  border-radius: 10px;
-  transition: 0.4s;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              width 0.3s ease,
+              opacity 0.25s ease;
 }
 
-.nav__toggle.open .bar:nth-child(1) {
-  transform: rotate(-45deg) translate(-5px, 6px);
+/* خط وسط کوتاه‌تر است و هنگام هاور تا انتها باز می‌شود */
+.nav__toggle-icon span:nth-child(2) {
+  width: 65%;
 }
 
-.nav__toggle.open .bar:nth-child(2) {
+.nav__toggle:hover .nav__toggle-icon span:nth-child(2) {
+  width: 100%;
+}
+
+/* حالت باز: آیکون ۹۰ درجه می‌چرخه، خط بالا/پایین به ضربدر تبدیل و خط وسط محو می‌شه
+   (فاصله‌ی مرکز دو خط کناری تا مرکز = ارتفاع خط ۲px + gap ۴px = ۶px) */
+.nav__toggle.open .nav__toggle-icon {
+  transform: rotate(90deg);
+}
+
+.nav__toggle.open .nav__toggle-icon span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav__toggle.open .nav__toggle-icon span:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
 }
 
-.nav__toggle.open .bar:nth-child(3) {
-  transform: rotate(45deg) translate(-5px, -6px);
+.nav__toggle.open .nav__toggle-icon span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 /*Active menu*/
 .active-link::after {
   transform: scaleX(1);
-}
-
-/*=== Show menu ===*/
-.show {
-  right: 0;
 }
 
 /*===== HOME =====*/
@@ -1684,11 +1799,12 @@ html[dir="rtl"] body {
 @media screen and (max-width: 767px) {
   html[dir="rtl"] .nav__menu {
     right: auto;
-    left: -100%;
+    left: 0;
+    transform: translateX(-100%);
+    box-shadow: 30px 0 36px -28px rgba(0, 0, 0, 0.5);
   }
   html[dir="rtl"] .nav__menu.show {
-    left: 0;
-    right: auto;
+    transform: translateX(0);
   }
 }
 
