@@ -2,21 +2,21 @@
 const translations = {
     en: {
         nav_home: "Home",
-        nav_about: "About",
-        nav_skills: "Skills",
-        nav_work: "Portfolio",
-        nav_contact: "Contact",
+        nav_about: "About Me",
+        nav_skills: "My Skills",
+        nav_work: "My Portfolio",
+        nav_contact: "Contact Me",
         resume_download: "Download Resume",
         theme_tooltip_to_dark: "Switch to dark mode",
         theme_tooltip_to_light: "Switch to light mode",
         home_title: `Hi,<br>I'am <span class="home__title-color">Alireza</span><br> Web Designer`,
         home_call: "Call Me",
-        about_title: "About",
+        about_title: "About Me",
         about_subtitle: "I'm Alireza",
         about_text: "I am a Front-End and Full-Stack developer with approximately four years of experience working with HTML, CSS, JavaScript, and React. For the past two years, I have been developing various projects—both independently and as part of a team—using the Next.js framework. One of my portfolio highlights is the end-to-end development of a large-scale online store, featuring an admin panel, an authentication system, and API integration. Additionally, I have two years of experience working with Vue.js and the Vuetify library, including participation in team-based projects built on these technologies. I also have two years of experience in website design using WordPress.",
-        skills_title: "Skills",
+        skills_title: "My Skills",
         skills_subtitle: "Professional Skills",
-        work_title: "Portfolio",
+        work_title: "My Portfolio",
         proj1_title: "Lugx Gaming",
         proj2_title: "Online Game Shop",
         proj3_title: "Barista Cafe",
@@ -24,7 +24,7 @@ const translations = {
         proj5_title: "Orkideh Store",
         work_new_project: "New Project",
         work_coming_soon: "Coming Soon",
-        contact_title: "Contact",
+        contact_title: "Contact Me",
         contact_name: "Name",
         contact_email: "Email",
         contact_message: "Message",
@@ -45,9 +45,9 @@ const translations = {
     fa: {
         nav_home: "خانه",
         nav_about: "درباره من",
-        nav_skills: "مهارت‌ها",
-        nav_work: "نمونه‌کارها",
-        nav_contact: "تماس",
+        nav_skills: "مهارت‌های من",
+        nav_work: "نمونه‌کارهای من",
+        nav_contact: "ارتباط با من",
         resume_download: "دانلود رزومه",
         theme_tooltip_to_dark: "تغییر به حالت تاریک",
         theme_tooltip_to_light: "تغییر به حالت روشن",
@@ -56,9 +56,9 @@ const translations = {
         about_title: "درباره من",
         about_subtitle: "من علیرضا هستم",
         about_text: "برنامه‌نویس Front-End و Full-Stack هستم و حدود ۴ سال است که با HTML, CSS, Js و React کار می‌کنم و حدود ۲ سال نیز با فریمورک NextJs مشغول توسعه پروژه‌های مختلف به صورت تیمی و شخصی بوده‌ام. یکی از نمونه‌کارهای من، پیاده‌سازی کامل یک فروشگاه آنلاین بزرگ از صفر تا صد شامل پنل مدیریتی، سیستم احراز هویت و کار با APIها می‌باشد. همچنین حدود ۲ سال است که با VueJs و کتابخانه Vuetify کار می‌کنم و تجربه حضور در پروژه‌های تیمی مبتنی بر Vue و Vuetify را دارم. همچنین سابقه ۲ سال فعالیت در حوزه طراحی وبسایت با وردپرس را نیز دارا هستم.",
-        skills_title: "مهارت‌ها",
+        skills_title: "مهارت‌های من",
         skills_subtitle: "مهارت‌های حرفه‌ای",
-        work_title: "نمونه‌کارها",
+        work_title: "نمونه‌کارهای من",
         proj1_title: "Lugx Gaming",
         proj2_title: "فروشگاه آنلاین بازی",
         proj3_title: "کافه باریستا",
@@ -66,7 +66,7 @@ const translations = {
         proj5_title: "فروشگاه ارکیده",
         work_new_project: "پروژه‌ی جدید",
         work_coming_soon: "به‌زودی",
-        contact_title: "تماس با من",
+        contact_title: "ارتباط با من",
         contact_name: "نام",
         contact_email: "ایمیل",
         contact_message: "پیام",
@@ -273,25 +273,60 @@ function linkAction(){
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
-const sections = document.querySelectorAll('section[id]')
+const sections = document.querySelectorAll('section[id]');
+const headerEl = document.querySelector('.l-header');
 
-const scrollActive = () =>{
-    const scrollDown = window.scrollY
+// متغیرهایی برای تشخیص اینکه آیا اسکرول توسط کلیک کاربر انجام شده است یا خیر
+let isClickScrolling = false;
+let scrollTimeout;
 
-  sections.forEach(current =>{
-        const sectionHeight = current.offsetHeight,
-              sectionTop = current.offsetTop - 58,
-              sectionId = current.getAttribute('id'),
-              sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
-        
-        if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
-            sectionsClass.classList.add('active-link')
-        }else{
-            sectionsClass.classList.remove('active-link')
-        }                                                    
-    })
+const setActiveLink = (id) => {
+    document.querySelectorAll('.nav__menu .nav__link.active-link').forEach(link => link.classList.remove('active-link'));
+    const activeLink = document.querySelector('.nav__menu a[href="#' + id + '"]');
+    if (activeLink) activeLink.classList.add('active-link');
 }
-window.addEventListener('scroll', scrollActive)
+
+// ۱. مدیریت کلیک روی لینک‌های منو
+const navLinksArray = document.querySelectorAll('.nav__link');
+navLinksArray.forEach(link => {
+    link.addEventListener('click', function(e) {
+        // فعال‌سازی حالت "اسکرول با کلیک"
+        isClickScrolling = true;
+        
+        // بلافاصله لینک هدف را اکتیو می‌کنیم تا منتظر آبزرور نماند
+        document.querySelectorAll('.nav__menu .nav__link.active-link').forEach(n => n.classList.remove('active-link'));
+        this.classList.add('active-link');
+    });
+});
+
+// ۲. تشخیص پایان اسکرول برای روشن کردن مجدد آبزرور
+window.addEventListener('scroll', () => {
+    if (isClickScrolling) {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            isClickScrolling = false; // اسکرول به پایان رسید
+        }, 150); // ۱۵۰ میلی‌ثانیه توقف به معنای پایان اسکرول نرم است
+    }
+});
+
+const headerHeight = headerEl ? headerEl.offsetHeight : 58;
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    // ۳. اگر در حال اسکرول ناشی از کلیک هستیم، آبزرور هیچ کلاسی را تغییر ندهد
+    if (isClickScrolling) return;
+
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            setActiveLink(entry.target.id);
+        }
+    });
+}, {
+    root: null,
+    rootMargin: `-${headerHeight}px 0px -60% 0px`,
+    threshold: 0
+});
+
+sections.forEach(section => sectionObserver.observe(section));
 
 ////////////////////////Skills///////////////////////////
 // همه‌ی نوارها رو قبل از هر انیمیشنی رو صفر (و با رقم درست فارسی/انگلیسی) مقداردهی اولیه می‌کنه
@@ -357,6 +392,57 @@ sr.reveal('.skills__data, .work__img, .contact__input',{
     // بعد از تمام شدن انیمیشن ورود، یه کلاس اضافه می‌کنیم تا ترنزیشن سریع هاور
     // (رفتن و برگشتن) بدون تداخل با ترنزیشن کند ScrollReveal اعمال بشه
     afterReveal: el => el.classList.add('is-revealed')
+});
+
+// افکت تایپ برای عنوان بخش‌ها (درباره من/مهارت‌های من/نمونه‌کارهای من/ارتباط با من)؛
+// فقط یک‌بار و همون لحظه‌ای که هنگام اسکرول وارد دید می‌شن اجرا می‌شه (نه در تعویض زبان).
+// هم‌زمان با تایپ شدن هر حرف، --underline-progress هم به‌روز می‌شه تا خط زیر عنوان (در styles.css)
+// با همون سرعت رشد کنه؛ جهت رشدش (از چپ یا راست) با html[dir] در CSS تعیین می‌شه.
+function typeSectionTitle(titleEl) {
+    const textEl = titleEl.querySelector('[data-i18n]');
+    if (!textEl || textEl.dataset.typed === 'true') return;
+    textEl.dataset.typed = 'true';
+
+    // متن رو از دیکشنری ترجمه (بر اساس زبان فعلی) می‌خونیم، نه از textContent فعلی المنت؛
+    // چون ممکنه این افکت قبل از اینکه applyLanguage اجرا بشه (مثلاً اگه عنوان همون ابتدا در دید باشه) صدا زده بشه
+    const key = textEl.getAttribute('data-i18n');
+    const fullText = (translations[currentLang] && translations[currentLang][key]) || textEl.textContent;
+    const totalChars = fullText.length;
+    if (!totalChars) return;
+
+    textEl.textContent = '';
+
+    // سرعت تایپ: هر حرف ۹۰ میلی‌ثانیه (کاملاً قابل مشاهده)، با سقف کلی برای عنوان‌های خیلی بلند
+    const perCharDelay = 90;
+    const totalDuration = Math.min(2200, totalChars * perCharDelay);
+    const stepDuration = totalDuration / totalChars;
+
+    // خط زیر عنوان رو مستقل از مراحل تایپ، با یک ترنزیشن CSS پیوسته (نه پله‌ای) از صفر تا صد پر می‌کنیم؛
+    // این‌طوری هیچ‌وقت وسط راه پرش نمی‌خوره و دقیقاً هم‌زمان با تمام شدن تایپ به انتها می‌رسه
+    titleEl.style.setProperty('--underline-duration', totalDuration + 'ms');
+    titleEl.style.setProperty('--underline-progress', '0');
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            titleEl.style.setProperty('--underline-progress', '1');
+        });
+    });
+
+    let index = 0;
+
+    function typeStep() {
+        index++;
+        textEl.textContent = fullText.slice(0, index);
+        if (index < totalChars) setTimeout(typeStep, stepDuration);
+    }
+
+    setTimeout(typeStep, stepDuration);
+}
+
+sr.reveal('.section-title', {
+    duration: 400,
+    delay: 0,
+    distance: '20px',
+    beforeReveal: typeSectionTitle
 });
 
 // داده‌های پروژه‌ها (عنوان/توضیح دوزبانه)

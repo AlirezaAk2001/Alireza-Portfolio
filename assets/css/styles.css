@@ -112,6 +112,13 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
 h1,
 h2,
 p {
@@ -141,6 +148,9 @@ img {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
   font-size: var(--h2-font-size);
   color: var(--first-color);
   margin-top: var(--mb-2);
@@ -152,16 +162,24 @@ img {
   font-size: 0.9em;
 }
 
+/* خط زیر عنوان بخش‌ها با متغیر --underline-progress (که در main.js همگام با افکت تایپ عنوان به‌روز می‌شه) رشد می‌کنه؛
+   جهتش هم مثل خط زیر منو، بسته به html[dir] از چپ یا راست باز می‌شه */
 .section-title::after {
   position: absolute;
   content: "";
-  width: 64px;
+  width: 100%;
   height: 0.18rem;
   left: 0;
-  right: 0;
-  margin: auto;
   top: 2rem;
   background-color: var(--first-color);
+  transform: scaleX(var(--underline-progress, 0));
+  transform-origin: left;
+  /* مدت این ترنزیشن از main.js (هم‌زمان با مدت‌زمان تایپ عنوان) تنظیم می‌شه تا خط به‌صورت کاملاً پیوسته و بدون پرش رشد کنه */
+  transition: transform var(--underline-duration, 900ms) linear;
+}
+
+html[dir="rtl"] .section-title::after {
+  transform-origin: right;
 }
 
 .section {
@@ -219,6 +237,7 @@ img {
   display: inline-flex;
   align-items: center;
   color: #fff;
+  white-space: nowrap;
 }
 
 .nav__link-icon {
@@ -226,11 +245,8 @@ img {
   font-size: 1.1rem;
 }
 
-.nav__link:hover {
-  position: relative;
-}
-
-.nav__link:hover::after {
+/* خط زیر لینک‌های منو: همیشه حاضر ولی جمع‌شده (scaleX(0))، و هنگام هاور/اکتیو شدن به‌آرامی از جهت متناسب با زبان صفحه باز می‌شود */
+.nav__link::after {
   position: absolute;
   content: "";
   width: 100%;
@@ -238,6 +254,17 @@ img {
   left: 0;
   top: 2rem;
   background-color: var(--first-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+html[dir="rtl"] .nav__link::after {
+  transform-origin: right;
 }
 
 .nav__logo {
@@ -280,13 +307,7 @@ img {
 
 /*Active menu*/
 .active-link::after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 0.18rem;
-  left: 0;
-  top: 2rem;
-  background-color: var(--first-color);
+  transform: scaleX(1);
 }
 
 /*=== Show menu ===*/
@@ -1087,12 +1108,12 @@ img {
   }
 
   .section-title::after {
-    width: 80px;
     top: 3rem;
   }
 
   .nav {
     height: calc(var(--header-height) + 1.5rem);
+    max-width: 1200px;
   }
 
   .nav__list {
@@ -1101,7 +1122,7 @@ img {
   }
 
   .nav__item {
-    margin-left: var(--mb-6);
+    margin-left: 2rem;
     margin-bottom: 0;
   }
 
