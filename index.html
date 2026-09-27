@@ -57,14 +57,13 @@
     <link rel="manifest" href="assets/site.webmanifest">
 
     <link rel="stylesheet" href="assets/css/styles.css">
-    <!-- آیکون‌فونت‌های بیرونی: بدون مسدودکردن رندر اولیه لود می‌شن (preload بعد تبدیل به stylesheet) -->
-    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
-        onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    <!-- آیکون‌فونت‌ها: میزبانی محلی (کنترل کامل روی کش و font-display) + بدون مسدودکردن رندر اولیه -->
+    <link rel="preload" as="style" href="assets/css/boxicons.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="assets/css/fontawesome.min.css"
         onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/boxicons.min.css">
+        <link rel="stylesheet" href="assets/css/fontawesome.min.css">
     </noscript>
 
     <!-- Structured data for search engines -->
@@ -234,7 +233,7 @@
                     <div class="skills__data" data-skill="80">
                         <div class="skills__names">
                             <img class="skills__icon"
-                                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tailwindcss.svg"
+                                src="assets/img/tailwindcss.svg"
                                 alt="TailwindCSS" style="width:24px;height:24px;">
                             <span class="skills__name">Tailwind CSS</span>
                         </div>
@@ -266,7 +265,7 @@
                     <div class="skills__data" data-skill="80">
                         <div class="skills__names">
                             <img class="skills__icon"
-                                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nextdotjs.svg" alt="Next.js"
+                                src="assets/img/nextdotjs.svg" alt="Next.js"
                                 width="24" height="24">
                             <span class="skills__name">NextJs</span>
                         </div>
@@ -288,7 +287,7 @@
                     <div class="skills__data" data-skill="80">
                         <div class="skills__names">
                             <img class="skills__icon"
-                                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vuetify.svg" alt="Vuetify"
+                                src="assets/img/vuetify.svg" alt="Vuetify"
                                 style="width:24px;height:24px;">
                             <span class="skills__name">Vuetify</span>
                         </div>
@@ -445,7 +444,7 @@
     </footer>
 
     <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript" src="assets/js/vendor/email.min.js"></script>
     <!--===== SCROLL REVEAL =====-->
     <script src="assets/js/vendor/scrollreveal.min.js"></script>
     <!--===== MAIN JS =====-->
