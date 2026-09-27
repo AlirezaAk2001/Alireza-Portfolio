@@ -1626,7 +1626,8 @@ html[dir="rtl"] .nav__link::after {
   letter-spacing: 0.02em;
   padding: 0.1rem 0.4rem;
   border-radius: 0.7rem;
-  background-color: var(--first-color);
+  /* تیره‌تر از --first-color تا کنتراست متن سفید روش به حداقل ۴.۵:۱ برسه (این رنگ فقط مال همین بج کوچیکه) */
+  background-color: hsl(var(--hue-color), 89%, 50%);
   color: #fff;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
