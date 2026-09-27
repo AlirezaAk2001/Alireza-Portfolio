@@ -57,8 +57,15 @@
     <link rel="manifest" href="assets/site.webmanifest">
 
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- آیکون‌فونت‌های بیرونی: بدون مسدودکردن رندر اولیه لود می‌شن (preload بعد تبدیل به stylesheet) -->
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
 
     <!-- Structured data for search engines -->
     <script type="application/ld+json">
@@ -144,16 +151,17 @@
                 </a>
             </div>
             <div class="home__social">
-                <a href="https://www.linkedin.com/in/alireza-akhoondi-dev" class="home__social-icon">
+                <a href="https://www.linkedin.com/in/alireza-akhoondi-dev" class="home__social-icon"
+                    aria-label="LinkedIn">
                     <i class='bx bxl-linkedin flag-button'></i>
                 </a>
-                <a href="https://t.me/alireza_egn" class="home__social-icon">
+                <a href="https://t.me/alireza_egn" class="home__social-icon" aria-label="Telegram">
                     <i class='bx bxl-telegram flag-button'></i>
                 </a>
-                <a href="https://instagram.com/alireza_egn" class="home__social-icon">
+                <a href="https://instagram.com/alireza_egn" class="home__social-icon" aria-label="Instagram">
                     <i class='bx bxl-instagram flag-button'></i>
                 </a>
-                <a href="https://github.com/AlirezaAk2001" class="home__social-icon">
+                <a href="https://github.com/AlirezaAk2001" class="home__social-icon" aria-label="GitHub">
                     <i class='bx bxl-github flag-button'></i>
                 </a>
             </div>
@@ -415,16 +423,16 @@
     <footer class="footer" style="cursor: default;">
         <p class="footer__title" data-i18n="footer_title">Alireza</p>
         <div class="footer__social">
-            <a href="https://www.linkedin.com/in/alireza-akhoondi-dev" class="footer__icon">
+            <a href="https://www.linkedin.com/in/alireza-akhoondi-dev" class="footer__icon" aria-label="LinkedIn">
                 <i class='bx bxl-linkedin flag-button'></i>
             </a>
-            <a href="https://t.me/alireza_egn" class="footer__icon">
+            <a href="https://t.me/alireza_egn" class="footer__icon" aria-label="Telegram">
                 <i class='bx bxl-telegram flag-button'></i>
             </a>
-            <a href="https://instagram.com/alireza_egn" class="footer__icon">
+            <a href="https://instagram.com/alireza_egn" class="footer__icon" aria-label="Instagram">
                 <i class='bx bxl-instagram flag-button'></i>
             </a>
-            <a href="https://github.com/AlirezaAk2001" class="footer__icon">
+            <a href="https://github.com/AlirezaAk2001" class="footer__icon" aria-label="GitHub">
                 <i class='bx bxl-github flag-button'></i>
             </a>
         </div>
