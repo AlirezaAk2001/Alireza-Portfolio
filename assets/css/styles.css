@@ -481,6 +481,62 @@ html[dir="rtl"] .nav__link::after {
   width: 376px;
 }
 
+/* ==== Orbiting skill icons around hero photo (desktop only, pure CSS) ==== */
+.home__orbit {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.home__orbit-track {
+  position: absolute;
+  inset: 0;
+  animation: home-orbit-spin 27s linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.home__orbit-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--surface-color);
+  box-shadow: var(--card-shadow);
+  color: var(--first-color);
+  font-size: 1.15rem;
+  transform: translate(-50%, -50%) translateY(calc(-1 * var(--orbit-radius, 230px)));
+  animation: home-orbit-spin-reverse 27s linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.home__orbit-logo.icon-mask {
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes home-orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes home-orbit-spin-reverse {
+  from { transform: translate(-50%, -50%) translateY(calc(-1 * var(--orbit-radius, 230px))) rotate(0deg); }
+  to { transform: translate(-50%, -50%) translateY(calc(-1 * var(--orbit-radius, 230px))) rotate(-360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__orbit-track,
+  .home__orbit-icon {
+    animation: none;
+  }
+}
+
 /* ==================== BUTTONS CONFIGURATION ==================== */
 /* تعریف استایل پایه دکمه‌ها هماهنگ با متغیرهای قالب شما */
 .btn {
@@ -702,7 +758,40 @@ html[dir="rtl"] .nav__link::after {
 .skills__icon {
   font-size: 2rem;
   transition: filter 0.3s ease;
-  /* color: var(--first-color); */
+  color: var(--first-color);
+}
+
+/* آیکون‌های لوگوی SVG خارجی (Tailwind/Next.js/Vuetify) با CSS mask آبی یک‌دست می‌شن
+   (هم‌رنگ با بقیه‌ی آیکون‌فونت‌ها)، مستقل از تم روشن/تاریک */
+.icon-mask {
+  display: inline-block;
+  background-color: var(--first-color);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.icon-mask[data-icon="tailwindcss"] {
+  -webkit-mask-image: url("../img/tailwindcss.svg");
+  mask-image: url("../img/tailwindcss.svg");
+}
+
+.icon-mask[data-icon="nextdotjs"] {
+  -webkit-mask-image: url("../img/nextdotjs.svg");
+  mask-image: url("../img/nextdotjs.svg");
+}
+
+.icon-mask[data-icon="vuetify"] {
+  -webkit-mask-image: url("../img/vuetify.svg");
+  mask-image: url("../img/vuetify.svg");
+}
+
+.skills__icon.icon-mask {
+  width: 2rem;
+  height: 2rem;
 }
 
 .skills__bar {
@@ -1258,6 +1347,11 @@ html[dir="rtl"] .nav__link::after {
     bottom: 10%;
   }
 
+  .home__orbit {
+    display: block;
+    --orbit-radius: 230px;
+  }
+
   .about__container {
     padding-top: 2rem;
   }
@@ -1291,6 +1385,10 @@ html[dir="rtl"] .nav__link::after {
 
   .home__img {
     width: 450px;
+  }
+
+  .home__orbit {
+    --orbit-radius: 255px;
   }
 }
 
@@ -1890,14 +1988,6 @@ html[data-theme="dark"] .popup__content {
 
 html[data-theme="dark"] .skills__data {
   border: 1px solid var(--border-color);
-}
-
-/* آیکون‌های Next.js/TailwindCSS/Vuetify به‌صورت SVG رنگی خارجی (img) هستن، نه فونت-آیکون؛
-   پس با color قابل رنگ‌آمیزی نیستن. تو تم تاریک با filter سفیدشون می‌کنیم، مثل بقیه‌ی آیکون‌ها */
-html[data-theme="dark"] .skills__icon[alt="Next.js"],
-html[data-theme="dark"] .skills__icon[alt="TailwindCSS"],
-html[data-theme="dark"] .skills__icon[alt="Vuetify"] {
-  filter: brightness(0) invert(1);
 }
 
 /* ==================== انیمیشن دایره‌ای تعویض تم (View Transitions API) ====================
