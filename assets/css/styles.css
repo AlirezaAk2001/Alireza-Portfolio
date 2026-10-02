@@ -1352,6 +1352,12 @@ html[dir="rtl"] .nav__link::after {
     --orbit-radius: 230px;
   }
 
+  /* جلوگیری از رفتن متن هدر زیر عکس (که absolute-position است و فلو رو هل نمی‌ده)
+     وقتی نام طولانی‌تری (مثل Mohammadreza) جایگزین بشه */
+  .home__data {
+    max-width: calc(100% - 420px);
+  }
+
   .about__container {
     padding-top: 2rem;
   }
@@ -1389,6 +1395,10 @@ html[dir="rtl"] .nav__link::after {
 
   .home__orbit {
     --orbit-radius: 255px;
+  }
+
+  .home__data {
+    max-width: calc(100% - 480px);
   }
 }
 
