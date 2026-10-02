@@ -481,12 +481,12 @@ html[dir="rtl"] .nav__link::after {
   width: 376px;
 }
 
-/* ==== Orbiting skill icons around hero photo (desktop only, pure CSS) ==== */
+/* ==== Orbiting skill icons around hero photo (all screen sizes, pure CSS) ==== */
 .home__orbit {
-  display: none;
   position: absolute;
   inset: 0;
   pointer-events: none;
+  --orbit-radius: 135px;
 }
 
 .home__orbit-track {
@@ -1190,10 +1190,10 @@ html[dir="rtl"] .nav__link::after {
   }
 
   .home__img {
-    position: static;
+    position: relative;
     width: 260px;
     order: -1;
-    margin-bottom: var(--mb-4);
+    margin-bottom: 2.5rem;
   }
 
   .home__data {
@@ -1244,6 +1244,10 @@ html[dir="rtl"] .nav__link::after {
 
   .home__img {
     width: 200px;
+  }
+
+  .home__orbit {
+    --orbit-radius: 105px;
   }
 }
 
@@ -1348,7 +1352,6 @@ html[dir="rtl"] .nav__link::after {
   }
 
   .home__orbit {
-    display: block;
     --orbit-radius: 230px;
   }
 
