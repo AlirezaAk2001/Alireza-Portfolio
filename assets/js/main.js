@@ -282,8 +282,16 @@ if(navToggleBtn && navMenuEl){
     })
 }
 
-// کلیک روی بخش محو‌شده‌ی بیرون از سایدبار هم اون رو می‌بنده
-if(navOverlayEl) navOverlayEl.addEventListener('click', ()=> setMenuOpen(false))
+// کلیک روی بخش محو‌شده‌ی بیرون از سایدبار، منو رو نمی‌بنده؛ فقط دکمه‌ی ضربدر این کار رو می‌کنه.
+// به‌جاش یه تپش رو همون دکمه اجرا می‌شه تا به کاربر نشون بده باید همونجا رو بزنه
+function pulseNavToggle(){
+    if(!navToggleBtn) return
+    navToggleBtn.classList.remove('pulse')
+    void navToggleBtn.offsetWidth
+    navToggleBtn.classList.add('pulse')
+}
+if(navToggleBtn) navToggleBtn.addEventListener('animationend', ()=> navToggleBtn.classList.remove('pulse'))
+if(navOverlayEl) navOverlayEl.addEventListener('click', pulseNavToggle)
 
 // اگه سایدبار باز باشه و عرض پنجره به حالت دسکتاپ برسه، حالت باز (و قفل اسکرول) نباید باقی بمونه
 window.matchMedia('(min-width: 768px)').addEventListener('change', e => {

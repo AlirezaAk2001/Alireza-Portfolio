@@ -449,6 +449,19 @@ html[dir="rtl"] .nav__link::after {
   transform: translateY(-6px) rotate(-45deg);
 }
 
+/* با لمس فضای خالی بیرون از سایدبار، منو بسته نمی‌شه؛ به‌جاش این تپش رو دکمه‌ی ضربدر
+   اجرا می‌شه تا به کاربر نشون بده فقط با زدن همین دکمه می‌تونه سایدبار رو ببنده */
+@keyframes nav-toggle-pulse {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.2); }
+  65% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.nav__toggle.pulse {
+  animation: nav-toggle-pulse 0.5s ease;
+}
+
 /*Active menu*/
 .active-link::after {
   transform: scaleX(1);
@@ -556,7 +569,8 @@ html[dir="rtl"] .nav__link::after {
 
 @media (prefers-reduced-motion: reduce) {
   .home__orbit-track,
-  .home__orbit-icon {
+  .home__orbit-icon,
+  .nav__toggle.pulse {
     animation: none;
   }
 }
