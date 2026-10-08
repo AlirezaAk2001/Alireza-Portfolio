@@ -488,7 +488,7 @@ html[dir="rtl"] .nav__link::after {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  --orbit-radius: 115px;
+  --orbit-radius: 120px;
 }
 
 .home__orbit-track {
@@ -1249,7 +1249,7 @@ html[dir="rtl"] .nav__link::after {
   }
 
   .home__orbit {
-    --orbit-radius: 85px;
+    --orbit-radius: 90px;
   }
 }
 
