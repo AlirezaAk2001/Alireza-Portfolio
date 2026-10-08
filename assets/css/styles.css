@@ -101,6 +101,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -110,6 +111,7 @@ body {
   color: var(--text-color);
   background-color: var(--bg-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
 input,
@@ -486,7 +488,7 @@ html[dir="rtl"] .nav__link::after {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  --orbit-radius: 135px;
+  --orbit-radius: 115px;
 }
 
 .home__orbit-track {
@@ -1247,7 +1249,7 @@ html[dir="rtl"] .nav__link::after {
   }
 
   .home__orbit {
-    --orbit-radius: 105px;
+    --orbit-radius: 85px;
   }
 }
 
