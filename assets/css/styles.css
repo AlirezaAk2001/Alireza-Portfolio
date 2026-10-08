@@ -363,14 +363,16 @@ html[dir="rtl"] .nav__link::after {
 
 /* هدر موبایل فقط حدود ۶px فضای خالی بالا/پایین دکمه داره؛ بالا رفتن پیش‌فرض flag-button (۵px هاور، ۶px هنگام لمس)
    دکمه رو به لبه‌ی بالای صفحه می‌چسبونه، پس برای این دکمه کوتاه‌تر می‌شه */
+/* جابه‌جایی با hover/active فقط برای دستگاه‌های با ماوس واقعی؛ رو موبایل :active
+   گاهی درست پاک نمی‌شه و دکمه تا لمس جای دیگه‌ای از صفحه "معلق" می‌مونه */
 @media (hover: hover) {
   .nav__toggle.flag-button:hover {
     transform: translateY(-2px);
   }
-}
 
-.nav__toggle.flag-button:active {
-  transform: translateY(-3px);
+  .nav__toggle.flag-button:active {
+    transform: translateY(-3px);
+  }
 }
 
 /* رنگ‌آمیزی حالت باز فقط به کلاس open وابسته‌ست (نه :hover) تا تو موبایل
