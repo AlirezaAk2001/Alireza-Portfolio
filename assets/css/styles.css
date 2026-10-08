@@ -363,19 +363,30 @@ html[dir="rtl"] .nav__link::after {
 
 /* هدر موبایل فقط حدود ۶px فضای خالی بالا/پایین دکمه داره؛ بالا رفتن پیش‌فرض flag-button (۵px هاور، ۶px هنگام لمس)
    دکمه رو به لبه‌ی بالای صفحه می‌چسبونه، پس برای این دکمه کوتاه‌تر می‌شه */
-.nav__toggle.flag-button:hover {
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .nav__toggle.flag-button:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .nav__toggle.flag-button:active {
   transform: translateY(-3px);
 }
 
-.nav__toggle:hover,
+/* رنگ‌آمیزی حالت باز فقط به کلاس open وابسته‌ست (نه :hover) تا تو موبایل
+   که :hover بعد از لمس "گیر" می‌کنه، بک‌گراند آبی بعد از بستن منو باقی نمونه */
 .nav__toggle.open {
   color: #fff;
   background-color: var(--first-color);
   border-color: var(--first-color);
+}
+
+@media (hover: hover) {
+  .nav__toggle:hover {
+    color: #fff;
+    background-color: var(--first-color);
+    border-color: var(--first-color);
+  }
 }
 
 /* align-items: flex-start در ستون flex، خودکار سمت شروعِ جهت صفحه رو می‌گیره (راست در فارسی، چپ در انگلیسی) */
@@ -404,8 +415,10 @@ html[dir="rtl"] .nav__link::after {
   width: 65%;
 }
 
-.nav__toggle:hover .nav__toggle-icon span:nth-child(2) {
-  width: 100%;
+@media (hover: hover) {
+  .nav__toggle:hover .nav__toggle-icon span:nth-child(2) {
+    width: 100%;
+  }
 }
 
 /* حالت باز: آیکون ۹۰ درجه می‌چرخه، خط بالا/پایین به ضربدر تبدیل و خط وسط محو می‌شه
