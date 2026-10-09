@@ -364,30 +364,22 @@ html[dir="rtl"] .nav__link::after {
 /* هدر موبایل فقط حدود ۶px فضای خالی بالا/پایین دکمه داره؛ بالا رفتن پیش‌فرض flag-button (۵px هاور، ۶px هنگام لمس)
    دکمه رو به لبه‌ی بالای صفحه می‌چسبونه، پس برای این دکمه کوتاه‌تر می‌شه */
 /* خنثی‌کردن صریح قانون عمومی .flag-button:hover/:active (که translateY و box-shadow می‌ده
-   و چون محدود به ماوس نیست، رو موبایل بعد از لمس "گیر" می‌کنه) مخصوص همین دکمه */
+   و چون محدود به ماوس نیست، رو موبایل بعد از لمس "گیر" می‌کنه) مخصوص همین دکمه.
+   بالا رفتن دکمه دیگه از hover/active نمیاد (چون اون‌ها بعد از لمس "گیر" می‌کنن)؛
+   به‌جاش مستقیماً به کلاس open وصله که فقط با کلیک جاوااسکریپت ست/حذف می‌شه */
 .nav__toggle.flag-button:hover,
 .nav__toggle.flag-button:active {
   transform: none;
   box-shadow: none;
 }
 
-/* جابه‌جایی با hover/active فقط برای دستگاه‌های با ماوس واقعی */
-@media (hover: hover) {
-  .nav__toggle.flag-button:hover {
-    transform: translateY(-2px);
-  }
-
-  .nav__toggle.flag-button:active {
-    transform: translateY(-3px);
-  }
-}
-
-/* رنگ‌آمیزی حالت باز فقط به کلاس open وابسته‌ست (نه :hover) تا تو موبایل
-   که :hover بعد از لمس "گیر" می‌کنه، بک‌گراند آبی بعد از بستن منو باقی نمونه */
+/* رنگ‌آمیزی و بالا رفتنِ حالت باز، هر دو فقط به کلاس open وابسته‌ست (نه :hover/:active) تا تو موبایل
+   که این pseudo-class ها بعد از لمس "گیر" می‌کنن، دکمه بعد از بستن منو روی هوا یا آبی باقی نمونه */
 .nav__toggle.open {
   color: #fff;
   background-color: var(--first-color);
   border-color: var(--first-color);
+  transform: translateY(-3px);
 }
 
 @media (hover: hover) {
