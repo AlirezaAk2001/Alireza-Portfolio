@@ -18,11 +18,14 @@
 
 - **دوزبانگی:** تغییر بین فارسی (راست‌به‌چپ) و انگلیسی (چپ‌به‌راست) بدون رفرش صفحه؛ انتخاب کاربر ذخیره می‌شود.
 - **تم روشن و تاریک:** با انیمیشن دایره‌ای (View Transitions API)، ذخیره‌ی انتخاب کاربر و پیروی از تنظیمات سیستم در بازدید اول.
-- **بخش‌ها:** معرفی، درباره‌ی من، مهارت‌ها، نمونه‌کارها، تماس و فوتر.
+- **بخش‌ها:** معرفی، درباره‌ی من، خدمات، مهارت‌ها، نمونه‌کارها، تماس و فوتر.
+- **خدمات و جذب مشتری:** سه خدمت با «مناسب برای»، ویژگی‌ها و زمان تحویل، مراحل همکاری (مشاوره، طراحی، توسعه، تحویل و پشتیبانی)، سوالات متداول (FAQ) و یک بنر دعوت به اقدام؛ هر دکمه‌ی «دریافت قیمت» یا «مشاوره رایگان» فرم تماس را با نوع درخواست و خدمت از پیش انتخاب‌شده باز می‌کند.
 - **حلقه‌ی مهارت‌ها:** آیکون مهارت‌ها به‌صورت چرخشی دور عکس پروفایل، در دسکتاپ و موبایل.
-- **نوار پیشرفت مهارت‌ها:** نمایش انیمیشنی درصد هر مهارت.
-- **نمونه‌کارها:** پنج نمونه‌کار که با کلیک روی هر کارت، پاپ‌آپ جزئیات (معرفی، تکنولوژی‌ها، ویژگی‌های کلیدی) و گالری تصاویر/ویدیو را نشان می‌دهد.
-- **فرم تماس:** ارسال پیام با [EmailJS](https://www.emailjs.com/) بدون نیاز به سرور اختصاصی.
+- **استک فنی دسته‌بندی‌شده:** مهارت‌ها در سه گروه (ساخت ظاهر، فریم‌ورک‌ها، مدیریت محتوا) با آیکون، بدون درصد.
+- **اسکرول‌بار سفارشی:** اسکرول‌بار مرورگر مخفی است و یک اسکرول‌بار باریک و مینیمال (`createScrollbar` در `main.js`) برای صفحه و پاپ‌آپ نشان داده می‌شود؛ در فارسی سمت راست و در انگلیسی سمت چپ. اسکرول واقعی همان اسکرول بومی مرورگر است (چرخ ماوس، لمس، کیبورد).
+- **دکمه‌ی ثابت «مشاوره رایگان» در هدر:** همیشه در دسترس است و فرم را با نوع درخواست «مشاوره» باز می‌کند؛ در عرض‌های کم فقط آیکون نشان می‌دهد و دکمه‌ی رزومه در دسکتاپ فقط آیکون است.
+- **نمونه‌کارها:** پنج نمونه‌کار که با کلیک روی هر کارت، پاپ‌آپ جزئیات (معرفی، چالش و رویکرد، تکنولوژی‌ها، ویژگی‌های کلیدی) با چیپ‌های وضعیت (در دست توسعه / اتمام‌یافته) و نوع (پروژه فعال / تمرینی) کنار عنوان و گالری تصاویر/ویدیو را نشان می‌دهد.
+- **فرم درخواست مشاوره/قیمت:** انتخاب نوع درخواست (دکمه‌های انتخاب با آیکون‌های متحرک و بلند شدن نرم با هاور) و خدمت، سپس روش تماس ترجیحی. با «تماس تلفنی» یک انتخاب‌گر پیش‌شماره‌ی تمام کشورها (با جستجو؛ ایران پیش‌فرض) کنار باکس شماره ظاهر می‌شود و شماره بدون صفر اول گرفته می‌شود (ارقام فارسی و شماره‌های بین‌المللیِ پیست‌شده هم تشخیص داده می‌شوند)؛ با «تلگرام» باکس آیدی با یک @ خودکار می‌گیرد. لیست‌های کشویی فرم سفارشی‌اند (chevron و باز شدن نرم، پشتیبانی کیبورد) و برای مشاوره، روز و ساعت پیشنهادی هم دارد؛ ارسال با [EmailJS](https://www.emailjs.com/) بدون نیاز به سرور اختصاصی.
 - **دانلود رزومه:** از بخش هدر.
 - **سال کپی‌رایت به‌صورت خودکار:** در حالت فارسی تقویم شمسی و در حالت انگلیسی میلادی.
 - **سئو:** متاتگ‌های توضیحات، Open Graph و Twitter Card، داده‌ی ساختاریافته‌ی JSON-LD (Person)، `sitemap.xml` و `robots.txt`.
@@ -76,11 +79,12 @@ python -m http.server 8000
 2. **شبکه‌های اجتماعی:** لینک‌ها را در بلوک `home__social` و در فوتر داخل `index.html` تغییر دهید.
 3. **عکس‌ها:** فایل‌های `assets/img/perfil.jpg` (بخش معرفی) و `assets/img/profile(1).jpg` (بخش درباره‌ی من) را با عکس خودتان جایگزین کنید.
 4. **رزومه:** فایل PDF را در `assets/docs/` قرار دهید و نام و مسیر آن را در لینک `resume-download` داخل `index.html` به‌روز کنید.
-5. **مهارت‌ها:** بخش `skills` در `index.html` را ویرایش کنید؛ مقدار `data-skill` درصد پیشرفت هر نوار را مشخص می‌کند. آیکون‌های حلقه‌ی معرفی در بلوک `home__orbit` قرار دارند.
-6. **نمونه‌کارها:** کارت‌های بخش `work` را در `index.html` و محتوای پاپ‌آپ‌ها را در `main.js` (بر اساس `data-project`) ویرایش کنید.
-7. **فرم تماس:** در `assets/js/main.js` کلید عمومی EmailJS (در `emailjs.init`) و شناسه‌ی سرویس و قالب (در `emailjs.sendForm`) را با مقادیر حساب خودتان جایگزین کنید.
-8. **رنگ‌ها:** متغیر `--hue-color` در بخش `:root` فایل `assets/css/styles.css` رنگ اصلی سایت را تعیین می‌کند.
-9. **دامنه و سئو:** فایل `CNAME`، `sitemap.xml`، `robots.txt` و آدرس‌های canonical و Open Graph داخل `index.html` را با دامنه‌ی خودتان هماهنگ کنید.
+5. **مهارت‌ها:** بخش `skills` در `index.html` را ویرایش کنید؛ هر مهارت یک `li.skills__item` داخل یکی از گروه‌هاست و عنوان گروه‌ها در `translations` (کلیدهای `skills_group_*`) قرار دارد. آیکون‌های حلقه‌ی معرفی در بلوک `home__orbit` قرار دارند.
+6. **نمونه‌کارها:** کارت‌های بخش `work` را در `index.html` و محتوای پاپ‌آپ‌ها را در `main.js` (بر اساس `data-project`) ویرایش کنید. چیپ‌های هر پروژه از فیلدهای `status` (`done` یا `progress`) و `kind` (`practice` یا `active`) در آبجکت `projects` ساخته می‌شوند و برچسب‌هایشان در `translations` (کلیدهای `popup_*`) است.
+7. **خدمات، مراحل و FAQ:** کارت‌ها، مراحل همکاری و سوالات بخش `services` را در `index.html` و متن دوزبانه‌شان را در `translations` (کلیدهای `svc*`، `step*`، `faq*`) ویرایش کنید.
+8. **فرم تماس:** در `assets/js/main.js` کلید عمومی EmailJS (در `emailjs.init`) و شناسه‌ی سرویس و قالب (در `emailjs.send`) را با مقادیر حساب خودتان جایگزین کنید. همه‌ی جزئیات فرم داخل فیلد `message` ایمیل می‌رود، پس قالب EmailJS فقط به `user_name`، `user_email` و `message` نیاز دارد.
+9. **رنگ‌ها:** متغیر `--hue-color` در بخش `:root` فایل `assets/css/styles.css` رنگ اصلی سایت را تعیین می‌کند.
+10. **دامنه و سئو:** فایل `CNAME`، `sitemap.xml`، `robots.txt` و آدرس‌های canonical و Open Graph داخل `index.html` را با دامنه‌ی خودتان هماهنگ کنید.
 
 ### استقرار (Deployment)
 
@@ -126,11 +130,14 @@ This repository contains the personal portfolio website of **Alireza Akhoondi**,
 
 - **Bilingual:** switch between Persian (RTL) and English (LTR) without reloading. The choice is remembered.
 - **Light and dark themes:** circular transition animation (View Transitions API), a saved preference, and the system preference on the first visit.
-- **Sections:** Home, About, Skills, Portfolio, Contact and Footer.
+- **Sections:** Home, About, Services, Skills, Portfolio, Contact and Footer.
+- **Services and lead generation:** three services with "best for", features and delivery time, a four-step process (consultation, design, development, delivery and support), an FAQ and a call-to-action band; every "Get a Quote" or "Free Consultation" button opens the contact form with the request type and service preselected.
 - **Orbiting skill icons:** skill icons rotate around the profile photo on desktop and mobile.
-- **Skill bars:** animated progress bars that show each skill's level.
-- **Portfolio:** five project cards. Clicking a card opens a popup with an overview, tech stack, key features and an image/video gallery. A placeholder card is reserved for upcoming projects.
-- **Contact form:** messages are sent with [EmailJS](https://www.emailjs.com/), so no dedicated backend server is needed.
+- **Grouped tech stack:** skills shown as icon chips in three groups (interface, frameworks, content management), with no percentages.
+- **Custom scrollbar:** the browser scrollbar is hidden and a thin, minimal one (`createScrollbar` in `main.js`) is drawn for the page and the project popup, on the right in Persian and on the left in English. Scrolling itself is still the browser's native scrolling (wheel, touch, keyboard).
+- **Sticky "Free Consultation" button in the header:** always available, and opens the contact form with the "consultation" request type preselected. It shows only an icon on narrow screens, and the resume button is icon-only on desktop.
+- **Portfolio:** five project cards. Clicking a card opens a popup with an overview, challenge and approach, tech stack, key features and an image/video gallery, with status chips (in development / completed) and type chips (active / practice project) next to the title. A placeholder card is reserved for upcoming projects.
+- **Consultation / quote request form:** request type (choice buttons with animated icons that lift softly on hover) and service, then the preferred contact channel. "Phone call" shows a searchable country-code picker (all countries, Iran by default) beside the number box and takes the number without the leading zero (Persian digits and pasted international numbers are recognised); "Telegram" turns the box into an ID field that adds a leading @ automatically. The form dropdowns are custom (smooth chevron and opening, keyboard support), and consultations also get a suggested day and time; sent with [EmailJS](https://www.emailjs.com/), so no dedicated backend server is needed.
 - **Resume download:** available from the header.
 - **Automatic copyright year:** Persian (Jalali) calendar in Persian mode and Gregorian calendar in English mode.
 - **SEO:** meta descriptions, Open Graph and Twitter Card tags, JSON-LD structured data (Person), `sitemap.xml` and `robots.txt`.
@@ -182,11 +189,12 @@ python -m http.server 8000
 2. **Social links:** update the links in the `home__social` block and the footer in `index.html`.
 3. **Photos:** replace `assets/img/perfil.jpg` (hero section) and `assets/img/profile(1).jpg` (About section).
 4. **Resume:** place your PDF in `assets/docs/` and update the `resume-download` link in `index.html`.
-5. **Skills:** edit the `skills` section in `index.html`. The `data-skill` value sets each bar's percentage. The orbiting icons live in the `home__orbit` block.
-6. **Portfolio:** edit the cards in the `work` section of `index.html` and the popup content in `main.js` (matched by `data-project`).
-7. **Contact form:** in `assets/js/main.js`, replace the EmailJS public key (in `emailjs.init`) and the service and template IDs (in `emailjs.sendForm`) with your own.
-8. **Colors:** the `--hue-color` variable in `:root` of `assets/css/styles.css` sets the main accent color.
-9. **Domain and SEO:** update `CNAME`, `sitemap.xml`, `robots.txt`, and the canonical and Open Graph URLs in `index.html`.
+5. **Skills:** edit the `skills` section in `index.html`. Each skill is an `li.skills__item` inside one of the groups, and the group titles live in `translations` (the `skills_group_*` keys). The orbiting icons live in the `home__orbit` block.
+6. **Portfolio:** edit the cards in the `work` section of `index.html` and the popup content in `main.js` (matched by `data-project`). Each project's chips come from the `status` (`done` or `progress`) and `kind` (`practice` or `active`) fields in the `projects` object; their labels live in `translations` (the `popup_*` keys).
+7. **Services, process and FAQ:** edit the cards, steps and questions in the `services` section of `index.html` and their bilingual text in `translations` (the `svc*`, `step*` and `faq*` keys).
+8. **Contact form:** in `assets/js/main.js`, replace the EmailJS public key (in `emailjs.init`) and the service and template IDs (in `emailjs.send`) with your own. All form details are packed into the email's `message` field, so the EmailJS template only needs `user_name`, `user_email` and `message`.
+9. **Colors:** the `--hue-color` variable in `:root` of `assets/css/styles.css` sets the main accent color.
+10. **Domain and SEO:** update `CNAME`, `sitemap.xml`, `robots.txt`, and the canonical and Open Graph URLs in `index.html`.
 
 ### Deployment
 
