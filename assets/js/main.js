@@ -10,7 +10,7 @@ const translations = {
         resume_download: "Download Resume",
         theme_tooltip_to_dark: "Switch to dark mode",
         theme_tooltip_to_light: "Switch to light mode",
-        home_title: `Hi,<br>I'm <span class="home__title-color">Alireza</span><br> Web Developer`,
+        home_title: `Hi, I'm<br><span class="home__title-color">Alireza Akhoondi</span><br>Web Developer`,
         home_subtitle: "A fast, custom website for your business, from idea to delivery and support.",
         home_call: "Call Me",
         home_consult: "Free Consultation",
@@ -133,8 +133,8 @@ const translations = {
         alert_success_text: "Thank you 🙏. I'll contact you soon in the way you chose.",
         alert_error_title: "Error sending message!",
         alert_error_text: "Please try again.",
-        page_title: "Alireza Akhoondi | Website & Online Store Development",
-        page_description: "Alireza Akhoondi, front-end and full-stack developer. Business websites, online stores, and custom admin panels for small businesses, built with WordPress, React, Next.js and Vue.js. Free consultation."
+        page_title: "Website Design by Alireza Akhoondi (علیرضا آخوندی) | Online Stores",
+        page_description: "Website design by Alireza Akhoondi (علیرضا آخوندی): business websites, online stores and custom admin panels built with WordPress, React and Next.js. Free consultation."
     },
     fa: {
         nav_home: "خانه",
@@ -146,7 +146,7 @@ const translations = {
         resume_download: "دانلود رزومه",
         theme_tooltip_to_dark: "تغییر به حالت تاریک",
         theme_tooltip_to_light: "تغییر به حالت روشن",
-        home_title: `سلام،<br><span class="home__title-color">علیرضا</span> هستم<br>توسعه‌دهنده وب`,
+        home_title: `سلام،<br><span class="home__title-color">علیرضا آخوندی</span> هستم<br>توسعه‌دهنده وب`,
         home_subtitle: "برای کسب‌وکار شما یک سایت اختصاصی و سریع طراحی می‌کنم؛ از ایده تا تحویل و پشتیبانی.",
         home_call: "تماس با من",
         home_consult: "مشاوره رایگان",
@@ -269,8 +269,8 @@ const translations = {
         alert_success_text: "ممنون 🙏. به‌زودی از همان راهی که انتخاب کردید با شما تماس می‌گیرم.",
         alert_error_title: "خطا در ارسال پیام!",
         alert_error_text: "لطفاً دوباره تلاش کنید.",
-        page_title: "طراحی سایت و فروشگاه اینترنتی | علیرضا آخوندی",
-        page_description: "علیرضا آخوندی، توسعه‌دهنده فرانت‌اند و فول‌استک. طراحی سایت معرفی، فروشگاه اینترنتی و پنل مدیریت اختصاصی برای کسب‌وکارهای کوچک با وردپرس، React، Next.js و Vue.js. مشاوره رایگان."
+        page_title: "طراحی سایت علیرضا آخوندی | فروشگاه اینترنتی",
+        page_description: "طراحی سایت علیرضا آخوندی : سایت معرفی کسب‌وکار، فروشگاه اینترنتی و پنل مدیریت اختصاصی با وردپرس، React و Next.js. مشاوره رایگان."
     }
 };
 
