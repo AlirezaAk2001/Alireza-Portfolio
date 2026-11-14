@@ -24,6 +24,107 @@
         })();
     </script>
 
+    <!-- ایمنی در برابر خطای گذرای CDN (مثلاً ۵۰۴ یا کندیِ چند ثانیه‌ای وقتی کش لبه سرد است):
+         ۱) هر فایل ناموفق (CSS، اسکریپت، عکس، فونت) حداکثر ۲ بار دیگر با پارامتر جدید گرفته می‌شه؛
+         ۲) فونت زبان فعلی از همین‌جا پیش‌بارگذاری می‌شه تا منتظر رسیدن CSS نمی‌مونه (یک مرحله از زنجیره‌ی HTML ← CSS ← فونت کم می‌شه) -->
+    <script>
+        (function () {
+            var MAX_TRIES = 2;
+            var tries = {};
+
+            function base(url) {
+                return url.replace(/([?&])r=\d+(&|$)/, '$1').replace(/[?&]$/, '');
+            }
+            function bust(url, n) {
+                var b = base(url);
+                return b + (b.indexOf('?') > -1 ? '&' : '?') + 'r=' + n;
+            }
+
+            // خطای بارگذاری فایل روی خودِ المان می‌افته و bubble نمی‌شه؛ برای همین در فاز capture روی window گوش می‌دیم
+            window.addEventListener('error', function (e) {
+                var el = e.target;
+                if (!el || !el.tagName) return; // خطای معمولی جاوااسکریپت، نه خطای فایل
+                var tag = el.tagName.toLowerCase();
+                var url;
+                if (tag === 'link' && (el.rel === 'stylesheet' || (el.rel === 'preload' && el.as === 'style'))) url = el.href;
+                else if ((tag === 'script' || tag === 'img') && el.src) url = el.src;
+                else if (tag === 'image' && el.getAttribute('href')) url = new URL(el.getAttribute('href'), document.baseURI).href;
+                else return;
+
+                var key = base(url);
+                var n = (tries[key] || 0) + 1;
+                if (n > MAX_TRIES) return;
+                tries[key] = n;
+                var next = bust(url, n);
+
+                setTimeout(function () {
+                    if (tag === 'link') {
+                        var copy = el.cloneNode(false); // onload/rel/as همراهش کپی می‌شه
+                        copy.href = next;
+                        if (el.parentNode) {
+                            el.parentNode.insertBefore(copy, el);
+                            el.parentNode.removeChild(el);
+                        }
+                    } else if (tag === 'script') {
+                        var s = document.createElement('script');
+                        s.src = next;
+                        s.async = false;
+                        document.head.appendChild(s);
+                    } else if (tag === 'image') {
+                        el.setAttribute('href', next);
+                    } else {
+                        el.src = next;
+                    }
+                }, n * 1000);
+            }, true);
+
+            // فونت‌ها از داخل CSS لود می‌شن و خطاشون روی window نمی‌رسه؛ فایلشون رو خودمون با FontFace دوباره می‌گیریم
+            function fontFile(family, weight) {
+                if (family === 'boxicons') return 'assets/fonts/boxicons.woff2';
+                if (family === 'Vazirmatn') return 'assets/fonts/vazirmatn-var.woff2';
+                if (family === 'Poppins') return 'assets/fonts/poppins-' + weight + '.woff2';
+                if (family === 'Font Awesome 6 Brands') return 'assets/webfonts/fa-brands-400.woff2';
+                if (family === 'Font Awesome 6 Free') return 'assets/webfonts/' + (weight === '900' ? 'fa-solid-900' : 'fa-regular-400') + '.woff2';
+                return null;
+            }
+            function retryFont(family, file, desc, n) {
+                if (n > MAX_TRIES) return;
+                setTimeout(function () {
+                    var face = new FontFace(family, 'url(' + bust(file, n) + ') format("woff2")', desc);
+                    face.load().then(function () {
+                        document.fonts.add(face);
+                    }, function () {
+                        retryFont(family, file, desc, n + 1);
+                    });
+                }, n * 1000);
+            }
+            if (window.FontFace && document.fonts && document.fonts.addEventListener) {
+                document.fonts.addEventListener('loadingerror', function (e) {
+                    (e.fontfaces || []).forEach(function (f) {
+                        var family = f.family.replace(/["']/g, '');
+                        var file = fontFile(family, f.weight);
+                        if (file) retryFont(family, file, { weight: f.weight, style: f.style }, 1);
+                    });
+                });
+            }
+
+            // فونت متن زبان فعلی (فارسی: وزیرمتن، انگلیسی: پاپینز) همین‌جا شروع به دانلود می‌کنه
+            var files = document.documentElement.lang === 'en' ? ['poppins-400', 'poppins-600', 'poppins-700'] : ['vazirmatn-var'];
+            for (var i = 0; i < files.length; i++) {
+                var link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'font';
+                link.type = 'font/woff2';
+                link.crossOrigin = 'anonymous';
+                link.href = 'assets/fonts/' + files[i] + '.woff2';
+                document.head.appendChild(link);
+            }
+        })();
+    </script>
+    <!-- فونت آیکون‌ها و عکس هیرو هم از ابتدا شروع به دانلود می‌شن (نه بعد از رسیدن CSS یا رسیدن به تگ SVG) -->
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/boxicons.woff2" crossorigin>
+    <link rel="preload" as="image" href="assets/img/perfil.jpg" fetchpriority="high">
+
    <title>طراحی سایت علیرضا آخوندی | فروشگاه اینترنتی</title>
     <meta name="description"
         content="طراحی سایت علیرضا آخوندی : سایت معرفی کسب‌وکار، فروشگاه اینترنتی و پنل مدیریت اختصاصی با وردپرس، React و Next.js. مشاوره رایگان.">
@@ -621,7 +722,7 @@
     <!--===== SCROLL REVEAL =====-->
     <script src="assets/js/vendor/scrollreveal.min.js"></script>
     <!--===== MAIN JS =====-->
-    <script src="assets/js/main.js?v=27"></script>
+    <script src="assets/js/main.js?v=28"></script>
 </body>
 
 </html>

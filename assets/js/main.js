@@ -421,7 +421,14 @@ function toggleTheme(event) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// اگه این فایل بعد از DOMContentLoaded برسه (مثلاً بعد از تلاش مجدد برای یک ۵۰۴ی CDN)، شنونده‌ی DOMContentLoaded دیگه هیچ‌وقت صدا زده
+// نمی‌شه و زبان، تم و فرم راه نمی‌افتن؛ پس اگه صفحه آماده‌ست مستقیم اجرا می‌کنیم
+function onReady(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+}
+
+onReady(() => {
     applyLanguage(detectInitialLang());
     applyTheme(detectInitialTheme());
 
@@ -565,13 +572,14 @@ const sectionObserver = new IntersectionObserver((entries) => {
 sections.forEach(section => sectionObserver.observe(section));
 
 /*===== SCROLL REVEAL ANIMATION =====*/
-const sr = ScrollReveal({
+// اگه فایل ScrollReveal از CDN نرسید فقط انیمیشن ورود حذف می‌شه؛ بدون این شرط ReferenceError کل ادامه‌ی اسکریپت رو از کار می‌ندازه
+const sr = typeof ScrollReveal === 'function' ? ScrollReveal({
     origin: 'top',
     distance: '60px',
     duration: 2000,
     delay: 200,
 //     reset: true
-});
+}) : { reveal() {} };
 
 sr.reveal('.home__data, .about__img, .skills__subtitle',{});
 sr.reveal('.home__img, .about__subtitle, .about__text, .about__actions, .skills__img',{delay: 400});
@@ -1565,8 +1573,18 @@ function refreshCustomSelects() {
     customSelects.forEach(instance => instance.render());
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  emailjs.init("01DP55z4IT14nN_aQ");
+onReady(function () {
+  // اگه فایل EmailJS دیر برسه یا نرسه، فقط ارسال فرم خطا می‌ده و بقیه‌ی فرم (کشوی کشورها، منوها، اعتبارسنجی) درست راه می‌افته؛
+  // مقداردهی اولیه هم موقع ارسال دوباره امتحان می‌شه (ممکنه فایل با تلاش مجدد صفحه بعداً رسیده باشه)
+  let emailjsReady = false;
+  function ensureEmailJS() {
+    if (!emailjsReady && window.emailjs) {
+      emailjs.init("01DP55z4IT14nN_aQ");
+      emailjsReady = true;
+    }
+    return emailjsReady;
+  }
+  ensureEmailJS();
 
   const contactForm = document.getElementById('contactForm');
   const contactSubmit = document.getElementById('contactSubmit');
@@ -1801,6 +1819,15 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (description.length < 10) fail(f.message, 'err_message_short');
 
     if (!isValid) return; // اگر فیلد ناقص بود، ارسال انجام نشود
+
+    if (!ensureEmailJS()) {
+      showToast({
+        type: 'error',
+        title: translations[currentLang].alert_error_title,
+        text: translations[currentLang].alert_error_text
+      });
+      return;
+    }
 
     // همه‌ی جزئیات فرم (نوع درخواست، خدمت، روش و زمان تماس) داخل همون فیلد message می‌ره؛
     // تا قالب فعلی EmailJS (که فقط user_name/user_email/message رو می‌شناسه) بدون تغییر کار کنه
