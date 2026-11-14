@@ -133,8 +133,8 @@ const translations = {
         alert_success_text: "Thank you 🙏. I'll contact you soon in the way you chose.",
         alert_error_title: "Error sending message!",
         alert_error_text: "Please try again.",
-        page_title: "Website Design by Alireza Akhoondi (علیرضا آخوندی) | Online Stores",
-        page_description: "Website design by Alireza Akhoondi (علیرضا آخوندی): business websites, online stores and custom admin panels built with WordPress, React and Next.js. Free consultation."
+        page_title: "Website Design by Alireza Akhoondi",
+        page_description: "Website design by Alireza Akhoondi: business websites, online stores and custom admin panels built with WordPress, React and Next.js. Free consultation."
     },
     fa: {
         nav_home: "خانه",
@@ -269,7 +269,7 @@ const translations = {
         alert_success_text: "ممنون 🙏. به‌زودی از همان راهی که انتخاب کردید با شما تماس می‌گیرم.",
         alert_error_title: "خطا در ارسال پیام!",
         alert_error_text: "لطفاً دوباره تلاش کنید.",
-        page_title: "طراحی سایت علیرضا آخوندی | فروشگاه اینترنتی",
+        page_title: "طراحی سایت علیرضا آخوندی",
         page_description: "طراحی سایت علیرضا آخوندی : سایت معرفی کسب‌وکار، فروشگاه اینترنتی و پنل مدیریت اختصاصی با وردپرس، React و Next.js. مشاوره رایگان."
     }
 };
