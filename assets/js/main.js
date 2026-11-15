@@ -16,8 +16,21 @@ const translations = {
         home_call: "Call Me",
         home_consult: "Free Consultation",
         about_title: "About Me",
+        eyebrow_about: "Introduction",
+        eyebrow_services: "What I can do for you",
+        eyebrow_skills: "Tools & technologies",
+        eyebrow_work: "Things I've built",
+        eyebrow_contact: "Let's work together",
+        trust1_title: "About 5 years",
+        trust1_text: "Of web design and development experience",
+        trust2_title: "Free consultation",
+        trust2_text: "Before we start, to find the right path together",
+        trust3_title: "Usually 1–2 weeks",
+        trust3_text: "For a business website",
+        trust4_title: "Support after delivery",
+        trust4_text: "Monthly maintenance and support, when you need it",
         about_subtitle: "I'm Alireza, a web programmer and developer",
-        about_text: "For about four years I've been working in website and web programming, from business websites and online stores to organizational and admin panels. I write the interface with HTML, CSS, JavaScript and React, and for larger projects I turn to Next.js and Vue (with Vuetify).",
+        about_text: "For about five years I've been working in website and web programming, from business websites and online stores to organizational and admin panels. I write the interface with HTML, CSS, JavaScript and React, and for larger projects I turn to Next.js and Vue (with Vuetify).",
         about_text2: "I'm currently building a large online store on my own, from scratch, with an admin panel, an authentication system and API integration; I'm finishing the UI and getting it onto a server. I've worked in a team setting as well as on personal projects, and I've also spent about two years working in WordPress website design.",
         about_cta: "Have an idea? You can turn it into reality with just one click and a free consultation.",
         services_title: "Services",
@@ -67,6 +80,8 @@ const translations = {
         skills_subtitle: "Professional Skills",
         skills_group_ui: "Building the interface",
         skills_group_frameworks: "Frameworks and libraries",
+        skills_group_data: "Database and authentication",
+        skills_group_plugins: "Plugins and helpers",
         skills_group_cms: "Content management",
         work_title: "My Portfolio",
         popup_status_done: "Completed",
@@ -80,6 +95,7 @@ const translations = {
         proj5_title: "Orkideh Store",
         work_new_project: "New Project",
         work_coming_soon: "Coming Soon",
+        work_view: "View details",
         contact_title: "Contact Me",
         contact_lead: "For a free consultation or a quote, fill in the form below; I'll get back to you as soon as I can.",
         req_legend: "Request type",
@@ -153,8 +169,21 @@ const translations = {
         home_call: "تماس با من",
         home_consult: "مشاوره رایگان",
         about_title: "درباره من",
+        eyebrow_about: "معرفی",
+        eyebrow_services: "چه کاری برای شما می‌کنم",
+        eyebrow_skills: "ابزارها و تکنولوژی‌ها",
+        eyebrow_work: "پروژه‌هایی که ساخته‌ام",
+        eyebrow_contact: "شروع همکاری",
+        trust1_title: "حدود ۵ سال",
+        trust1_text: "تجربه در طراحی و توسعه‌ی وب",
+        trust2_title: "مشاوره‌ی رایگان",
+        trust2_text: "پیش از شروع، تا با هم مسیر مناسب را پیدا کنیم",
+        trust3_title: "تحویل معمول ۱ تا ۲ هفته",
+        trust3_text: "برای سایت معرفی کسب‌وکار",
+        trust4_title: "پشتیبانی پس از تحویل",
+        trust4_text: "نگهداری و پشتیبانی ماهانه، در صورت نیاز",
         about_subtitle: "من علیرضا هستم؛ برنامه‌نویس و توسعه‌دهندۀ وب",
-        about_text: "حدود ۴ سال است که در حوزۀ سایت و برنامه‌نویسی وب فعالیت دارم؛ از سایت معرفی کسب‌وکار و فروشگاه اینترنتی گرفته تا پنل‌های سازمانی و مدیریتی. ظاهر و بخش رابط کاربری را با HTML، CSS، JavaScript و React می‌نویسم و برای پروژه‌های بزرگ‌تر از Next.js و Vue (به‌همراه Vuetify) کمک می‌گیرم.",
+        about_text: "حدود ۵ سال است که در حوزۀ سایت و برنامه‌نویسی وب فعالیت دارم؛ از سایت معرفی کسب‌وکار و فروشگاه اینترنتی گرفته تا پنل‌های سازمانی و مدیریتی. ظاهر و بخش رابط کاربری را با HTML، CSS، JavaScript و React می‌نویسم و برای پروژه‌های بزرگ‌تر از Next.js و Vue (به‌همراه Vuetify) کمک می‌گیرم.",
         about_text2: "الان به‌تنهایی مشغول ساخت یک فروشگاه آنلاین بزرگ از صفر هستم، با پنل مدیریت، سیستم احراز هویت و اتصال به APIها؛ رابط کاربری را تکمیل می‌کنم و آن را روی سرور می‌برم. هم در یک گروه تیمی کار کرده‌ام و هم روی پروژه‌های شخصی، و حدود ۲ سال هم در زمینۀ طراحی سایت‌های وردپرسی فعالیت داشته‌ام.",
         about_cta: "ایده‌ای دارید؟ می‌توانید ایدۀ خود را تنها با یک کلیک و مشاورۀ رایگان به واقعیت تبدیل کنید.",
         services_title: "خدمات",
@@ -204,6 +233,8 @@ const translations = {
         skills_subtitle: "مهارت‌های حرفه‌ای",
         skills_group_ui: "ساخت ظاهر سایت",
         skills_group_frameworks: "فریم‌ورک‌ها و کتابخانه‌ها",
+        skills_group_data: "پایگاه داده و احراز هویت",
+        skills_group_plugins: "افزونه‌ها و ابزارهای کمکی",
         skills_group_cms: "سیستم مدیریت محتوا",
         work_title: "نمونه‌کارهای من",
         popup_status_done: "اتمام‌یافته",
@@ -217,6 +248,7 @@ const translations = {
         proj5_title: "فروشگاه ارکیده",
         work_new_project: "پروژه‌ی جدید",
         work_coming_soon: "به‌زودی",
+        work_view: "مشاهده جزئیات",
         contact_title: "ارتباط با من",
         contact_lead: "برای مشاوره‌ی رایگان یا دریافت قیمت، فرم زیر را پر کنید؛ در اولین فرصت با شما تماس می‌گیرم.",
         req_legend: "نوع درخواست",
@@ -423,6 +455,25 @@ function toggleTheme(event) {
     });
 }
 
+// تغییر زبان با محو شدن نرمِ صفحه‌ی جدید روی قبلی (View Transitions API؛ هم‌خانواده‌ی انیمیشن دایره‌ایِ تم).
+// مرورگرهای بدون این API یا کاربرانی که «کاهش حرکت» را روشن کرده‌اند، مثل قبل تعویض آنی می‌گیرند
+function switchLanguage(lang) {
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!document.startViewTransition || reduceMotion) {
+        applyLanguage(lang);
+        return;
+    }
+    const transition = document.startViewTransition(() => {
+        applyLanguage(lang);
+    });
+    transition.ready.then(() => {
+        document.documentElement.animate(
+            { opacity: [0, 1] },
+            { duration: 380, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', pseudoElement: '::view-transition-new(root)' }
+        );
+    }).catch(() => {});
+}
+
 // اگه این فایل بعد از DOMContentLoaded برسه (مثلاً بعد از تلاش مجدد برای یک ۵۰۴ی CDN)، شنونده‌ی DOMContentLoaded دیگه هیچ‌وقت صدا زده
 // نمی‌شه و زبان، تم و فرم راه نمی‌افتن؛ پس اگه صفحه آماده‌ست مستقیم اجرا می‌کنیم
 function onReady(fn) {
@@ -437,7 +488,7 @@ onReady(() => {
     const langToggleBtn = document.getElementById('lang-toggle');
     if (langToggleBtn) {
         langToggleBtn.addEventListener('click', () => {
-            applyLanguage(currentLang === 'fa' ? 'en' : 'fa');
+            switchLanguage(currentLang === 'fa' ? 'en' : 'fa');
         });
     }
 
@@ -494,7 +545,7 @@ window.matchMedia('(min-width: 768px)').addEventListener('change', e => {
 // وقتی برمی‌گرده، :hover/:active مرورگر گاهی روشون "گیر" کرده می‌مونه. به‌جاش همین کلاس is-pressed
 // فقط برای مدت واقعی لمس/فشردن با pointer event ها کنترل می‌شه و با رها شدن یا برگشتن به صفحه همیشه پاک می‌شه
 // دکمه‌ی nav-toggle از این مکانیزم مستثناست؛ بالا رفتنش فقط به کلاس open (در پایین همین فایل) وابسته‌ست
-const PRESSABLE_SELECTOR = '.flag-button:not(.nav__toggle), .lang-toggle, .theme-toggle, .resume-download, .nav__cta, .chip, .scroll-top'
+const PRESSABLE_SELECTOR = '.flag-button:not(.nav__toggle), .lang-toggle, .theme-toggle, .resume-download, .nav__cta, .chip, .scroll-top, .work__img'
 let pressedEl = null
 function setPressed(el){
     if(pressedEl && pressedEl !== el) pressedEl.classList.remove('is-pressed')
@@ -611,31 +662,66 @@ const sectionObserver = new IntersectionObserver((entries) => {
 sections.forEach(section => sectionObserver.observe(section));
 
 /*===== SCROLL REVEAL ANIMATION =====*/
+// همه‌ی ورودهای اسکرولی از همین یک تنظیم می‌آیند تا کل صفحه یک حس داشته باشد:
+// از پایین ۲۸ پیکسل بالا می‌آیند، ۹۰۰ میلی‌ثانیه، با همان منحنی ورودی CSS (--ease-out)، و عناصر هم‌گروه ۱۱۰ میلی‌ثانیه با هم فاصله دارند.
+// کسی که «کاهش حرکت» را روشن کرده فقط ظاهر می‌شود (بدون جابه‌جایی و بدون مکث).
+const MOTION = {
+    reduced: !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches),
+    easing: 'cubic-bezier(0.22, 1, 0.36, 1)',   // = --ease-out در styles.css
+    duration: 900,
+    distance: '28px',
+    interval: 110
+};
+
 // اگه فایل ScrollReveal از CDN نرسید فقط انیمیشن ورود حذف می‌شه؛ بدون این شرط ReferenceError کل ادامه‌ی اسکریپت رو از کار می‌ندازه
 const sr = typeof ScrollReveal === 'function' ? ScrollReveal({
-    origin: 'top',
-    distance: '60px',
-    duration: 2000,
-    delay: 200,
-//     reset: true
+    origin: 'bottom',
+    distance: MOTION.reduced ? '0px' : MOTION.distance,
+    duration: MOTION.reduced ? 0 : MOTION.duration,
+    easing: MOTION.easing,
+    delay: 0
 }) : { reveal() {} };
 
-sr.reveal('.home__data, .about__img, .skills__subtitle',{});
-sr.reveal('.home__img, .about__subtitle, .about__text, .about__actions, .skills__img',{delay: 400});
-sr.reveal('.home__social-icon',{ interval: 200});
-sr.reveal('.skills__group, .services__card, .work__img, .contact__input',{
-    interval: 200,
-    // بعد از تمام شدن انیمیشن ورود، یه کلاس اضافه می‌کنیم تا ترنزیشن سریع هاور
-    // (رفتن و برگشتن) بدون تداخل با ترنزیشن کند ScrollReveal اعمال بشه
-    afterReveal: el => el.classList.add('is-revealed')
+// تنظیم یک گروه: فاصله‌ی ورود بین عناصر هم‌گروه + تأخیر شروع (کاهش حرکت: بدون تأخیر)
+const reveal = (selector, { delay = 0, stagger = false, ...extra } = {}) =>
+    sr.reveal(selector, {
+        delay: MOTION.reduced ? 0 : delay,
+        interval: stagger && !MOTION.reduced ? MOTION.interval : 0,
+        ...extra,
+        ...(MOTION.reduced ? { duration: 0, distance: '0px' } : {})
+    });
+
+// بعد از تمام شدن انیمیشن ورود، یه کلاس اضافه می‌کنیم تا ترنزیشن سریع هاور
+// (رفتن و برگشتن) بدون تداخل با ترنزیشن کند ScrollReveal اعمال بشه
+const markRevealed = el => el.classList.add('is-revealed');
+
+// هیرو: تیتر، زیرتیتر و دکمه‌ها پشت سر هم، عکس هم‌زمان با کمی بزرگ‌شدن، و بعد آیکون‌های شبکه‌های اجتماعی
+reveal('.home__title');
+reveal('.home__subtitle', { delay: 120 });
+reveal('.home__cta', { delay: 240 });
+reveal('.home__img', { delay: 100, scale: MOTION.reduced ? 1 : 0.94 });
+reveal('.home__social-icon', { delay: 360, interval: MOTION.reduced ? 0 : 90 });
+
+// نوار اعتماد زیر هیرو
+reveal('.trust__item', { stagger: true });
+
+// درباره من و مهارت‌ها
+reveal('.about__img');
+reveal('.about__subtitle, .about__text, .about__actions', { delay: 120, stagger: true });
+reveal('.skills__subtitle');
+reveal('.skills__img', { delay: 150 });
+
+// کارت‌ها و فیلدها
+reveal('.skills__group, .services__card, .work__img, .work__comingsoon, .contact__input', {
+    stagger: true,
+    afterReveal: markRevealed
 });
 
-// مراحل همکاری، سوالات متداول و بنر دعوت به اقدام
-sr.reveal('.services__note, .process__step, .faq__item, .cta-band__inner', {
-    interval: 150,
-    distance: '30px',
-    // برای .faq__item: بعد از ورود، ترنزیشن سریع هاور بدون تداخل با ترنزیشن کند ScrollReveal (CSS: .faq__item.is-revealed)
-    afterReveal: el => el.classList.add('is-revealed')
+// یادداشت خدمات، مراحل همکاری، سوالات متداول و بنر دعوت به اقدام
+// (برای .faq__item: ترنزیشن سریع هاور بعد از ورود، CSS: .faq__item.is-revealed)
+reveal('.services__note, .process__step, .faq__item, .cta-band__inner', {
+    stagger: true,
+    afterReveal: markRevealed
 });
 
 /*===== سوالات متداول: باز و بسته شدن نرم =====
@@ -687,6 +773,13 @@ function typeSectionTitle(titleEl) {
     if (!textEl || textEl.dataset.typed === 'true') return;
     textEl.dataset.typed = 'true';
 
+    // کاهش حرکت: عنوان و خط زیرش بدون تایپ و بدون رشد، فوراً کامل دیده می‌شن
+    if (MOTION.reduced) {
+        titleEl.style.setProperty('--underline-duration', '0ms');
+        titleEl.style.setProperty('--underline-progress', '1');
+        return;
+    }
+
     // متن رو از دیکشنری ترجمه (بر اساس زبان فعلی) می‌خونیم، نه از textContent فعلی المنت؛
     // چون ممکنه این افکت قبل از اینکه applyLanguage اجرا بشه (مثلاً اگه عنوان همون ابتدا در دید باشه) صدا زده بشه
     const key = textEl.getAttribute('data-i18n');
@@ -722,9 +815,12 @@ function typeSectionTitle(titleEl) {
     setTimeout(typeStep, stepDuration);
 }
 
-sr.reveal('.section-title', {
-    duration: 400,
-    delay: 0,
+// برچسب و عنوانِ هر بخش کوتاه‌تر و کم‌جابه‌جاتر از بقیه می‌آیند (عنوان کمی دیرتر، با افکت تایپ)
+reveal('.section-eyebrow', { duration: 600, distance: '20px' });
+
+reveal('.section-title', {
+    delay: 80,
+    duration: 600,
     distance: '20px',
     beforeReveal: typeSectionTitle
 });
@@ -1206,7 +1302,17 @@ function renderProjectChips(project) {
     );
 }
 
+// کارت‌ها div هستن؛ با Enter/Space هم باز می‌شن و بعد از بستن پاپ‌آپ فوکوس به همون کارت برمی‌گرده
+let lastWorkItem = null;
+
 workItems.forEach(item => {
+    item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            item.click();
+        }
+    });
+
     item.addEventListener('click', () => {
         const projectId = item.getAttribute('data-project');
         const project = projects[projectId];
@@ -1245,6 +1351,8 @@ workItems.forEach(item => {
             document.body.style.overflow = 'hidden';
             document.documentElement.classList.add('popup-open');
             requestAnimationFrame(popupScrollbar.update);
+            lastWorkItem = item;
+            closePopup.focus({ preventScroll: true });
         }
     });
 });
@@ -1254,6 +1362,7 @@ closePopup.addEventListener('click', () => {
     popup.style.display = 'none';
     document.body.style.overflow = '';
     document.documentElement.classList.remove('popup-open');
+    if (lastWorkItem) lastWorkItem.focus({ preventScroll: true });
 });
 
 /*===== Toast (جایگزین SweetAlert2 برای پیام‌های موفقیت/خطای فرم تماس) =====*/
@@ -1922,3 +2031,25 @@ onReady(function () {
       });
   });
 });
+
+/*===== نورِ دنبال‌کننده‌ی ماوس روی کارت‌ها =====
+   فقط با ماوس واقعی (روی لمس هاور نداریم). مختصات ماوس نسبت به کارت در --mx/--my ثبت می‌شه و CSS (::before کارت‌ها) نور رو همون‌جا می‌کشه؛
+   هر فریم حداکثر یک‌بار نوشته می‌شه */
+(function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const SPOT = '.services__card, .process__step, .services__note, .trust__item';
+    let frame = 0;
+    let last = null;
+    document.addEventListener('pointermove', event => {
+        const card = event.target instanceof Element ? event.target.closest(SPOT) : null;
+        if (!card) return;
+        last = { card, x: event.clientX, y: event.clientY };
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+            frame = 0;
+            const rect = last.card.getBoundingClientRect();
+            last.card.style.setProperty('--mx', (last.x - rect.left) + 'px');
+            last.card.style.setProperty('--my', (last.y - rect.top) + 'px');
+        });
+    }, { passive: true });
+})();

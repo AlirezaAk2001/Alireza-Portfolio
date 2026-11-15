@@ -123,7 +123,7 @@
     </script>
     <!-- فونت آیکون‌ها و عکس هیرو هم از ابتدا شروع به دانلود می‌شن (نه بعد از رسیدن CSS یا رسیدن به تگ SVG) -->
     <link rel="preload" as="font" type="font/woff2" href="assets/fonts/boxicons.woff2" crossorigin>
-    <link rel="preload" as="image" href="assets/img/perfil.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/img/perfil.jpg?v=2" fetchpriority="high">
 
    <title>طراحی سایت علیرضا آخوندی</title>
     <meta name="description"
@@ -159,7 +159,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="manifest" href="assets/site.webmanifest">
 
-    <link rel="stylesheet" href="assets/css/styles.css?v=40">
+    <link rel="stylesheet" href="assets/css/styles.css?v=45">
     <!-- آیکون‌فونت‌ها: میزبانی محلی (کنترل کامل روی کش و font-display) + بدون مسدودکردن رندر اولیه -->
     <link rel="preload" as="style" href="assets/css/boxicons.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" as="style" href="assets/css/fontawesome.min.css"
@@ -303,7 +303,7 @@
                     <g mask="url(#mask0)">
                         <path
                             d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
-                        <image class="home__blob-img" x="50" y="60" href="assets/img/perfil.jpg" />
+                        <image class="home__blob-img" x="0" y="-64" width="479" height="639" preserveAspectRatio="xMidYMid slice" href="assets/img/perfil.jpg?v=2" />
                     </g>
                 </svg>
                 <div class="home__orbit" aria-hidden="true">
@@ -337,8 +337,41 @@
                 </div>
             </div>
         </section>
+        <!--===== TRUST STRIP =====
+             هر آیتم فقط چیزی را می‌گوید که در خود صفحه (درباره‌ی من، خدمات و مراحل) آمده؛ متن‌ها در translations (کلیدهای trust*) -->
+        <ul class="trust bd-grid">
+            <li class="trust__item">
+                <span class="trust__icon" aria-hidden="true"><i class='bx bx-award'></i></span>
+                <div>
+                    <p class="trust__title" data-i18n="trust1_title">حدود ۵ سال</p>
+                    <p class="trust__text" data-i18n="trust1_text">تجربه در طراحی و توسعه‌ی وب</p>
+                </div>
+            </li>
+            <li class="trust__item">
+                <span class="trust__icon" aria-hidden="true"><i class='bx bx-calendar-check'></i></span>
+                <div>
+                    <p class="trust__title" data-i18n="trust2_title">مشاوره‌ی رایگان</p>
+                    <p class="trust__text" data-i18n="trust2_text">پیش از شروع، تا با هم مسیر مناسب را پیدا کنیم</p>
+                </div>
+            </li>
+            <li class="trust__item">
+                <span class="trust__icon" aria-hidden="true"><i class='bx bx-timer'></i></span>
+                <div>
+                    <p class="trust__title" data-i18n="trust3_title">تحویل معمول ۱ تا ۲ هفته</p>
+                    <p class="trust__text" data-i18n="trust3_text">برای سایت معرفی کسب‌وکار</p>
+                </div>
+            </li>
+            <li class="trust__item">
+                <span class="trust__icon" aria-hidden="true"><i class='bx bx-support'></i></span>
+                <div>
+                    <p class="trust__title" data-i18n="trust4_title">پشتیبانی پس از تحویل</p>
+                    <p class="trust__text" data-i18n="trust4_text">نگهداری و پشتیبانی ماهانه، در صورت نیاز</p>
+                </div>
+            </li>
+        </ul>
         <!--===== ABOUT =====-->
         <section class="about section " id="about" style="cursor: default;">
+            <p class="section-eyebrow" data-i18n="eyebrow_about">معرفی</p>
             <h2 class="section-title"><i class='bx bx-user section-title__icon'></i><span
                     data-i18n="about_title">درباره من</span></h2>
             <div class="about__container bd-grid">
@@ -349,7 +382,7 @@
 
                 <div>
                     <h2 class="about__subtitle" data-i18n="about_subtitle">من علیرضا هستم؛ برنامه‌نویس و توسعه‌دهندۀ وب</h2>
-                    <p class="about__text" data-i18n="about_text">حدود ۴ سال است که در حوزۀ سایت و برنامه‌نویسی وب فعالیت دارم؛ از سایت معرفی کسب‌وکار و فروشگاه اینترنتی گرفته تا پنل‌های سازمانی و مدیریتی. ظاهر و بخش رابط کاربری را با HTML، CSS، JavaScript و React می‌نویسم و برای پروژه‌های بزرگ‌تر از Next.js و Vue (به‌همراه Vuetify) کمک می‌گیرم.</p>
+                    <p class="about__text" data-i18n="about_text">حدود ۵ سال است که در حوزۀ سایت و برنامه‌نویسی وب فعالیت دارم؛ از سایت معرفی کسب‌وکار و فروشگاه اینترنتی گرفته تا پنل‌های سازمانی و مدیریتی. ظاهر و بخش رابط کاربری را با HTML، CSS، JavaScript و React می‌نویسم و برای پروژه‌های بزرگ‌تر از Next.js و Vue (به‌همراه Vuetify) کمک می‌گیرم.</p>
                     <p class="about__text" data-i18n="about_text2">الان به‌تنهایی مشغول ساخت یک فروشگاه آنلاین بزرگ از صفر هستم، با پنل مدیریت، سیستم احراز هویت و اتصال به APIها؛ رابط کاربری را تکمیل می‌کنم و آن را روی سرور می‌برم. هم در یک گروه تیمی کار کرده‌ام و هم روی پروژه‌های شخصی، و حدود ۲ سال هم در زمینۀ طراحی سایت‌های وردپرسی فعالیت داشته‌ام.</p>
                     <div class="about__actions">
                         <p class="about__cta-text" data-i18n="about_cta">ایده‌ای دارید؟ می‌توانید ایدۀ خود را تنها با یک کلیک و مشاورۀ رایگان به واقعیت تبدیل کنید.</p>
@@ -363,6 +396,7 @@
         </section>
         <!--===== SERVICES =====-->
         <section class="services section" id="services" style="cursor: default;">
+            <p class="section-eyebrow" data-i18n="eyebrow_services">چه کاری برای شما می‌کنم</p>
             <h2 class="section-title"><i class='bx bx-layer section-title__icon'></i><span
                     data-i18n="services_title">خدمات</span></h2>
             <p class="services__intro" data-i18n="services_intro">کسب‌وکارتان در هر مرحله‌ای باشد، سایتی متناسب با آن می‌سازم: سریع، واکنش‌گرا و ساده برای مدیریت شما.</p>
@@ -457,6 +491,7 @@
         </section>
         <!--===== SKILLS =====-->
         <section class="skills section" id="skills" style="cursor: default;">
+            <p class="section-eyebrow" data-i18n="eyebrow_skills">ابزارها و تکنولوژی‌ها</p>
             <h2 class="section-title"><i class='bx bx-code-alt section-title__icon'></i><span
                     data-i18n="skills_title">مهارت‌های من</span></h2>
             <div class="skills__container bd-grid">
@@ -470,6 +505,8 @@
                                 <li class="skills__item"><i class='bx bxl-css3 skills__icon'></i><span>CSS3</span></li>
                                 <li class="skills__item"><span class="skills__icon icon-mask" data-icon="tailwindcss" aria-hidden="true"></span><span>Tailwind CSS</span></li>
                                 <li class="skills__item"><i class='bx bxl-javascript skills__icon'></i><span>JavaScript</span></li>
+                                <li class="skills__item"><i class='bx bxl-bootstrap skills__icon'></i><span>Bootstrap</span></li>
+                                <li class="skills__item"><i class='bx bxl-jquery skills__icon'></i><span>jQuery</span></li>
                             </ul>
                         </div>
                         <div class="skills__group">
@@ -479,6 +516,32 @@
                                 <li class="skills__item"><span class="skills__icon icon-mask" data-icon="nextdotjs" aria-hidden="true"></span><span>NextJs</span></li>
                                 <li class="skills__item"><i class="fab fa-vuejs skills__icon"></i><span>VueJs</span></li>
                                 <li class="skills__item"><span class="skills__icon icon-mask" data-icon="vuetify" aria-hidden="true"></span><span>Vuetify</span></li>
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="mui" aria-hidden="true"></span><span>Material UI</span></li>
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="reactquery" aria-hidden="true"></span><span>TanStack Query</span></li>
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="reactrouter" aria-hidden="true"></span><span>React Router</span></li>
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="vuedotjs" aria-hidden="true"></span><span>Vue Router</span></li>
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="axios" aria-hidden="true"></span><span>Axios</span></li>
+                            </ul>
+                        </div>
+                        <div class="skills__group">
+                            <h3 class="skills__group-title" data-i18n="skills_group_data">پایگاه داده و احراز هویت</h3>
+                            <ul class="skills__list">
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="postgresql" aria-hidden="true"></span><span>PostgreSQL</span></li>
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="prisma" aria-hidden="true"></span><span>Prisma ORM</span></li>
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="jsonwebtokens" aria-hidden="true"></span><span>JWT</span></li>
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="google" aria-hidden="true"></span><span>Google OAuth</span></li>
+                            </ul>
+                        </div>
+                        <div class="skills__group">
+                            <h3 class="skills__group-title" data-i18n="skills_group_plugins">افزونه‌ها و ابزارهای کمکی</h3>
+                            <ul class="skills__list">
+                                <li class="skills__item"><span class="skills__icon icon-mask" data-icon="swiper" aria-hidden="true"></span><span>Swiper</span></li>
+                                <li class="skills__item"><i class='bx bx-grid-alt skills__icon'></i><span>Isotope.js</span></li>
+                                <li class="skills__item"><i class='bx bx-carousel skills__icon'></i><span>Owl Carousel</span></li>
+                                <li class="skills__item"><i class='bx bx-images skills__icon'></i><span>Vegas.js</span></li>
+                                <li class="skills__item"><i class='bx bx-bell skills__icon'></i><span>SweetAlert2</span></li>
+                                <li class="skills__item"><i class='bx bx-move skills__icon'></i><span>Animate.css</span></li>
+                                <li class="skills__item"><i class='bx bx-server skills__icon'></i><span>json-server</span></li>
                             </ul>
                         </div>
                         <div class="skills__group">
@@ -498,61 +561,97 @@
         </section>
         <!--===== portfolio =====-->
         <section class="work section" id="work" style="cursor: default;">
+            <p class="section-eyebrow" data-i18n="eyebrow_work">پروژه‌هایی که ساخته‌ام</p>
             <h2 class="section-title"><i class='bx bx-briefcase section-title__icon'></i><span
                     data-i18n="work_title">نمونه‌کارهای من</span></h2>
             <div class="work__container bd-grid">
-                <!-- نمونه‌کار 1 -->
-                <div class="work__img" data-project="project1">
-                    <img src="assets/img/logo-lugx(2).jpg" alt="Lugx Gaming project thumbnail" width="897"
-                        height="900" loading="lazy">
-                    <div class="work__overlay">
-                        <h3 class="work__title" data-i18n="proj1_title">Lugx Gaming</h3>
+                <!-- دو کارت بزرگ بالا (پروژه‌ی فعال و فروشگاه بازی)، سه کارت کوچک زیرشون، و نوار «به‌زودی» پایین؛ چیدمانش در CSS است -->
+                <div class="work__img work__img--lg" data-project="project5" role="button" tabindex="0" aria-haspopup="dialog">
+                    <div class="work__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                    <div class="work__shot">
+                        <img src="assets/img/work-orkideh.webp" alt="Orkideh Sewing Machine Store project screenshot" width="1000" height="451" loading="lazy" decoding="async">
+                        <span class="work__status work__status--progress" data-i18n="popup_status_progress">در دست توسعه</span>
+                        <span class="work__view"><span data-i18n="work_view">مشاهده جزئیات</span><i class='bx bx-right-arrow-alt'></i></span>
+                    </div>
+                    <div class="work__meta">
+                        <div class="work__info">
+                            <h3 class="work__title" data-i18n="proj5_title">فروشگاه ارکیده</h3>
+                            <ul class="work__tags"><li>Next.js</li><li>React</li><li>PostgreSQL</li><li>Prisma</li></ul>
+                        </div>
+                        <span class="work__go" aria-hidden="true"><i class='bx bx-right-arrow-alt'></i></span>
                     </div>
                 </div>
-                <!-- نمونه‌کار 2 -->
-                <div class="work__img" data-project="project2">
-                    <img src="assets/img/logo-ogs-1.png" alt="Online Game Shop project thumbnail" width="640"
-                        height="642" loading="lazy">
-                    <div class="work__overlay">
-                        <h3 class="work__title" data-i18n="proj2_title">فروشگاه آنلاین بازی</h3>
+                <div class="work__img work__img--lg" data-project="project2" role="button" tabindex="0" aria-haspopup="dialog">
+                    <div class="work__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                    <div class="work__shot">
+                        <img src="assets/img/work-ogs.webp" alt="Online Game Shop project screenshot" width="1000" height="500" loading="lazy" decoding="async">
+                        <span class="work__status work__status--done" data-i18n="popup_status_done">اتمام‌یافته</span>
+                        <span class="work__view"><span data-i18n="work_view">مشاهده جزئیات</span><i class='bx bx-right-arrow-alt'></i></span>
+                    </div>
+                    <div class="work__meta">
+                        <div class="work__info">
+                            <h3 class="work__title" data-i18n="proj2_title">فروشگاه آنلاین بازی</h3>
+                            <ul class="work__tags"><li>React</li><li>TanStack Query</li><li>Material UI</li><li>Swiper</li></ul>
+                        </div>
+                        <span class="work__go" aria-hidden="true"><i class='bx bx-right-arrow-alt'></i></span>
                     </div>
                 </div>
-                <!-- نمونه‌کار 3 -->
-                <div class="work__img" data-project="project3">
-                    <img src="assets/img/coffee-beans.png" alt="Barista Cafe project thumbnail" width="320"
-                        height="321" loading="lazy">
-                    <div class="work__overlay">
-                        <h3 class="work__title" data-i18n="proj3_title">کافه باریستا</h3>
+                <div class="work__img" data-project="project1" role="button" tabindex="0" aria-haspopup="dialog">
+                    <div class="work__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                    <div class="work__shot">
+                        <img src="assets/img/work-lugx.webp" alt="Lugx Gaming project screenshot" width="1000" height="491" loading="lazy" decoding="async">
+                        <span class="work__status work__status--done" data-i18n="popup_status_done">اتمام‌یافته</span>
+                        <span class="work__view"><span data-i18n="work_view">مشاهده جزئیات</span><i class='bx bx-right-arrow-alt'></i></span>
+                    </div>
+                    <div class="work__meta">
+                        <div class="work__info">
+                            <h3 class="work__title" data-i18n="proj1_title">Lugx Gaming</h3>
+                            <ul class="work__tags"><li>Bootstrap 5</li><li>jQuery</li><li>Isotope.js</li></ul>
+                        </div>
+                        <span class="work__go" aria-hidden="true"><i class='bx bx-right-arrow-alt'></i></span>
                     </div>
                 </div>
-                <!-- نمونه‌کار 4 -->
-                <div class="work__img" data-project="project4">
-                    <img src="assets/img/logo-vue-1.png" alt="Vue SPA project thumbnail" width="640" height="642"
-                        loading="lazy">
-                    <div class="work__overlay">
-                        <h3 class="work__title" data-i18n="proj4_title">Vue SPA</h3>
+                <div class="work__img" data-project="project3" role="button" tabindex="0" aria-haspopup="dialog">
+                    <div class="work__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                    <div class="work__shot">
+                        <img src="assets/img/work-cafe.webp" alt="Barista Cafe project screenshot" width="1000" height="489" loading="lazy" decoding="async">
+                        <span class="work__status work__status--done" data-i18n="popup_status_done">اتمام‌یافته</span>
+                        <span class="work__view"><span data-i18n="work_view">مشاهده جزئیات</span><i class='bx bx-right-arrow-alt'></i></span>
+                    </div>
+                    <div class="work__meta">
+                        <div class="work__info">
+                            <h3 class="work__title" data-i18n="proj3_title">کافه باریستا</h3>
+                            <ul class="work__tags"><li>Bootstrap</li><li>jQuery</li><li>Vegas.js</li></ul>
+                        </div>
+                        <span class="work__go" aria-hidden="true"><i class='bx bx-right-arrow-alt'></i></span>
                     </div>
                 </div>
-                <!-- نمونه‌کار 5 -->
-                <div class="work__img" data-project="project5">
-                    <img src="assets/img/logo-sewing-1.png" alt="Orkideh Sewing Machine Store project thumbnail"
-                        width="640" height="642" loading="lazy">
-                    <div class="work__overlay">
-                        <h3 class="work__title" data-i18n="proj5_title">فروشگاه ارکیده</h3>
+                <div class="work__img" data-project="project4" role="button" tabindex="0" aria-haspopup="dialog">
+                    <div class="work__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                    <div class="work__shot">
+                        <img src="assets/img/work-vue.webp" alt="Vue SPA project screenshot" width="1000" height="489" loading="lazy" decoding="async">
+                        <span class="work__status work__status--done" data-i18n="popup_status_done">اتمام‌یافته</span>
+                        <span class="work__view"><span data-i18n="work_view">مشاهده جزئیات</span><i class='bx bx-right-arrow-alt'></i></span>
+                    </div>
+                    <div class="work__meta">
+                        <div class="work__info">
+                            <h3 class="work__title" data-i18n="proj4_title">Vue SPA</h3>
+                            <ul class="work__tags"><li>Vue 3</li><li>Vue Router</li><li>Axios</li></ul>
+                        </div>
+                        <span class="work__go" aria-hidden="true"><i class='bx bx-right-arrow-alt'></i></span>
                     </div>
                 </div>
-                <!-- نمونه‌کار 6 -->
-                <div class="work__img work__comingsoon">
+                <div class="work__comingsoon">
                     <div class="spinner">
                         <div class="ring r1"></div>
                         <div class="ring r2"></div>
                         <div class="ring r3"></div>
                         <div class="core"></div>
                     </div>
-                    <div class="work__overlay">
+                    <div class="work__soon-text">
                         <h3 class="work__title" data-i18n="work_new_project">پروژه‌ی جدید</h3>
+                        <div class="label"><span class="neon" data-i18n="work_coming_soon">به‌زودی</span></div>
                     </div>
-                    <div class="label"><span class="neon" data-i18n="work_coming_soon">به‌زودی</span></div>
                 </div>
             </div>
             <!-- پاپ‌آپ برای نمایش جزئیات پروژه -->
@@ -596,6 +695,7 @@
                     </div>
                 </div>
             </div>
+            <p class="section-eyebrow" data-i18n="eyebrow_contact">شروع همکاری</p>
             <h2 class="section-title"><i class='bx bx-envelope section-title__icon'></i><span
                     data-i18n="contact_title">ارتباط با من</span></h2>
             <p class="contact__lead" data-i18n="contact_lead">برای مشاوره‌ی رایگان یا دریافت قیمت، فرم زیر را پر کنید؛ در اولین فرصت با شما تماس می‌گیرم.</p>
@@ -735,7 +835,7 @@
     <!--===== SCROLL REVEAL =====-->
     <script src="assets/js/vendor/scrollreveal.min.js"></script>
     <!--===== MAIN JS =====-->
-    <script src="assets/js/main.js?v=29"></script>
+    <script src="assets/js/main.js?v=34"></script>
 </body>
 
 </html>

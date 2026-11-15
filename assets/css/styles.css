@@ -81,6 +81,14 @@
   /*===== z index =====*/
   --z-back: -10;
   --z-fixed: 100;
+  /*===== حرکت یکپارچه (مرحله‌ی ۴) =====
+     --ease-out: منحنی اصلیِ همه‌ی ورودها و هاورها؛ --ease-in-out: رفت‌وبرگشت‌های متقارن (مثل مسیر خط نور)؛
+     --ease-standard: تغییرهای کوچک و کم‌ارتفاع؛ --lift-card: بالا رفتن کارت‌ها هنگام هاور (همه‌ی کارت‌های بزرگ یک‌اندازه).
+     همین مقدارها در main.js (MOTION.easing) هم تکرار شده تا ورود اسکرولی با هاورها هم‌حس باشد */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --lift-card: -8px;
 }
 
 @media screen and (min-width: 968px) {
@@ -102,6 +110,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  /* در کل پروژه نشانگر ماوس روی متن‌ها فلش است (نه I-beam)؛ لینک‌ها، دکمه‌ها و فیلدها نشانگر خودشان (pointer/text) را نگه می‌دارند */
+  cursor: default;
 }
 
 body {
@@ -249,14 +259,14 @@ html[dir="rtl"] .section-title::after {
        منحنی (0.4, 0, 0.2, 1) سرعت اولیه و انتهایی صفر داره، یعنی شروع و پایان کاملاً نرم */
     transform: translateX(100%);
     visibility: hidden;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transition: transform 0.5s var(--ease-standard),
                 visibility 0s linear 0.5s;
   }
 
   .nav__menu.show {
     transform: translateX(0);
     visibility: visible;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transition: transform 0.6s var(--ease-standard),
                 visibility 0s linear 0s;
   }
 
@@ -274,7 +284,7 @@ html[dir="rtl"] .section-title::after {
     backdrop-filter: blur(6px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.55s;
+    transition: opacity 0.55s var(--ease-standard), visibility 0.55s;
   }
 
   .nav__overlay.is-visible {
@@ -317,7 +327,7 @@ html.menu-open {
   background-color: var(--first-color);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.4s var(--ease-out);
 }
 
 .nav__link:hover::after {
@@ -354,8 +364,8 @@ html[dir="rtl"] .nav__link::after {
 
 /* با specificity بالاتر از .flag-button تا ترنزیشن اون (که border-color نداره) این ترنزیشن رو override نکنه */
 .nav__toggle.flag-button {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out),
               background-color 0.4s ease,
               color 0.4s ease,
               border-color 0.4s ease;
@@ -388,7 +398,7 @@ html[dir="rtl"] .nav__link::after {
   align-items: flex-start;
   gap: 4px;
   width: 16px;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.5s var(--ease-out);
 }
 
 .nav__toggle-icon span {
@@ -397,7 +407,7 @@ html[dir="rtl"] .nav__link::after {
   height: 2px;
   border-radius: 2px;
   background-color: currentColor;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.5s var(--ease-out),
               width 0.3s ease,
               opacity 0.25s ease;
 }
@@ -512,9 +522,7 @@ html[lang="en"] .home__title {
   fill: var(--first-color);
 }
 
-.home__blob-img {
-  width: 376px;
-}
+/* عکس با attributeهای width/height داخل SVG (اندازه‌ی ۴۷۹×۶۳۹ و جابه‌جایی y) کل شکل بلاب رو پر می‌کنه */
 
 /* ==== Orbiting skill icons around hero photo (all screen sizes, pure CSS) ==== */
 .home__orbit {
@@ -830,6 +838,56 @@ html[lang="en"] .home__title {
   mask-image: url("../img/vuetify.svg");
 }
 
+.icon-mask[data-icon="mui"] {
+  -webkit-mask-image: url("../img/mui.svg");
+  mask-image: url("../img/mui.svg");
+}
+
+.icon-mask[data-icon="reactquery"] {
+  -webkit-mask-image: url("../img/reactquery.svg");
+  mask-image: url("../img/reactquery.svg");
+}
+
+.icon-mask[data-icon="reactrouter"] {
+  -webkit-mask-image: url("../img/reactrouter.svg");
+  mask-image: url("../img/reactrouter.svg");
+}
+
+.icon-mask[data-icon="vuedotjs"] {
+  -webkit-mask-image: url("../img/vuedotjs.svg");
+  mask-image: url("../img/vuedotjs.svg");
+}
+
+.icon-mask[data-icon="axios"] {
+  -webkit-mask-image: url("../img/axios.svg");
+  mask-image: url("../img/axios.svg");
+}
+
+.icon-mask[data-icon="postgresql"] {
+  -webkit-mask-image: url("../img/postgresql.svg");
+  mask-image: url("../img/postgresql.svg");
+}
+
+.icon-mask[data-icon="prisma"] {
+  -webkit-mask-image: url("../img/prisma.svg");
+  mask-image: url("../img/prisma.svg");
+}
+
+.icon-mask[data-icon="jsonwebtokens"] {
+  -webkit-mask-image: url("../img/jsonwebtokens.svg");
+  mask-image: url("../img/jsonwebtokens.svg");
+}
+
+.icon-mask[data-icon="google"] {
+  -webkit-mask-image: url("../img/google.svg");
+  mask-image: url("../img/google.svg");
+}
+
+.icon-mask[data-icon="swiper"] {
+  -webkit-mask-image: url("../img/swiper.svg");
+  mask-image: url("../img/swiper.svg");
+}
+
 .skills__icon.icon-mask {
   width: 1.6rem;
   height: 1.6rem;
@@ -847,87 +905,375 @@ html[lang="en"] .home__title {
 }
 
 /* ===== Portfolio =====*/
+/* کارت‌ها قاب مرورگر با اسکرین‌شات واقعی سایت‌ها هستن (وضعیت پروژه روی عکس، تکنولوژی‌ها زیرش).
+   موبایل: یک ستون؛ تبلت: دو ستون؛ دسکتاپ: شبکه‌ی ۶ ستونی (دو کارت بزرگ بالا، سه کارت کوچک زیرشون، نوار «به‌زودی» پایین).
+   ترتیب کارت‌ها در HTML است؛ دو کارت اول کلاس work__img--lg دارن */
 .work__container {
-  row-gap: 2rem;
-  justify-items: center;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding-top: 1rem;
 }
 
-/* کل کارت‌ها */
 .work__img {
-  width: 330px;
-  height: 330px;
-  background: var(--surface-color);
-  border-radius: 20px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    0 5px 15px rgba(0, 0, 0, 0.5),
-    inset 0 0 15px rgba(94, 240, 255, 0.25);
-  transform: perspective(600px) rotateX(0deg) rotateY(0deg);
-  /* بدون important: تا انیمیشن ورود ScrollReveal (اسکرول/رفرش) دست‌نخورده بمونه */
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-color);
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: var(--card-shadow);
   cursor: pointer;
-  backdrop-filter: blur(8px);
+  /* بدون important: تا انیمیشن ورود ScrollReveal (اسکرول/رفرش) دست‌نخورده بمونه */
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out),
+              border-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* بعد از تمام شدن انیمیشن ورود (main.js کلاس is-revealed رو اضافه می‌کنه)،
    ترنزیشن سریع رو قطعی می‌کنیم تا رفتن و برگشتنِ هاور هر دو سریع و قرینه باشن */
 .work__img.is-revealed {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out),
+              border-color 0.3s ease !important;
 }
 
-/* !important فقط اینجا (روی خود هاور) چون ScrollReveal یک transform/transition inline ست می‌کند؛
-   با اسکوپ کردنش به :hover، انیمیشن ورود اولیه دست‌نخورده می‌ماند و فقط لحظه‌ی هاور سریع/نرم اجرا می‌شود */
-.work__img:hover {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
-  transform: translateY(-10px) !important;
-  box-shadow:
-    0 22px 32px -16px hsla(var(--hue-color), 89%, 60%, 0.35),
-    0 8px 16px -8px rgba(14, 36, 49, 0.2) !important;
+.work__img:focus-visible {
+  outline: 3px solid hsla(var(--hue-color), 89%, 60%, 0.5);
+  outline-offset: 3px;
 }
 
-/* لوگوی پروژه داخل کارت */
-.work__img img {
-  transition: transform 0.5s ease;
-  transform-style: preserve-3d;
+/* نوار بالای قاب مرورگر (سه نقطه) */
+.work__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 1.65rem;
+  padding: 0 0.75rem;
+  direction: ltr;
+  background-color: rgba(127, 127, 127, 0.12);
+  border-bottom: 1px solid var(--border-color);
 }
 
-.work__img:hover img {
-  transform: scale(1.1) translateZ(30px);
+.work__bar i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #ff5f57;
 }
 
-/* متن عنوان */
-.work__img:hover .work__title {
-  text-shadow:
-    1px 1px 2px rgba(0, 0, 0, 0.5),
-    0 0 12px rgba(255, 255, 255, 0.8),
-    0 0 25px rgba(94, 240, 255, 0.75),
-    0 0 45px rgba(200, 107, 255, 0.55);
-  transform: scale(1.05);
-  transition: all 0.3s ease;
-  animation: flicker 3s linear infinite;
+.work__bar i:nth-child(2) {
+  background-color: #febc2e;
 }
 
-.work__img:hover .work__overlay {
-  opacity: 1;
+.work__bar i:nth-child(3) {
+  background-color: #28c840;
 }
 
-.work__overlay {
+/* اسکرین‌شات + لایه‌های هاور (خط نور و دکمه‌ی «مشاهده جزئیات»).
+   تیره‌شدن عکس هنگام هاور با filter روی خودِ <img> انجام می‌شه، نه با یک لایه‌ی جدا روی عکس:
+   لایه‌ی جدا روی مانیتورهای با مقیاس کسری (مثلاً ۱۲۵٪ یا ۱۵۰٪ ویندوز) یک ردیف پیکسل پایین عکس رو تیره نمی‌کرد
+   و تا پایان انیمیشن زوم یک خط روشن/نویز زیر عکس دیده می‌شد.
+   با filter هر پیکسلِ عکس همراه خودش تیره می‌شه، و خط نور (که بالای عکسه) روی عکس تیره‌شده می‌افته
+   پس روی اسکرین‌شات‌های روشن (مثل Vue SPA) هم دیده می‌شه */
+.work__shot {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: rgba(127, 127, 127, 0.12);
+}
+
+.work__shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.9s var(--ease-out),
+              filter 0.5s ease;
+}
+
+/* خط نور مورب: هنگام هاور آروم از یک سمت عکس به سمت دیگه می‌ره و با برداشتن هاور همون مسیر رو (با همون نرمی) برمی‌گرده.
+   دو سرِ مسیر بیرونِ قابه و لبه‌های گرادیانت نرم‌اند، پس شروع و پایان حرکت دیده نمی‌شه */
+.work__shot::before {
+  content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.07) 38%,
+    rgba(255, 255, 255, 0.34) 50%,
+    rgba(255, 255, 255, 0.07) 62%,
+    transparent 75%
+  );
+  transform: translateX(-75%);
+  transition: transform 1.8s cubic-bezier(0.35, 0.1, 0.5, 0.9);
+}
+
+/* وضعیت پروژه روی گوشه‌ی عکس (شیشه‌ای تیره تا روی هر عکسی خوانا بمونه) */
+.work__status {
+  position: absolute;
+  z-index: 2;
+  top: 0.6rem;
+  inset-inline-start: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.7rem;
+  font-weight: var(--font-semi);
+  line-height: 1.8;
   color: #fff;
-  padding: 1rem;
+  background-color: rgba(10, 16, 26, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2rem;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.work__status::before {
+  content: "";
+  flex-shrink: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background-color: hsl(145, 60%, 55%);
+}
+
+/* نقطه‌ی «در دست توسعه» می‌تپه (همان انیمیشن چیپ‌های پاپ‌آپ) */
+.work__status--progress {
+  --dot-glow: hsla(38, 95%, 60%, 0.55);
+}
+
+.work__status--progress::before {
+  background-color: hsl(38, 95%, 60%);
+  animation: chipDotBeat 1.8s ease-in-out infinite,
+             chipDotRing 1.8s ease-out infinite;
+}
+
+.work__view {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.8rem;
+  font-weight: var(--font-semi);
+  white-space: nowrap;
+  color: #fff;
+  background-color: var(--first-color);
+  border-radius: 2rem;
+  box-shadow: 0 10px 22px -8px hsla(var(--hue-color), 89%, 52%, 0.8);
   opacity: 0;
-  transition: opacity 0.3s ease;
-  text-align: center;
+  transform: translate(-50%, calc(-50% + 12px));
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.45s var(--ease-out);
+}
+
+.work__view i,
+.work__go i {
+  display: inline-block;
+  font-size: 1.15rem;
+  transition: transform 0.35s var(--ease-out);
+}
+
+/* فلش‌ها در فارسی (rtl) رو به چپ‌اند */
+html[dir="rtl"] .work__view i,
+html[dir="rtl"] .work__go i {
+  transform: scaleX(-1);
+}
+
+.work__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem 1rem;
+}
+
+.work__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.work__title {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+  font-weight: var(--font-semi);
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+.work__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work__tags li {
+  padding: 0 0.55rem;
+  font-size: 0.68rem;
+  font-weight: var(--font-semi);
+  line-height: 1.7;
+  white-space: nowrap;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  border-radius: 2rem;
+}
+
+.work__go {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--first-color);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* کارت‌های بزرگ‌تر کمی عنوان درشت‌تری دارن */
+.work__img--lg .work__title {
+  font-size: 1.15rem;
+}
+
+/* حالت هاور/فوکوس کارت (دسکتاپ: هاور واقعی؛ فوکوس صفحه‌کلید همیشه) */
+.work__img:focus-visible .work__shot img {
+  transform: scale(1.06);
+  filter: brightness(0.5);
+}
+
+.work__img:focus-visible .work__shot::before {
+  transform: translateX(75%);
+}
+
+.work__img:focus-visible .work__view {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+.work__img:focus-visible .work__go {
+  color: #fff;
+  background-color: var(--first-color);
+  border-color: var(--first-color);
+}
+
+@media screen and (min-width: 768px) {
+  /* !important فقط روی خود هاور چون ScrollReveal یک transform/transition inline ست می‌کند؛
+     با اسکوپ کردنش به :hover، انیمیشن ورود اولیه دست‌نخورده می‌ماند */
+  .work__img:hover {
+    border-color: hsla(var(--hue-color), 89%, 60%, 0.6);
+    transform: translateY(var(--lift-card)) !important;
+    box-shadow:
+      0 26px 40px -18px hsla(var(--hue-color), 89%, 52%, 0.45),
+      0 8px 16px -8px rgba(14, 36, 49, 0.2) !important;
+    transition: transform 0.45s var(--ease-out),
+                box-shadow 0.45s var(--ease-out),
+                border-color 0.3s ease !important;
+  }
+
+  .work__img:hover .work__shot img {
+    transform: scale(1.06);
+    filter: brightness(0.5);
+  }
+
+  .work__img:hover .work__shot::before {
+    transform: translateX(75%);
+  }
+
+  .work__img:hover .work__view {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  .work__img:hover .work__go {
+    color: #fff;
+    background-color: var(--first-color);
+    border-color: var(--first-color);
+  }
+
+  .work__img:hover .work__go i {
+    transform: translateX(3px);
+  }
+
+  html[dir="rtl"] .work__img:hover .work__go i {
+    transform: scaleX(-1) translateX(3px);
+  }
+}
+
+/* موبایل: به‌جای :hover (که روی لمس گیر می‌کنه) کلاس is-pressed از main.js کنترل می‌شه */
+@media screen and (max-width: 767px) {
+  .work__img.is-pressed {
+    transform: scale(0.985) !important;
+  }
+
+  .work__img.is-pressed .work__go {
+    color: #fff;
+    background-color: var(--first-color);
+    border-color: var(--first-color);
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .work__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .work__comingsoon {
+    grid-column: 1 / -1;
+  }
+}
+
+/* تبلت (دو ستون): کارت اول (پروژه‌ی شاخص) تمام‌عرض، چهار کارت بعدی دوتا دوتا، و نوار «به‌زودی» تمام‌عرض */
+@media screen and (min-width: 640px) and (max-width: 991px) {
+  .work__container > .work__img:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .work__container {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .work__img {
+    grid-column: span 2;
+  }
+
+  .work__img--lg {
+    grid-column: span 3;
+  }
+
+  .work__comingsoon {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work__shot img,
+  .work__shot::before,
+  .work__view,
+  .work__img:hover .work__shot img,
+  .work__img:hover .work__shot::before {
+    transition: none;
+  }
+
+  .work__status--progress::before {
+    animation: none;
+  }
 }
 
 /* استایل‌های پاپ‌آپ */
@@ -966,7 +1312,8 @@ html[lang="en"] .home__title {
 .popup__close {
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  /* سمتِ شروعِ زبان: راست در فارسی، چپ در انگلیسی */
+  inset-inline-start: 1rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -979,8 +1326,8 @@ html[lang="en"] .home__title {
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out),
               background-color 0.3s ease,
               color 0.3s ease,
               border-color 0.3s ease;
@@ -1170,8 +1517,8 @@ html[data-theme="dark"] .popup-chip--active {
   border: 1px solid var(--border-color);
   border-radius: 0.6rem;
   padding: 0.9rem 1rem;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out);
 }
 
 /* بلند شدن نرم کارت‌ها هنگام هاور، هم‌سبک با دکمه‌ی Call Me */
@@ -1243,8 +1590,8 @@ html[data-theme="dark"] .popup-chip--active {
   border-radius: 0.6rem;
   font-size: var(--smaller-font-size);
   line-height: 1.5;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out);
 }
 
 .popup__desc-features li:hover {
@@ -1425,12 +1772,6 @@ html[data-theme="dark"] .popup-chip--active {
     column-gap: 1rem;
   }
 
-  .work__container {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 2rem;
-    padding-top: 2rem;
-  }
-
   .contact__form {
     width: 360px;
     padding-top: 2rem;
@@ -1516,10 +1857,6 @@ html[data-theme="dark"] .popup-chip--active {
     text-align: initial;
   }
 
-  .work__container {
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 2rem;
-  }
 }
 
 @media screen and (min-width: 992px) {
@@ -1545,34 +1882,45 @@ html[data-theme="dark"] .popup-chip--active {
   }
 }
 
-/* ==== Coming Soon Spinner (for work cards) ==== */
+/* ==== Coming Soon Spinner (نوار «پروژه‌ی جدید» زیر کارت‌ها) ==== */
 .work__comingsoon {
-  width: 330px;
-  height: 330px;
-  background: var(--surface-color);
-  border-radius: 20px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow:
-    0 5px 15px rgba(0, 0, 0, 0.5),
-    inset 0 0 15px rgba(94, 240, 255, 0.25);
-  transform: perspective(600px) rotateX(0deg) rotateY(0deg);
-  /* بدون important: تا انیمیشن ورود ScrollReveal دست‌نخورده بمونه */
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  cursor: pointer;
-  backdrop-filter: blur(8px);
+  gap: 1.5rem;
+  padding: 1.1rem 1.5rem;
+  background-color: var(--surface-color);
+  border: 1px dashed var(--border-color);
+  border-radius: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.45s var(--ease-out);
 }
 
 .work__comingsoon:hover {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
-  transform: translateY(-10px) !important;
-  box-shadow:
-    0 22px 32px -16px hsla(var(--hue-color), 89%, 60%, 0.35),
-    0 8px 16px -8px rgba(14, 36, 49, 0.2) !important;
+  border-color: hsla(var(--hue-color), 89%, 60%, 0.55);
+  box-shadow: 0 18px 32px -18px hsla(var(--hue-color), 89%, 52%, 0.4);
+}
+
+.work__soon-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.work__soon-text .work__title {
+  margin-bottom: 0.3rem;
+}
+
+/* داخل نوار، برچسب به‌جای جعبه‌ی گرادیانی قدیمی یک متن نئونی تمیز با رنگ اصلی سایت است */
+.work__soon-text .label {
+  margin-top: 0;
+  background: none;
+  color: var(--first-color);
+  -webkit-text-fill-color: var(--first-color);
+  text-shadow: 0 0 14px hsla(var(--hue-color), 89%, 60%, 0.5);
+}
+
+.work__comingsoon:hover .work__soon-text .label {
+  text-shadow: 0 0 18px hsla(var(--hue-color), 89%, 60%, 0.8);
 }
 
 /* Spinner Base */
@@ -1824,8 +2172,8 @@ html[data-theme="dark"] .popup-chip--active {
 
 /* بلند شدن نرم دکمه‌های flag-button (Call Me، شبکه‌های اجتماعی، ارسال پیام، لینک‌های منو و ...) */
 .flag-button {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out),
     background-color 0.4s ease,
     color 0.4s ease;
 }
@@ -1868,8 +2216,8 @@ html[data-theme="dark"] .popup-chip--active {
   border: 1.5px solid var(--text-color);
   border-radius: 2rem;
   cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out),
               background-color 0.3s ease,
               color 0.3s ease,
               border-color 0.3s ease;
@@ -1943,8 +2291,8 @@ html[data-theme="dark"] .popup-chip--active {
   border: 1.5px solid var(--text-color);
   border-radius: 50%;
   cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out),
               background-color 0.3s ease,
               color 0.3s ease,
               border-color 0.3s ease;
@@ -2010,8 +2358,8 @@ html[data-theme="dark"] .popup-chip--active {
   border: 1.5px solid var(--text-color);
   border-radius: 50%;
   cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out),
               background-color 0.3s ease,
               color 0.3s ease,
               border-color 0.3s ease;
@@ -2042,7 +2390,7 @@ html[data-theme="dark"] .popup-chip--active {
 /* چرخش فقط روی آیکون داخل دکمه اجرا می‌شه، نه کل دکمه؛ وگرنه tooltip (که pseudo-element خود دکمه‌ست) هم کج می‌شد */
 .theme-toggle i {
   display: inline-block;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.35s var(--ease-out);
 }
 
 @media screen and (min-width: 768px) {
@@ -2191,12 +2539,6 @@ html[dir="rtl"] .error-message {
   right: 5px;
 }
 
-/* دکمه‌ی بستن پاپ‌آپ: بالا-چپ به‌جای بالا-راست */
-html[dir="rtl"] .popup__close {
-  right: auto;
-  left: 1rem;
-}
-
 /* ==================== تم تاریک ==================== */
 html[data-theme="dark"] {
   color-scheme: dark;
@@ -2266,8 +2608,8 @@ html[data-theme="dark"] .popup__content {
   pointer-events: auto;
   opacity: 0;
   transform: translateY(16px) scale(0.97);
-  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.35s var(--ease-out),
+              transform 0.35s var(--ease-out);
 }
 
 .toast.show {
@@ -2503,21 +2845,21 @@ html[data-theme="dark"] .services__note {
   border-radius: 0.75rem;
   box-shadow: var(--card-shadow);
   /* بدون important: تا انیمیشن ورود ScrollReveal دست‌نخورده بمونه */
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out);
 }
 
 /* بعد از تمام شدن انیمیشن ورود (main.js کلاس is-revealed رو اضافه می‌کنه)، ترنزیشن سریع هاور قطعی می‌شه
    (دقیقاً مثل کارت‌های مهارت‌ها و نمونه‌کارها) */
 .services__card.is-revealed {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out) !important;
 }
 
 .services__card:hover {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
-  transform: translateY(-10px) !important;
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out) !important;
+  transform: translateY(var(--lift-card)) !important;
   box-shadow:
     0 22px 32px -16px hsla(var(--hue-color), 89%, 60%, 0.35),
     0 8px 16px -8px rgba(14, 36, 49, 0.2) !important;
@@ -2689,16 +3031,16 @@ html[data-theme="dark"] .services__card {
   background-color: var(--surface-color);
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out),
               border-color 0.3s ease;
 }
 
 /* بعد از تمام شدن انیمیشن ورود (main.js کلاس is-revealed را می‌گذارد)، ترنزیشن ScrollReveal کنار می‌رود تا بالا رفتن و برگشتن هاور هر دو نرم و سریع باشند
    (!important چون ScrollReveal خودش transform/transition را inline می‌گذارد؛ مثل کارت‌های خدمات) */
 .faq__item.is-revealed {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out),
               border-color 0.3s ease !important;
 }
 
@@ -2738,7 +3080,7 @@ html[data-theme="dark"] .services__card {
   border-right: 2px solid var(--first-color);
   border-bottom: 2px solid var(--first-color);
   transform: translateY(-0.15rem) rotate(45deg);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s var(--ease-standard);
 }
 
 .faq__item.is-open .faq__q::after {
@@ -2921,8 +3263,8 @@ html[data-theme="dark"] .services__card {
   border: 1px solid var(--border-color);
   border-radius: 2rem;
   font-size: 0.9rem;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out),
     background-color 0.25s ease,
     color 0.25s ease,
     border-color 0.25s ease;
@@ -3119,8 +3461,8 @@ html[lang="en"] .about__cta-text {
   border: 1.5px solid var(--text-color);
   border-radius: 50%;
   cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out),
               background-color 0.3s ease,
               color 0.3s ease,
               border-color 0.3s ease;
@@ -3374,14 +3716,14 @@ html.menu-open .cscroll--page {
 @media screen and (min-width: 768px) {
   [data-request="consult"]:hover .icon-check__tick,
   .chip:hover .icon-check__tick {
-    animation: tickDraw 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.1s both;
+    animation: tickDraw 0.7s var(--ease-in-out) 0.1s both;
   }
 }
 
 @media screen and (max-width: 767px) {
   [data-request="consult"].is-pressed .icon-check__tick,
   .chip.is-pressed .icon-check__tick {
-    animation: tickDraw 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.1s both;
+    animation: tickDraw 0.7s var(--ease-in-out) 0.1s both;
   }
 }
 
@@ -3419,24 +3761,24 @@ html.menu-open .cscroll--page {
 @media screen and (min-width: 768px) {
   [data-request="quote"]:hover .icon-quote,
   .chip:hover .icon-quote {
-    animation: quotePop 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: quotePop 0.6s var(--ease-out) both;
   }
 
   [data-request="quote"]:hover .icon-quote__line,
   .chip:hover .icon-quote__line {
-    animation: tickDraw 0.45s cubic-bezier(0.65, 0, 0.35, 1) var(--line-delay, 0s) both;
+    animation: tickDraw 0.45s var(--ease-in-out) var(--line-delay, 0s) both;
   }
 }
 
 @media screen and (max-width: 767px) {
   [data-request="quote"].is-pressed .icon-quote,
   .chip.is-pressed .icon-quote {
-    animation: quotePop 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: quotePop 0.6s var(--ease-out) both;
   }
 
   [data-request="quote"].is-pressed .icon-quote__line,
   .chip.is-pressed .icon-quote__line {
-    animation: tickDraw 0.45s cubic-bezier(0.65, 0, 0.35, 1) var(--line-delay, 0s) both;
+    animation: tickDraw 0.45s var(--ease-in-out) var(--line-delay, 0s) both;
   }
 }
 
@@ -3589,7 +3931,7 @@ html.menu-open .cscroll--page {
   border-bottom: 2px solid currentColor;
   color: var(--text-muted);
   transform: translateY(-0.15rem) rotate(45deg);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+  transition: transform 0.4s var(--ease-out), color 0.3s ease;
 }
 
 .cselect.is-open .cselect__chevron {
@@ -3617,8 +3959,8 @@ html.menu-open .cscroll--page {
   transform: translateY(-6px);
   clip-path: inset(-12px -40px 100% -40px);
   transition: opacity 0.25s ease,
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    clip-path 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s var(--ease-out),
+    clip-path 0.35s var(--ease-out),
     visibility 0s linear 0.35s;
 }
 
@@ -3780,8 +4122,8 @@ html[dir="rtl"] .cselect__panel {
 .contact-info__code {
   flex: 0 0 7.5rem;
   margin-right: 0.75rem;
-  transition: flex-basis 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    margin 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: flex-basis 0.4s var(--ease-out),
+    margin 0.4s var(--ease-out),
     opacity 0.25s ease,
     visibility 0s linear 0s;
 }
@@ -4017,7 +4359,7 @@ html.menu-open .scroll-top {
   opacity: 0;
   transform: translate(-10px, -50%);
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.25s ease, transform 0.3s var(--ease-out);
 }
 
 .scroll-top__tip::after {
@@ -4087,7 +4429,7 @@ html[dir="rtl"] .scroll-top__tip::after {
                 0 4px 10px rgba(14, 36, 49, 0.22),
                 inset 0 1px 1px rgba(255, 255, 255, 0.5);
     transition: opacity 0.3s ease,
-                transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.35s var(--ease-out),
                 box-shadow 0.35s ease,
                 visibility 0s;
   }
@@ -4097,7 +4439,7 @@ html[dir="rtl"] .scroll-top__tip::after {
   }
 
   .scroll-top.is-visible:hover .scroll-top__arrow {
-    animation: scroll-top-rise 0.85s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    animation: scroll-top-rise 0.85s var(--ease-in-out) infinite;
   }
 
   .scroll-top:hover .scroll-top__tip {
@@ -4139,7 +4481,7 @@ html[dir="rtl"] .scroll-top__tip::after {
 }
 
 .scroll-top.is-visible.is-launching .scroll-top__arrow--next {
-  animation: scroll-top-launch-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: scroll-top-launch-in 0.7s var(--ease-out) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4162,5 +4504,430 @@ html[dir="rtl"] .scroll-top__tip::after {
 @media print {
   .scroll-top {
     display: none;
+  }
+}
+
+/* ==================== مرحله‌ی ۲ UI: هیرو، ریتم بخش‌ها و عمق کارت‌ها ==================== */
+
+/* --- هیرو: عکس کل بلاب رو پر می‌کنه (قبلاً یک مستطیل مشکی با لبه‌ی تیز روی بلاب آبی می‌افتاد)،
+   پشتش هاله‌ی نور، و یک مسیر خط‌چین نشون می‌ده که آیکون‌های تکنولوژی روش می‌چرخن --- */
+.home {
+  isolation: isolate;
+}
+
+/* شبکه‌ی نقطه‌ایِ محوِ پشت هیرو؛ عرض کامل صفحه (100vw)، با ماسک شعاعی تا فقط وسطش دیده بشه */
+.home::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-image: radial-gradient(hsla(var(--hue-color), 89%, 60%, 0.22) 1px, transparent 1.6px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 52% 62% at 50% 46%, #000 18%, transparent 76%);
+  mask-image: radial-gradient(ellipse 52% 62% at 50% 46%, #000 18%, transparent 76%);
+  pointer-events: none;
+}
+
+.home__img {
+  isolation: isolate;
+}
+
+.home__img::before {
+  content: "";
+  position: absolute;
+  inset: -14%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, hsla(var(--hue-color), 89%, 60%, 0.42), hsla(var(--hue-color), 89%, 60%, 0.12) 62%, transparent 100%);
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.home__blob {
+  filter: drop-shadow(0 22px 38px hsla(var(--hue-color), 89%, 52%, 0.35));
+}
+
+.home__orbit::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--orbit-radius) * 2);
+  height: calc(var(--orbit-radius) * 2);
+  transform: translate(-50%, -50%);
+  border: 1px dashed hsla(var(--hue-color), 89%, 60%, 0.3);
+  border-radius: 50%;
+  animation: orbit-ring-spin 60s linear infinite;
+}
+
+@keyframes orbit-ring-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* --- ریتم بخش‌ها: خط گرادیانیِ بالای هر بخش + هاله‌ی نور محو که یکی در میان از راست و چپ می‌آد.
+   فقط با background چندلایه روی خود .section انجام شده (بدون position/pseudo)، پس روی چیدمان بخش‌ها اثری نداره --- */
+.section {
+  background:
+    linear-gradient(90deg, transparent, hsla(var(--hue-color), 89%, 60%, 0.55), transparent) top center / min(72%, 720px) 1px no-repeat,
+    radial-gradient(520px 320px at var(--glow-x, 88%) 0, hsla(var(--hue-color), 89%, 60%, var(--glow-a, 0.07)), transparent 72%);
+}
+
+.section:nth-of-type(even) {
+  --glow-x: 12%;
+}
+
+html[data-theme="dark"] .section {
+  --glow-a: 0.12;
+}
+
+/* برچسب کوچک بالای عنوان هر بخش (متن در main.js دوزبانه‌ست) */
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  max-width: calc(100% - 2rem);
+  margin: 0 auto;
+  padding: 0.15rem 1rem;
+  font-size: 0.75rem;
+  font-weight: var(--font-semi);
+  line-height: 1.8;
+  text-align: center;
+  color: var(--first-color);
+  background-color: hsla(var(--hue-color), 89%, 60%, 0.1);
+  border: 1px solid hsla(var(--hue-color), 89%, 60%, 0.28);
+  border-radius: 2rem;
+}
+
+/* نقطه‌ی برچسب مثل نقطه‌ی «در دست توسعه» می‌تپد: خودِ نقطه نرم بزرگ و کوچک می‌شود (chipDotBeat) و با هر تپش یک حلقه از دورش باز می‌شود و محو می‌شود
+   (eyebrowDotRing؛ مثل chipDotRing ولی کمی بازتر چون نقطه‌ی برچسب کوچک است). مدت یک دور و رنگ حلقه (--dot-glow) همین‌جاست */
+.section-eyebrow::before {
+  --dot-glow: hsla(var(--hue-color), 89%, 60%, 0.6);
+  content: "";
+  flex-shrink: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--first-color);
+  animation: chipDotBeat 1.8s ease-in-out infinite,
+             eyebrowDotRing 1.8s ease-out infinite;
+}
+
+@keyframes eyebrowDotRing {
+  0% {
+    box-shadow: 0 0 0 0 var(--dot-glow);
+  }
+  100% {
+    box-shadow: 0 0 0 0.55rem transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-eyebrow::before {
+    animation: none;
+    box-shadow: 0 0 0 3px hsla(var(--hue-color), 89%, 60%, 0.22);
+  }
+}
+
+html[lang="en"] .section-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-eyebrow + .section-title {
+  margin-top: 0.6rem;
+}
+
+/* --- عمق کارت‌ها: برق ظریف لبه‌ی بالا و گرادیان خیلی ملایم، و نورِ دنبال‌کننده‌ی ماوس روی دسکتاپ
+   (--mx/--my از main.js؛ لایه‌ی نور زیر متن کارت می‌مونه و روی لمس اصلاً دیده نمی‌شه) --- */
+.services__card,
+.process__step,
+.services__note,
+.trust__item {
+  position: relative;
+  isolation: isolate;
+  background-image: linear-gradient(180deg, hsla(var(--hue-color), 89%, 62%, 0.07), transparent 46%);
+}
+
+.process__step {
+  box-shadow: 0 6px 18px -12px rgba(14, 36, 49, 0.3);
+}
+
+html[data-theme="dark"] .services__card,
+html[data-theme="dark"] .process__step,
+html[data-theme="dark"] .services__note,
+html[data-theme="dark"] .trust__item {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 42%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), var(--card-shadow);
+}
+
+.services__card::before,
+.process__step::before,
+.services__note::before,
+.trust__item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%), hsla(var(--hue-color), 89%, 62%, 0.2), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .services__card:hover::before,
+  .process__step:hover::before,
+  .services__note:hover::before,
+  .trust__item:hover::before {
+    opacity: 1;
+  }
+}
+
+@media print {
+  .home::before,
+  .home__img::before,
+  .home__orbit::before {
+    display: none;
+  }
+
+  .section {
+    background: none;
+  }
+}
+
+/* ==================== مرحله‌ی ۳ UI: نوار اعتماد، تأکید روی خدمات و مسیر مراحل ==================== */
+
+/* --- نوار اعتماد زیر هیرو: چهار آیتم کوتاه (متن‌ها فقط چیزهایی‌اند که در خود صفحه آمده) --- */
+.trust {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.trust__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.9rem 1rem;
+  background-color: var(--surface-color);
+  border-radius: 0.75rem;
+  box-shadow: var(--card-shadow);
+}
+
+html[data-theme="dark"] .trust__item {
+  border: 1px solid var(--border-color);
+}
+
+.trust__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.4rem;
+  color: var(--first-color);
+  background: linear-gradient(135deg, hsla(var(--hue-color), 89%, 60%, 0.24), hsla(var(--hue-color), 89%, 60%, 0.08));
+  box-shadow: inset 0 0 0 1px hsla(var(--hue-color), 89%, 60%, 0.28);
+  border-radius: 0.65rem;
+}
+
+.trust__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: var(--font-semi);
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.trust__text {
+  margin: 0.2rem 0 0;
+  font-size: var(--smaller-font-size);
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 576px) {
+  .trust__item {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.85rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .trust {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/* --- خدمات: آیکون گرادیانی، «مناسب برای» با خط کناری و زمان تحویل به‌شکل چیپ تا با یک نگاه خوانده شن --- */
+.services__icon {
+  background: linear-gradient(135deg, hsla(var(--hue-color), 89%, 60%, 0.24), hsla(var(--hue-color), 89%, 60%, 0.08));
+  box-shadow: inset 0 0 0 1px hsla(var(--hue-color), 89%, 60%, 0.28);
+  transition: transform 0.45s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .services__card:hover .services__icon {
+    transform: translateY(-3px) scale(1.06) rotate(-4deg);
+  }
+}
+
+.services__title {
+  font-size: 1.2rem;
+}
+
+.services__for {
+  padding-inline-start: 0.7rem;
+  border-inline-start: 2px solid hsla(var(--hue-color), 89%, 60%, 0.5);
+}
+
+.services__time {
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: var(--font-semi);
+  background-color: hsla(var(--hue-color), 89%, 60%, 0.1);
+  border: 1px solid hsla(var(--hue-color), 89%, 60%, 0.22);
+  border-radius: 1rem;
+  opacity: 1;
+}
+
+.services__time i {
+  color: var(--first-color);
+}
+
+/* --- مراحل همکاری: روی چهارستونه، یک خط‌چین از هر مرحله به مرحله‌ی بعد می‌رود (جهتش با html[dir] خودکار برعکس می‌شود) --- */
+@media screen and (min-width: 1024px) {
+  /* خط‌چین پیوسته در حرکت است و به سمت مرحله‌ی بعد جریان دارد (چپ‌به‌راست در انگلیسی، راست‌به‌چپ در فارسی) */
+  .process__step:not(:last-child)::after {
+    --flow: 10px;
+    content: "";
+    position: absolute;
+    top: calc(2.375rem - 1px);
+    inset-inline-end: -1.5rem;
+    width: 1.5rem;
+    height: 2px;
+    background: linear-gradient(90deg, hsla(var(--hue-color), 89%, 60%, 0.65) 50%, transparent 50%) 0 0 / 10px 2px repeat-x;
+    animation: dash-flow 0.9s linear infinite;
+    pointer-events: none;
+  }
+
+  html[dir="rtl"] .process__step:not(:last-child)::after {
+    --flow: -10px;
+  }
+}
+
+@keyframes dash-flow {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: var(--flow, 10px) 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__icon {
+    transition: none;
+  }
+
+  .services__card:hover .services__icon {
+    transform: none;
+  }
+}
+
+/* ==================== مرحله‌ی ۴ UI: حرکت یکپارچه و کاهش حرکت ==================== */
+
+/* کسی که در سیستم‌عامل «کاهش حرکت» را روشن کرده، هیچ انیمیشن و ترنزیشنی را نمی‌بیند (حالت پایانی فوراً اعمال می‌شود).
+   قاعده‌های جدا برای هر المان (مثل چیپ‌ها و دکمه‌ی بالا) همچنان هستند؛ این بلاک شبکه‌ی اطمینان برای بقیه است */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  /* این سه کارت بعد از ورود ترنزیشن هاورشان را با !important (و ویژگی بالاتر از * بالا) تعیین کرده‌اند؛ این‌جا همان‌ها هم صفر می‌شوند */
+  .services__card.is-revealed,
+  .faq__item.is-revealed,
+  .work__img.is-revealed {
+    transition-duration: 0.01ms !important;
+  }
+
+  /* بدون چرخش، آیکون‌ها نباید همه روی هم و بالای دایره بیفتند؛ هر کدام در جای شروع چرخششان (۴۰ درجه فاصله) می‌ایستند و ایستاده می‌مانند */
+  .home__orbit-track {
+    animation: none;
+    transform: rotate(calc(var(--i, 0) * 40deg));
+  }
+
+  .home__orbit-icon {
+    animation: none;
+    transform: translate(-50%, -50%) translateY(calc(-1 * var(--orbit-radius, 230px))) rotate(calc(var(--i, 0) * -40deg));
+  }
+
+  .home__orbit-track:nth-child(2) {
+    --i: 1;
+  }
+
+  .home__orbit-track:nth-child(3) {
+    --i: 2;
+  }
+
+  .home__orbit-track:nth-child(4) {
+    --i: 3;
+  }
+
+  .home__orbit-track:nth-child(5) {
+    --i: 4;
+  }
+
+  .home__orbit-track:nth-child(6) {
+    --i: 5;
+  }
+
+  .home__orbit-track:nth-child(7) {
+    --i: 6;
+  }
+
+  .home__orbit-track:nth-child(8) {
+    --i: 7;
+  }
+
+  .home__orbit-track:nth-child(9) {
+    --i: 8;
   }
 }
