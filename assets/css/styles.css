@@ -3856,3 +3856,311 @@ html[dir="rtl"] .contact-info .error-message {
     line-height: 1.2;
   }
 }
+
+/* ==================== دکمه‌ی بازگشت به بالا ==================== */
+/* گوشه‌ی پایین صفحه: فارسی (rtl) سمت راست، انگلیسی سمت چپ (مثل اسکرول‌بار سفارشی)؛ بعد از کمی اسکرول با چرخش و جهش فنری ظاهر می‌شه؛ حلقه‌ی سفید دورش با --progress
+   (که main.js می‌نویسه) پیشرفت اسکرول صفحه رو نشون می‌ده. هاور (فقط دسکتاپ): فلش‌ها مثل آسانسور بالا می‌رن و برچسب باز می‌شه.
+   کلیک: فلش پرتاب می‌شه و یک موج از دکمه پخش می‌شه. z-index یکی کمتر از هدر/پاپ‌آپ/توست تا همیشه زیر اونا باشه */
+.scroll-top {
+  --progress: 0;
+  position: fixed;
+  left: 1.25rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  z-index: calc(var(--z-fixed) - 1);
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0;
+  color: #fff;
+  background: radial-gradient(circle at 30% 22%, hsl(var(--hue-color), 95%, 74%) 0%, var(--first-color) 52%, hsl(var(--hue-color), 78%, 44%) 100%);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 14px 28px -10px hsla(var(--hue-color), 89%, 52%, 0.7),
+              0 3px 8px rgba(14, 36, 49, 0.2),
+              inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(1.75rem) scale(0.4) rotate(-90deg);
+  transition: opacity 0.25s ease,
+              transform 0.3s ease,
+              box-shadow 0.35s ease,
+              visibility 0s linear 0.3s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html[dir="rtl"] .scroll-top {
+  left: auto;
+  right: 1.25rem;
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition: opacity 0.3s ease,
+              transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.35s ease,
+              visibility 0s;
+}
+
+/* زیر پاپ‌آپ و کنار سایدبار موبایل دیده نشه */
+html.popup-open .scroll-top,
+html.menu-open .scroll-top {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.6);
+}
+
+.scroll-top:focus-visible {
+  outline: 3px solid hsla(var(--hue-color), 89%, 60%, 0.45);
+  outline-offset: 3px;
+}
+
+/* دو موج نور: یکی هنگام ظاهر شدن (دو بار)، یکی هنگام کلیک */
+.scroll-top::before,
+.scroll-top::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.scroll-top.is-visible::before {
+  animation: scroll-top-pulse 1.8s ease-out 0.5s 2;
+}
+
+.scroll-top.is-visible.is-launching::after {
+  border: 2px solid hsla(var(--hue-color), 89%, 60%, 0.85);
+  animation: scroll-top-ripple 0.75s ease-out;
+}
+
+/* حلقه‌ی پیشرفت (از بالا شروع می‌شه و ساعت‌گرد پر می‌شه) */
+.scroll-top__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.scroll-top__track,
+.scroll-top__bar {
+  fill: none;
+  stroke-width: 2.5;
+}
+
+.scroll-top__track {
+  stroke: rgba(255, 255, 255, 0.28);
+}
+
+.scroll-top__bar {
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: calc(1 - var(--progress));
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+  transition: stroke-dashoffset 0.2s linear;
+}
+
+/* فلش: دو کپی زیر هم داخل یک کادر بریده‌شده؛ حرکت دادن هر دو به اندازه‌ی ۱۴۰٪ جای اولی رو به دومی می‌ده (حلقه‌ی بی‌درز) */
+.scroll-top__arrows {
+  position: relative;
+  width: 1.4rem;
+  height: 1.4rem;
+  overflow: hidden;
+}
+
+.scroll-top__arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.scroll-top__arrow--next {
+  top: 140%;
+}
+
+/* حالت استراحت: فلش آرام بالا و پایین می‌ره تا توجه رو جلب کنه */
+.scroll-top.is-visible .scroll-top__arrow:first-child {
+  animation: scroll-top-bob 2.6s ease-in-out 1.4s infinite;
+}
+
+/* برچسب (تولتیپ): رنگ‌ها وارونه‌ی تم هستن تا روی هر دو تم خوانا باشه */
+.scroll-top__tip {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 0.85rem);
+  padding: 0.4rem 0.8rem;
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-semi);
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--bg-color);
+  background-color: var(--text-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--card-shadow);
+  opacity: 0;
+  transform: translate(-10px, -50%);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-top__tip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  background-color: inherit;
+  border-radius: 1px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* فارسی: دکمه سمت راسته، پس برچسب (و فلش کوچکش) سمت چپ دکمه باز می‌شه */
+html[dir="rtl"] .scroll-top__tip {
+  left: auto;
+  right: calc(100% + 0.85rem);
+  transform: translate(10px, -50%);
+}
+
+html[dir="rtl"] .scroll-top__tip::after {
+  left: auto;
+  right: -4px;
+}
+
+.scroll-top:focus-visible .scroll-top__tip {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+@keyframes scroll-top-pulse {
+  0% { box-shadow: 0 0 0 0 hsla(var(--hue-color), 89%, 60%, 0.55); }
+  100% { box-shadow: 0 0 0 18px hsla(var(--hue-color), 89%, 60%, 0); }
+}
+
+@keyframes scroll-top-ripple {
+  0% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(2.1); }
+}
+
+@keyframes scroll-top-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9%); }
+}
+
+@keyframes scroll-top-rise {
+  from { transform: translateY(0); }
+  to { transform: translateY(-140%); }
+}
+
+@keyframes scroll-top-launch-out {
+  0% { opacity: 1; transform: translateY(0) scaleY(1); }
+  100% { opacity: 0; transform: translateY(-190%) scaleY(1.7); }
+}
+
+@keyframes scroll-top-launch-in {
+  0%, 35% { transform: translateY(0); }
+  100% { transform: translateY(-140%); }
+}
+
+/* دسکتاپ: هاور واقعی ماوس */
+@media screen and (min-width: 768px) {
+  .scroll-top.is-visible:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 32px -10px hsla(var(--hue-color), 89%, 52%, 0.8),
+                0 4px 10px rgba(14, 36, 49, 0.22),
+                inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    transition: opacity 0.3s ease,
+                transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s ease,
+                visibility 0s;
+  }
+
+  .scroll-top.is-visible:active {
+    transform: translateY(-2px) scale(0.93);
+  }
+
+  .scroll-top.is-visible:hover .scroll-top__arrow {
+    animation: scroll-top-rise 0.85s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  .scroll-top:hover .scroll-top__tip {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+/* موبایل: به‌جای :hover/:active (که روی لمس گیر می‌کنن) کلاس is-pressed از main.js کنترل می‌شه؛ برچسب هم نمایش داده نمی‌شه */
+@media screen and (max-width: 767px) {
+  .scroll-top {
+    left: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    width: 3rem;
+    height: 3rem;
+  }
+
+  html[dir="rtl"] .scroll-top {
+    left: auto;
+    right: 1rem;
+  }
+
+  .scroll-top.is-visible.is-pressed {
+    transform: scale(0.9);
+  }
+
+  .scroll-top__tip {
+    display: none;
+  }
+}
+
+/* پرتاب هنگام کلیک (بعد از حالت‌های هاور/استراحت تا بر اونا غلبه کنه) */
+.scroll-top.is-visible.is-launching {
+  transform: translateY(-4px) scale(0.96);
+}
+
+.scroll-top.is-visible.is-launching .scroll-top__arrow:first-child {
+  animation: scroll-top-launch-out 0.45s cubic-bezier(0.5, 0, 0.9, 0.5) forwards;
+}
+
+.scroll-top.is-visible.is-launching .scroll-top__arrow--next {
+  animation: scroll-top-launch-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top,
+  .scroll-top.is-visible,
+  .scroll-top.is-visible:hover {
+    transition: opacity 0.2s ease, visibility 0s;
+  }
+
+  .scroll-top::before,
+  .scroll-top::after,
+  .scroll-top__arrow,
+  .scroll-top.is-visible .scroll-top__arrow:first-child,
+  .scroll-top.is-visible:hover .scroll-top__arrow,
+  .scroll-top.is-visible.is-launching .scroll-top__arrow {
+    animation: none;
+  }
+}
+
+@media print {
+  .scroll-top {
+    display: none;
+  }
+}

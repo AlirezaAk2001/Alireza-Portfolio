@@ -159,7 +159,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <link rel="manifest" href="assets/site.webmanifest">
 
-    <link rel="stylesheet" href="assets/css/styles.css?v=39">
+    <link rel="stylesheet" href="assets/css/styles.css?v=40">
     <!-- آیکون‌فونت‌ها: میزبانی محلی (کنترل کامل روی کش و font-display) + بدون مسدودکردن رندر اولیه -->
     <link rel="preload" as="style" href="assets/css/boxicons.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" as="style" href="assets/css/fontawesome.min.css"
@@ -717,12 +717,25 @@
         <p class="footer__copy" data-i18n="footer_copy">۱۴۰۵ © تمام حقوق برای علیرضا آخوندی محفوظ است</p>
     </footer>
 
+    <!-- دکمه‌ی بازگشت به بالا: بعد از کمی اسکرول ظاهر می‌شه؛ حلقه‌ی دورش پیشرفت اسکرول صفحه رو نشون می‌ده (منطقش در main.js) -->
+    <button type="button" class="scroll-top" id="scrollTop" aria-labelledby="scrollTopLabel">
+        <svg class="scroll-top__ring" viewBox="0 0 52 52" aria-hidden="true" focusable="false">
+            <circle class="scroll-top__track" cx="26" cy="26" r="22.5" />
+            <circle class="scroll-top__bar" cx="26" cy="26" r="22.5" pathLength="1" />
+        </svg>
+        <span class="scroll-top__arrows" aria-hidden="true">
+            <svg class="scroll-top__arrow" viewBox="0 0 24 24" focusable="false"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg>
+            <svg class="scroll-top__arrow scroll-top__arrow--next" viewBox="0 0 24 24" focusable="false"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" /></svg>
+        </span>
+        <span class="scroll-top__tip" id="scrollTopLabel" data-i18n="scroll_top">بازگشت به بالا</span>
+    </button>
+
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="assets/js/vendor/email.min.js"></script>
     <!--===== SCROLL REVEAL =====-->
     <script src="assets/js/vendor/scrollreveal.min.js"></script>
     <!--===== MAIN JS =====-->
-    <script src="assets/js/main.js?v=28"></script>
+    <script src="assets/js/main.js?v=29"></script>
 </body>
 
 </html>
