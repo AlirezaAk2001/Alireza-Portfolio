@@ -49,7 +49,9 @@
 ├── index.html            ساختار و محتوای اصلی صفحه
 ├── robots.txt
 ├── sitemap.xml
-├── CNAME                 دامنه‌ی سفارشی برای GitHub Pages
+├── CNAME                 دامنه‌ی سفارشی برای GitHub Pages (فقط برای هدایت www)
+├── tools/
+│   └── deploy-to-arvan.js  انتشار فایل‌های تغییرکرده روی صندوقچه‌ی آروان
 └── assets/
     ├── css/              styles.css و فایل‌های آیکون
     ├── js/
@@ -95,18 +97,19 @@ python -m http.server 8000
 
 ### استقرار (Deployment)
 
-سایت استاتیک است و روی **GitHub Pages** میزبانی می‌شود:
+سایت استاتیک است. کد روی GitHub نگه‌داری می‌شود، ولی سایت زنده از یک **صندوقچه‌ی ArvanCloud (Object Storage با «استاتیک وب‌سایت»)** پشت CDN آروان سرو می‌شود؛ مبدأ GitHub Pages از داخل ایران ناپایدار بود و فایل‌های بزرگ‌تر کامل نمی‌رسیدند.
 
-1. ریپازیتوری را در گیت‌هاب بسازید و کدها را push کنید.
-2. در مسیر **Settings → Pages** گزینه‌ی **Deploy from a branch** را انتخاب کنید، برنچ مورد نظر را بگذارید و پوشه را `/ (root)` انتخاب کنید.
-3. اگر دامنه‌ی سفارشی دارید، آن را در همین بخش وارد کنید (فایل `CNAME` ساخته می‌شود) و رکوردهای DNS را طبق [راهنمای رسمی GitHub Pages](https://docs.github.com/en/pages) تنظیم کنید.
-4. پس از صدور گواهی SSL، گزینه‌ی **Enforce HTTPS** را فعال کنید. اگر سایت پشت CDN قرار دارد، ممکن است این گزینه در GitHub در دسترس نباشد؛ در این صورت HTTPS را از تنظیمات CDN فعال کنید.
+1. تغییرها را commit و push کنید.
+2. کلیدهای صندوقچه (Access Key و Secret Key از «مدیریت دسترسی» پنل آروان) را در فایل `%USERPROFILE%\.arvan-deploy.json` بگذارید: `{ "accessKey": "...", "secretKey": "..." }`. این فایل هرگز نباید داخل پروژه یا git برود.
+3. `node tools/deploy-to-arvan.js` فقط نشان می‌دهد چه چیزی تغییر کرده؛ `node tools/deploy-to-arvan.js --yes` فایل‌های تغییرکرده را روی صندوقچه می‌فرستد (با `--delete` فایل‌های حذف‌شده هم پاک می‌شوند) و در پایان آدرس‌هایی را که باید در پنل آروان (CDN ← Caching ← پاک‌کردن گزینشی) پاک شوند چاپ می‌کند. «پاک‌سازی همه» را نزنید؛ کش خالی یعنی بازدیدکننده‌های بعدی دوباره منتظر کشیده‌شدن فایل‌ها می‌مانند.
+4. رکورد `@` دامنه در CDN از نوع **ANAME** به آدرس وب‌سایت صندوقچه است، با «هدر هاست» برابر همان آدرس و پروتکل ارتباط با سرور اصلی روی HTTP. رکورد `www` هنوز به GitHub Pages می‌رود و به دامنه‌ی اصلی هدایت می‌شود، پس فایل `CNAME` را پاک نکنید.
 
 ### بهینه‌سازی عملکرد
 
 - فونت‌ها، آیکون‌ها و کتابخانه‌های جانبی به‌صورت محلی بارگذاری می‌شوند تا وابستگی به CDNهای خارجی کم شود.
 - تصاویر و ویدیوها فشرده‌سازی شده‌اند، ابعاد تصاویر به‌صورت صریح مشخص شده و تصاویر پایین صفحه با `loading="lazy"` بارگذاری می‌شوند.
 - CSS و JavaScript سبک و بدون فریم‌ورک هستند.
+- انیمیشن‌های همیشه‌روشن (تپش نقطه‌ها، جریان خط‌چین‌ها، آیکون‌های چرخان) فقط با `transform` و `opacity` انجام می‌شوند تا روی کارت گرافیک اجرا شوند و صفحه در حالت بیکاری ریسمان اصلی مرورگر را مشغول نکند. بعد از ورود هر کارت، استایل‌های inline ScrollReveal (`transform: matrix3d` و `transition: all`) پاک می‌شوند و سایه‌های کارت‌های کوچک و پرتعداد سبک‌اند؛ این‌ها اسکرول در Firefox را کند می‌کردند.
 
 ### مجوز و استفاده
 
@@ -168,7 +171,9 @@ This repository contains the personal portfolio website of **Alireza Akhoondi**,
 ├── index.html            Main page structure and content
 ├── robots.txt
 ├── sitemap.xml
-├── CNAME                 Custom domain for GitHub Pages
+├── CNAME                 Custom domain for GitHub Pages (only used to redirect www now)
+├── tools/
+│   └── deploy-to-arvan.js  Uploads the changed files to the ArvanCloud bucket
 └── assets/
     ├── css/              styles.css and icon font styles
     ├── js/
@@ -212,18 +217,19 @@ python -m http.server 8000
 
 ### Deployment
 
-The site is static and is hosted on **GitHub Pages**:
+The site is static. The code lives on GitHub, but the live site is served from an **ArvanCloud bucket (Object Storage with "static website") behind the ArvanCloud CDN**; GitHub Pages was an unreliable origin from inside Iran and larger files did not arrive complete.
 
-1. Create a repository on GitHub and push the code.
-2. Go to **Settings → Pages**, choose **Deploy from a branch**, select your branch, and set the folder to `/ (root)`.
-3. To use a custom domain, enter it in the same section (this creates the `CNAME` file), then configure your DNS records following the [official GitHub Pages documentation](https://docs.github.com/en/pages).
-4. Once the SSL certificate is issued, enable **Enforce HTTPS**. If the site sits behind a CDN, this option may be unavailable in GitHub; in that case, enable HTTPS in the CDN settings instead.
+1. Commit and push your changes.
+2. Put the bucket keys (Access Key and Secret Key from "Access management" in the Arvan panel) in `%USERPROFILE%\.arvan-deploy.json`: `{ "accessKey": "...", "secretKey": "..." }`. This file must never go into the project or git.
+3. `node tools/deploy-to-arvan.js` only shows what changed; `node tools/deploy-to-arvan.js --yes` uploads the changed files to the bucket (add `--delete` to remove files that no longer exist) and finally prints the URLs to purge in the Arvan panel (CDN, Caching, selective purge). Do not use "purge everything": an empty cache makes the next visitors wait while every file is pulled again.
+4. The domain's `@` record in the CDN is an **ANAME** to the bucket's website address, with the "Host header" set to that same address and the origin protocol set to HTTP. The `www` record still goes to GitHub Pages and redirects to the main domain, so keep the `CNAME` file.
 
 ### Performance
 
 - Fonts, icons and third-party libraries are self-hosted to reduce dependencies on external CDNs.
 - Images and videos are compressed, image dimensions are set explicitly, and below-the-fold images use `loading="lazy"`.
 - The CSS and JavaScript are lightweight and framework-free.
+- The always-on animations (pulsing dots, flowing dashed lines, orbiting icons) use only `transform` and `opacity`, so they run on the GPU and the page does no main-thread work while idle. After each card has entered, ScrollReveal's inline leftovers (`transform: matrix3d` and `transition: all`) are cleared, and the many small cards use a light shadow; both used to make scrolling slow in Firefox.
 
 ### License and Usage
 

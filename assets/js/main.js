@@ -570,6 +570,7 @@ if(scrollTopBtn){
     const SHOW_AFTER = 320
     const LAUNCH_MS = 900
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const scrollTopBar = scrollTopBtn.querySelector('.scroll-top__bar')
     let scrollTopTicking = false
     let launchTimer = 0
 
@@ -579,6 +580,8 @@ if(scrollTopBtn){
         const max = document.documentElement.scrollHeight - window.innerHeight
         const progress = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0
         scrollTopBtn.style.setProperty('--progress', progress.toFixed(4))
+        // offset مستقیم از JS: فایرفاکس calc(1 - var(--progress)) را برای stroke-dashoffset نمی‌فهمد (حلقه همیشه پر می‌شد)
+        if(scrollTopBar) scrollTopBar.style.strokeDashoffset = (1 - progress).toFixed(4)
         scrollTopBtn.classList.toggle('is-visible', y > SHOW_AFTER)
     }
     function requestScrollTopUpdate(){
@@ -693,7 +696,18 @@ const reveal = (selector, { delay = 0, stagger = false, ...extra } = {}) =>
 
 // بعد از تمام شدن انیمیشن ورود، یه کلاس اضافه می‌کنیم تا ترنزیشن سریع هاور
 // (رفتن و برگشتن) بدون تداخل با ترنزیشن کند ScrollReveal اعمال بشه
-const markRevealed = el => el.classList.add('is-revealed');
+// ScrollReveal بعد از ورود هم transform: matrix3d(...) و transition: all را روی عنصر نگه می‌دارد. فایرفاکس هر کارت را «سه‌بعدی و در حال تغییر» می‌بیند
+// و جدا از بقیه با سایه‌اش دوباره می‌کشد (اسکرول ۴۰ میلی‌ثانیه به‌جای ۱۷ برای هر فریم)؛ حالت نهایی همان حالت عادی CSS است، پس بعد از ورود پاکشان می‌کنیم
+const settle = el => {
+    el.style.transform = ''
+    el.style.transition = ''
+    el.style.opacity = ''
+    el.style.visibility = ''
+}
+const markRevealed = el => {
+    el.classList.add('is-revealed')
+    settle(el)
+}
 
 // هیرو: تیتر، زیرتیتر و دکمه‌ها پشت سر هم، عکس هم‌زمان با کمی بزرگ‌شدن، و بعد آیکون‌های شبکه‌های اجتماعی
 reveal('.home__title');
@@ -703,7 +717,7 @@ reveal('.home__img', { delay: 100, scale: MOTION.reduced ? 1 : 0.94 });
 reveal('.home__social-icon', { delay: 360, interval: MOTION.reduced ? 0 : 90 });
 
 // نوار اعتماد زیر هیرو
-reveal('.trust__item', { stagger: true });
+reveal('.trust__item', { stagger: true, afterReveal: markRevealed });
 
 // درباره من و مهارت‌ها
 reveal('.about__img');
